@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "usuario": "Usuario50",
+      "clave": "clave1"
+    },
+    {
+      "usuario": "Usuario50",
+      "clave": "clave2"
+    },
+    {
+      "usuario": "ajaramillom",
+      "clave": "Administrador1."
+    }
+  ],
+  "variables": {
+    "keyuno": "valueuno",
+    "keydos": "valueods",
+    "keytres": "valuetres"
+  },
+  "resultados": {
+    "1": "Tus credenciales no coinciden. Por favor vuelve a intentar",
+    "2": "Tus credenciales no coinciden. Por favor vuelve a intentar nuevamente"
+  }
+}
