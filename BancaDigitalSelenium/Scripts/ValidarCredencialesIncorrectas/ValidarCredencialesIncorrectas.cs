@@ -1,21 +1,46 @@
-﻿using BancaDigitalSelenium.Helpers;
-using BancaDigitalSelenium.Interface;
-using BancaDigitalSelenium.Scripts.Shared;
+﻿using BancaDigitalSelenium.Scripts.Shared;
+using Core.Helpers;
+using Core.Models.Entidad;
+using Core.Models.Interface;
+using MongoDB.Bson;
 using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BancaDigitalSelenium.Scripts
 {
-    internal class ValidarCredencialesIncorrectas : ScriptBase, IScript
+    public class ValidarCredencialesIncorrectas : ScriptBase, IScript
     {
         private List<ValidarCredencialesIncorrectasDATA> TestData { get; set; }
 
+        /// <summary>
+        /// Metodo para configurar script
+        /// </summary>
+        /// <param name="driver"></param>
+        public void SetConfig(IWebDriver driver)
+        {
+            this.Reporte = new AutoReport(this.GetType().ToString().Split('.').Last());
+            this.URL = "https://bgrdigital-test.bgr.com.ec/Cuenta/Login";
+            this.Driver = driver;
+            this.Driver.Url = URL;
+            this.Driver.Navigate();
+            this.Variables = Variables ?? new Dictionary<string, string>();
+            this.SeleniumJS = (IJavaScriptExecutor)driver;
+
+            using (StreamReader sr = new StreamReader("scripts/ValidarCredencialesIncorrectas/ValidarCredencialesIncorrectas.json"))
+            {
+                JObject json = JObject.Parse(sr.ReadToEnd());
+                TestData = json.SelectToken("data").ToObject<List<ValidarCredencialesIncorrectasDATA>>();
+                Variables = json.SelectToken("variables").ToObject<Dictionary<string, string>>();
+                Reporte.AgregarInformacionReporte(Variables);
+                Resultados = json.SelectToken("resultados").ToObject<Dictionary<string, string>>();
+                Reporte.AgregarInformacionReporte(Resultados);
+            }
+            this.Test = Reporte.CrearTest(this.GetType().ToString()).AssignDevice(driver.GetType().ToString());
+        }
 
         /// <summary>
         /// Metodo para ejecutar el script
@@ -25,10 +50,10 @@ namespace BancaDigitalSelenium.Scripts
             foreach (var data in TestData)
             {
                 List<string> resultadosPrueba = new List<string>();
-                this.SeleniumDriver.Url = this.URL;
-                SeleniumDriver.Navigate();
-                SeleniumDriver.Navigate().Refresh();
-                SeleniumDriver.Login(data.Usuario, data.Clave);
+                this.Driver.Url = this.URL;
+                Driver.Navigate();
+                Driver.Navigate().Refresh();
+                Driver.Login(data.Usuario, data.Clave);
 
                 if (ValidarMensajeCuentaDeshabilitada())
                 {
@@ -48,37 +73,36 @@ namespace BancaDigitalSelenium.Scripts
             }
         }
 
+        /// <summary>
+        /// Finalizar script
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public void Finalizar()
+        {
+            Reporte.GuardarReporte();
+        }
+
+        /// <summary>
+        /// Metodo que se ejecuta al detectar un error
+        /// </summary>
+        /// <param name="ex"></param>
+        public void Error(Exception ex)
+        {
+            Test.Error(ex);
+            Test.Error(ex.Message, Driver.TomarScreen());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resultadosPrueba"></param>
         private void ValidarResultadoPrueba(List<string> resultadosPrueba)
         {
             var resultados = resultadosPrueba.Where(w => Resultados.Any(a => a.Value == w));
             string resultado = resultados.Count() > 0 ? "Prueba exitosa" : "Prueba Fallida";
-
             Console.WriteLine(resultado);
         }
 
-        /// <summary>
-        /// Metodo donde se personaliza la configuración del script
-        /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="vars"></param>
-        public void SetConfig(IWebDriver driver)
-        {
-            this.URL = "https://bgrdigital-test.bgr.com.ec/Cuenta/Login";
-            this.SeleniumDriver = driver;
-            this.SeleniumDriver.Url = URL;
-            this.SeleniumDriver.Navigate();
-
-            this.Variables = Variables ?? new Dictionary<string, string>();
-            this.SeleniumJS = (IJavaScriptExecutor)driver;
-
-            using (StreamReader sr = new StreamReader("scripts/ValidarCredencialesIncorrectas/ValidarCredencialesIncorrectas.json"))
-            {
-                JObject json = JObject.Parse(sr.ReadToEnd());
-                TestData = json.SelectToken("data").ToObject<List<ValidarCredencialesIncorrectasDATA>>();
-                Variables = json.SelectToken("variables").ToObject<Dictionary<string, string>>();
-                Resultados = json.SelectToken("resultados").ToObject<Dictionary<string, string>>();
-            }
-        }
 
         /// <summary>
         /// Valida si se muestra el mensaje de error
@@ -88,9 +112,9 @@ namespace BancaDigitalSelenium.Scripts
         {
             const string credencialesNoCoinciden = "Tus-credenciales-no-coinciden-Por-favor-vuelve-a-intentar-nuevamente";
 
-            if (SeleniumDriver.CheckIfElementExists(By.ClassName(credencialesNoCoinciden)))
+            if (Driver.CheckIfElementExists(By.ClassName(credencialesNoCoinciden)))
             {
-                var mensajeError = SeleniumDriver.FindElements(By.ClassName(credencialesNoCoinciden));
+                var mensajeError = Driver.FindElements(By.ClassName(credencialesNoCoinciden));
                 return mensajeError.Where(w => w.Displayed && w.Enabled).Count() > 0;
             }
             return false;
@@ -99,7 +123,7 @@ namespace BancaDigitalSelenium.Scripts
         private bool ValidarMensajeCuentaDeshabilitada()
         {
             const string cuentaBloqueada = "Tu-cuenta-ha-sido-temporalmente-deshabilitada-por-favor-cambia-tu-contrasea-para-poder-desbloquear";
-            if (SeleniumDriver.CheckIfElementExists(By.ClassName(cuentaBloqueada)))
+            if (Driver.CheckIfElementExists(By.ClassName(cuentaBloqueada)))
             {
                 return true;
             }
@@ -114,9 +138,9 @@ namespace BancaDigitalSelenium.Scripts
         {
             const string usuarioBloqueado = "Tu-usuario-ser-bloqueado-al-siguiente-intento-fallido-para-proteger-tu-cuenta";
 
-            if (SeleniumDriver.CheckIfElementExists(By.ClassName(usuarioBloqueado)))
+            if (Driver.CheckIfElementExists(By.ClassName(usuarioBloqueado)))
             {
-                var mensajeBloqueo = SeleniumDriver.FindElements(By.ClassName(usuarioBloqueado));
+                var mensajeBloqueo = Driver.FindElements(By.ClassName(usuarioBloqueado));
                 return mensajeBloqueo.Where(w => w.Displayed && w.Enabled).Count() > 0;
             }
             return false;
@@ -128,23 +152,25 @@ namespace BancaDigitalSelenium.Scripts
         /// <returns></returns>
         public string ObtenerMensajesValidacionLogin()
         {
-            var item = SeleniumDriver.FindElement(By.Id("IdFallido1")).GetInnerText();
+            var item = Driver.FindElement(By.Id("IdFallido1")).GetInnerText();
             return item;
         }
 
         private string ObtenerMensajeUsuarioBloqueado()
         {
             const string credencialesNoCoinciden = "Tu-usuario-ser-bloqueado-al-siguiente-intento-fallido-para-proteger-tu-cuenta";
-            var item = SeleniumDriver.FindElement(By.ClassName(credencialesNoCoinciden)).GetInnerText();
+            var item = Driver.FindElement(By.ClassName(credencialesNoCoinciden)).GetInnerText();
             return item;
         }
 
         private string ObtenerMensajeCuentaDeshabilitada()
         {
             const string usuarioBloqueado = "Tu-cuenta-ha-sido-temporalmente-deshabilitada-por-favor-cambia-tu-contrasea-para-poder-desbloquear";
-            var item = SeleniumDriver.FindElement(By.ClassName(usuarioBloqueado)).GetInnerText();
+            var item = Driver.FindElement(By.ClassName(usuarioBloqueado)).GetInnerText();
             return item;
         }
+
+
     }
 
     internal class ValidarCredencialesIncorrectasDATA

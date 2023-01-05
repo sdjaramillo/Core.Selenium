@@ -19,9 +19,10 @@ namespace BancaDigitalSelenium
         static void Main(string[] args)
         {
             //SELECCIONAR CUALQUIER NAVEGADOR
-            var chrome = new ChromeDriver("drivers");
+            var driver = new ChromeDriver("drivers");
 
-            DriverTemplate.EjecutarScript(new ValidarCredencialesIncorrectas(), chrome);
+            DriverTemplate.EjecutarScript(new RecuperarContrasena(), driver);
+            //DriverTemplate.EjecutarScript(new ValidarCredencialesIncorrectas(), chrome);
         }
     }
 }

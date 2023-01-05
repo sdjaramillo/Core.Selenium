@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "TipoIdentificacion": "Cedula",
+      "numeroDocumento": "12345678"
+    },
+    {
+      "TipoIdentificacion": "Pasaporte",
+      "numeroDocumento": "123456"
+    }
+  ]
+}

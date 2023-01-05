@@ -1,14 +1,12 @@
-﻿using BancaDigitalSelenium.Interface;
+﻿using Core.Models.Interface;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BancaDigitalSelenium
 {
+    /// <summary>
+    /// Plantilla principal para ejecución estandarizada de scripts
+    /// </summary>
     public class DriverTemplate
     {
         public static void EjecutarScript(IScript script, IWebDriver driver)
@@ -16,11 +14,15 @@ namespace BancaDigitalSelenium
             try
             {
                 script.SetConfig(driver);
-                script.Execute();
+                script.Execute();                
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                script.Error(ex);
+            }
+            finally
+            {
+                script.Finalizar();
             }
         }
     }

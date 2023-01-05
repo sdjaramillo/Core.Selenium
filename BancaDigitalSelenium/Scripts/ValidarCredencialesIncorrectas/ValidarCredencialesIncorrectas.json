@@ -1,16 +1,16 @@
 {
   "data": [
     {
-      "usuario": "Usuario50",
-      "clave": "clave1"
+      "usuario": "test",
+      "clave": "test1"
     },
     {
-      "usuario": "Usuario50",
-      "clave": "clave2"
+      "usuario": "test",
+      "clave": "test2"
     },
     {
-      "usuario": "ajaramillom",
-      "clave": "Administrador1."
+      "usuario": "test",
+      "clave": "test3."
     }
   ],
   "variables": {
@@ -19,7 +19,7 @@
     "keytres": "valuetres"
   },
   "resultados": {
-    "1": "Tus credenciales no coinciden. Por favor vuelve a intentar",
-    "2": "Tus credenciales no coinciden. Por favor vuelve a intentar nuevamente"
+    "PosibleResultado 1": "Tus credenciales no coinciden. Por favor vuelve a intentar",
+    "PosibleResultado 2": "Tus credenciales no coinciden. Por favor vuelve a intentar nuevamente"
   }
 }
