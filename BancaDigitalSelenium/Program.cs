@@ -1,4 +1,5 @@
 ﻿using BancaDigitalSelenium.Scripts;
+using BancaDigitalSelenium.Scripts.Transferencias;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Chromium;
@@ -19,10 +20,11 @@ namespace BancaDigitalSelenium
         static void Main(string[] args)
         {
             //SELECCIONAR CUALQUIER NAVEGADOR
-            var driver = new ChromeDriver("drivers");
+            var driver = new EdgeDriver("drivers");
 
-            DriverTemplate.EjecutarScript(new RecuperarContrasena(), driver);
+            //DriverTemplate.EjecutarScript(new RecuperarContrasena(), driver);
             //DriverTemplate.EjecutarScript(new ValidarCredencialesIncorrectas(), chrome);
+            DriverTemplate.EjecutarScript(new TransferenciaInternaScript(), driver);
         }
     }
 }

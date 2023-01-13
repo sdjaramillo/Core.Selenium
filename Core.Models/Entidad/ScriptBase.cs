@@ -61,5 +61,6 @@ namespace Core.Models.Entidad
         public object TestData { get; set; }
 
         public ScriptBase _script { get; set; }
+
     }
 }

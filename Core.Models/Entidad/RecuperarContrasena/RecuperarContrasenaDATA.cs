@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Models.Entidad.RecuperarContrasena
 {
-    public class RecuperarContrasenaData
+    public class RecuperarContrasenaData : ScriptParametroBase
     {
         public string TipoIdentificacion { get; set; }
         public string NumeroDocumento { get; set; }
+        public string Pin { get; set; }
     }
 }

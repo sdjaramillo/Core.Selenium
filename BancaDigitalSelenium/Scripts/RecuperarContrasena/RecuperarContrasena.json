@@ -2,11 +2,18 @@
   "data": [
     {
       "TipoIdentificacion": "Cedula",
-      "numeroDocumento": "12345678"
+      "numeroDocumento": "0602975146",
+      "pin": "2532",
+      "codigoTemporal": "123456",
+      "resultadoEsperado": {
+
+      }
     },
     {
-      "TipoIdentificacion": "Pasaporte",
-      "numeroDocumento": "123456"
+      "TipoIdentificacion": "Cedula",
+      "numeroDocumento": "1718615428",
+      "codigoTemporal": "123456",
+      "pin": "1234"
     }
   ]
 }

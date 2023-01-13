@@ -53,7 +53,7 @@ namespace BancaDigitalSelenium.Scripts
                 this.Driver.Url = this.URL;
                 Driver.Navigate();
                 Driver.Navigate().Refresh();
-                Driver.Login(data.Usuario, data.Clave);
+                this.Login(data.Usuario, data.Clave);
 
                 if (ValidarMensajeCuentaDeshabilitada())
                 {

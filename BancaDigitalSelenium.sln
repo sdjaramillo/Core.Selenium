@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BancaDigitalSelenium", "BancaDigitalSelenium\BancaDigitalSelenium.csproj", "{5C772EE8-0D63-449D-93A7-7C1938FE798B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Scripts", "BancaDigitalSelenium\Core.Scripts.csproj", "{5C772EE8-0D63-449D-93A7-7C1938FE798B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.LogicaScripts", "Core.LogicaScripts\Core.LogicaScripts.csproj", "{AB2DC2BC-0AF4-41B6-9632-E61DA03944E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Models", "Core.Models\Core.Models.csproj", "{7BBE3180-2A6D-4541-A524-EFDCB5894FC2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Helpers", "Core.Helpers\Core.Helpers.csproj", "{1DA42430-9E7B-44DC-99D6-08F1C6ED1714}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Forms", "Core.Forms\Core.Forms.csproj", "{6A6BED1E-06D7-4800-A32D-8A393CF56CDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1DA42430-9E7B-44DC-99D6-08F1C6ED1714}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DA42430-9E7B-44DC-99D6-08F1C6ED1714}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DA42430-9E7B-44DC-99D6-08F1C6ED1714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A6BED1E-06D7-4800-A32D-8A393CF56CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A6BED1E-06D7-4800-A32D-8A393CF56CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A6BED1E-06D7-4800-A32D-8A393CF56CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A6BED1E-06D7-4800-A32D-8A393CF56CDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

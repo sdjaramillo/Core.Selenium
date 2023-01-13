@@ -18,7 +18,7 @@ namespace BancaDigitalSelenium
             }
             catch (Exception ex)
             {
-                script.Error(ex);
+                script.Error(ex);                
             }
             finally
             {

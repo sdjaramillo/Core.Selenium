@@ -1,10 +1,8 @@
 ﻿using AventStack.ExtentReports;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Helpers
 {
@@ -53,6 +51,25 @@ namespace Core.Helpers
         {
             Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
             return ss.AsBase64EncodedString;
+        }
+
+        public static IWebElement FluentWait(this IWebDriver driver, By by, int timeout = 30)
+        {
+            DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver);
+            fluentWait.Timeout = TimeSpan.FromSeconds(timeout);
+            fluentWait.PollingInterval = TimeSpan.FromMilliseconds(250);
+            fluentWait.IgnoreExceptionTypes(typeof(OpenQA.Selenium.NoSuchElementException));
+
+            IWebElement elemento = fluentWait.Until(x => x.FindElement(by));
+
+            return elemento;
+        }
+
+        public static IWebElement WaitFindElement(this IWebDriver driver, By by, int timeout=10)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+            var element = w.Until(ExpectedConditions.ElementExists(by));
+            return element;
         }
     }
 }

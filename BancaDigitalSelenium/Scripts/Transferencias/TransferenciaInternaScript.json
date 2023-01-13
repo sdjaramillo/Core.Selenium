@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "usuario": "ajaramillom",
+      "contrasena": "Administrador0.",
+      "transferencias": [
+        {
+          "numeroCuenta": "8594650100",
+          "monto": "1.75",
+          "motivo": "opcional",
+          "cuentaOrigen": "8594651900"
+        },
+        {
+          "numeroCuenta": "8594650100",
+          "monto": "1.75",
+          "motivo": "opcional",
+          "cuentaOrigen": "8594651900"
+        }
+      ],
+
+      "urlFallido": "https://bgrdigital-test.bgr.com.ec/Transferencias/TransferenciaFallo"
+    }
+  ]
+}

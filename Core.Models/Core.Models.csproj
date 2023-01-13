@@ -429,9 +429,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entidad\AutoReport.cs" />
+    <Compile Include="Entidad\Afiliacion\AfiliacionData.cs" />
+    <Compile Include="Entidad\AutoReport\AutoReport.cs" />
+    <Compile Include="Entidad\ScriptParametroBase.cs" />
     <Compile Include="Entidad\RecuperarContrasena\RecuperarContrasenaDATA.cs" />
     <Compile Include="Entidad\ScriptBase.cs" />
+    <Compile Include="Entidad\Transferencias\Transferencia.cs" />
+    <Compile Include="Entidad\Transferencias\TransferenciaInternaParametro.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Interface\IBL.cs" />
     <Compile Include="Interface\IScript.cs" />

@@ -437,8 +437,10 @@
     <Compile Include="DriverTemplate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Afiliacion\Afiliacion.cs" />
     <Compile Include="Scripts\RecuperarContrasena\RecuperarContrasena.cs" />
     <Compile Include="Scripts\Shared\SharedComponents.cs" />
+    <Compile Include="Scripts\Transferencias\TransferenciaInternaScript.cs" />
     <Compile Include="Scripts\ValidarCredencialesIncorrectas\ValidarCredencialesIncorrectas.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -448,6 +450,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\RecuperarContrasena\RecuperarContrasena.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Transferencias\TransferenciaInternaScript.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
