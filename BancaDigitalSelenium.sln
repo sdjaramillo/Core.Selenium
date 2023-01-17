@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Models", "Core.Models\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Helpers", "Core.Helpers\Core.Helpers.csproj", "{1DA42430-9E7B-44DC-99D6-08F1C6ED1714}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Forms", "Core.Forms\Core.Forms.csproj", "{6A6BED1E-06D7-4800-A32D-8A393CF56CDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Forms", "Core.Forms\Core.Forms.csproj", "{6A6BED1E-06D7-4800-A32D-8A393CF56CDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

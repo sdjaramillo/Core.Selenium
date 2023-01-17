@@ -1,29 +1,32 @@
-﻿using BancaDigitalSelenium.Scripts.Shared;
-using Core.Helpers;
+﻿using AventStack.ExtentReports.Model;
 using Core.LogicaScripts.RecuperarContrasena;
-using Core.Models.Entidad;
 using Core.Models.Entidad.RecuperarContrasena;
+using Core.Models.Entidad;
 using Core.Models.Interface;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
+using System.Text;
+using System.Threading.Tasks;
+using BancaDigitalSelenium.Scripts.Shared;
+using Core.Helpers;
 
-namespace BancaDigitalSelenium.Scripts
+namespace BancaDigitalSelenium.Scripts.RecuperarContrasena
 {
-
-    public class RecuperarContrasena : ScriptBase, IScript
+    public class RecuperarContrasenaScript : ScriptBase, IScript
     {
         private RecuperarContrasenaBLL Logica { get; set; }
         public void SetConfig(IWebDriver driver)
         {
             Logica = new RecuperarContrasenaBLL();
-            Logica.SetConfig<RecuperarContrasenaData>(this, driver);
+            Logica.SetConfig<RecuperarContrasenaParametro>(this, driver);
         }
 
         public void Execute()
         {
-            List<RecuperarContrasenaData> ListaDatos = (List<RecuperarContrasenaData>)TestData;
+            List<RecuperarContrasenaParametro> ListaDatos = (List<RecuperarContrasenaParametro>)TestData;
             foreach (var data in ListaDatos)
             {
                 try
@@ -40,11 +43,16 @@ namespace BancaDigitalSelenium.Scripts
                     Logica.ContinuarValidarIdentificacion();
                     Logica.IngresarPinTarjetaDebito(data.Pin);
                     Logica.ValidaMensajeErrorTarjetaDebito();
-                    Logica.ValidarPin();
+                    Test.Info("Ingreso Pin", Driver.TomarScreen());
+                    Logica.ValidarPin();                    
                     Logica.EsperarMensajeValidando();
                     Logica.ValidaMensajeErrorTarjetaDebito();
+
+                    //Logica.IngresarContrasenaNueva(data.ContrasenaNueva)
+
                     Logica.RestaurarUsuario();
                     this.IngresarCodigoTemporal(data.CodigoTemporal);
+                    Test.Info("Ingreso códig temporal", Driver.TomarScreen());
                     string usuarioRecuperado = Logica.ObtenerUsuarioRecuperado();
                     Test.Pass($"Usuario Recupetado {usuarioRecuperado}", Driver.TomarScreen());
                 }
@@ -65,5 +73,6 @@ namespace BancaDigitalSelenium.Scripts
         {
             Reporte.GuardarReporte();
         }
+
     }
 }

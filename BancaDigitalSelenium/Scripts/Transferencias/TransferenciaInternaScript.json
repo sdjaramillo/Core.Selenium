@@ -11,14 +11,15 @@
           "cuentaOrigen": "8594651900"
         },
         {
-          "numeroCuenta": "8594650100",
-          "monto": "1.75",
-          "motivo": "opcional",
+          "numeroCuenta": "8064532200",
+          "monto": "2.25",
+          "motivo": "Transferencia Interna",
           "cuentaOrigen": "8594651900"
         }
       ],
 
-      "urlFallido": "https://bgrdigital-test.bgr.com.ec/Transferencias/TransferenciaFallo"
+      "urlFallido": "https://bgrdigital-test.bgr.com.ec/Transferencias/TransferenciaFallo",
+      "urlCorrecto": "https://bgrdigital-test.bgr.com.ec/Transferencias/TransferenciaProcesar"
     }
   ]
 }

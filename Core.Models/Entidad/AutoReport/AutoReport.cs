@@ -21,9 +21,9 @@ namespace Core.Models.Entidad
         /// </summary>
         public string PathGuardado;
 
-        public AutoReport(string nombrePrueba)
+        public AutoReport(string nombrePrueba, string pathGuardado)
         {
-            PathGuardado = nombrePrueba.Split('.').Last();
+            PathGuardado = pathGuardado;
             HtmlReporte = new ExtentHtmlReporter(PathGuardado);
             Reporte = new ExtentReports();
             Reporte.AttachReporter(HtmlReporte);

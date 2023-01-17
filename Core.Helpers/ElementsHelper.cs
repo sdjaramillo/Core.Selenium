@@ -1,6 +1,7 @@
 ﻿using AventStack.ExtentReports;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using RazorEngine.Compilation.ImpromptuInterface.Dynamic;
 using SeleniumExtras.WaitHelpers;
 using System;
 
@@ -65,11 +66,26 @@ namespace Core.Helpers
             return elemento;
         }
 
-        public static IWebElement WaitFindElement(this IWebDriver driver, By by, int timeout=10)
+        public static IWebElement WaitFindElement(this IWebDriver driver, By by, int timeout = 10)
         {
             WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
             var element = w.Until(ExpectedConditions.ElementExists(by));
             return element;
+        }
+
+        public static void checkAlert(this IWebDriver driver, int timeout=1)
+        {
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(1));
+                wait.Until(ExpectedConditions.AlertIsPresent());
+                var alert = driver.SwitchTo().Alert();
+                alert.Accept();
+            }
+            catch (Exception e)
+            {
+                //exception handling
+            }
         }
     }
 }

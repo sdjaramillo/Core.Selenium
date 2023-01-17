@@ -62,5 +62,7 @@ namespace Core.Models.Entidad
 
         public ScriptBase _script { get; set; }
 
+        public string PathGuardado { get; set; }
+
     }
 }

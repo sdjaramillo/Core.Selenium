@@ -1,25 +1,28 @@
 ﻿using Core.Helpers;
 using Core.Models.Entidad;
+using Core.Models.Entidad.RecuperarContrasena;
+using Core.Models.Interface;
 using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace Core.LogicaScripts.RecuperarContrasena
 {
-    public class RecuperarContrasenaBLL
+    public class RecuperarUsuarioBLL
     {
         private IWebDriver _driver;
         public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver)
         {
             _driver = driver;
             var logicaInyectada = script.GetType().Name;
-            script.URL = "https://bgrdigital-test.bgr.com.ec/Cuenta/Restaurarclave";
+            script.URL = "https://bgrdigital-test.bgr.com.ec/Cuenta/Usuario";
             script.Reporte = new AutoReport(script.GetType().ToString().Split('.').Last(), script.PathGuardado);
             script.Driver = driver;
             script.Driver.Url = script.URL;
@@ -48,7 +51,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
 
         public void IngresarNumeroDocumento(string numeroIdentificacion, string tipoDocumento)
         {
-            const string identificacion = "IdentificacionPersona";
+            const string identificacion = "Identificacion";
             const string identificacionPersona = "IdentificacionPersona";
 
             var elemento = tipoDocumento.Equals("Cedula") ? identificacion : identificacionPersona;
@@ -154,7 +157,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
         {
             const string divUsuario = "usuario-recuperado";
 
-            var recuperarUsuario = _driver.WaitFindElement(By.Id(divUsuario));
+            var recuperarUsuario = _driver.WaitFindElement(By.Id(divUsuario),30);
             return recuperarUsuario.GetInnerText();
         }
     }

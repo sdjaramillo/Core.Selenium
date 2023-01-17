@@ -33,13 +33,19 @@ namespace BancaDigitalSelenium.Scripts.Transferencias
 
             foreach (var data in ListaDatos)
             {
-                
+
                 this.Login(data.Usuario, data.Contrasena);
                 this.SeleccionarOpcionMenu(By.Id("menu-transferencias"));
 
                 foreach (var transferencia in data.Transferencias)
                 {
                     Test = Reporte.CrearTest($"Transferencia: {transferencia.CuentaOrigen} > {transferencia.NumeroCuenta}");
+                    var info = Test.CreateNode("Información Prueba");
+                    info.Info($"Cuenta origen: {transferencia.CuentaOrigen}");
+                    info.Info($"Monto: {transferencia.Monto}");
+                    info.Info($"Motivo: {transferencia.Motivo}");
+                    info.Info($"Cuenta Destino: {transferencia.NumeroCuenta}");
+
                     //BOTON NUEVA TRANSFERENCIA
                     var nuevaTransferencia = Driver.FindElement(By.ClassName("button-active-transferencia"));
                     nuevaTransferencia.Click();
@@ -77,12 +83,13 @@ namespace BancaDigitalSelenium.Scripts.Transferencias
                     {
                         Test.Fail(data.UrlFallido, Driver.TomarScreen());
                     }
+                    if (data.UrlCorrecto == Driver.Url)
+                    {
+                        Test.Pass("Transferencia Exitosa", Driver.TomarScreen());
+                    }
 
                     this.SeleccionarOpcionMenu(By.Id("menu-transferencias"));
                 }
-
-
-
             }
         }
         public void Error(Exception ex)

@@ -10,5 +10,6 @@ namespace Core.Models.Entidad.Transferencias
     {
         public List<Transferencia> Transferencias { get; set; }
         public string UrlFallido { get; set; }
+        public string UrlCorrecto { get; set; }
     }
 }

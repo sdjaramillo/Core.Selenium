@@ -1,4 +1,6 @@
 ﻿using BancaDigitalSelenium.Scripts;
+using BancaDigitalSelenium.Scripts.Afiliacion;
+using BancaDigitalSelenium.Scripts.RecuperarContrasena;
 using BancaDigitalSelenium.Scripts.Transferencias;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -22,7 +24,9 @@ namespace BancaDigitalSelenium
             //SELECCIONAR CUALQUIER NAVEGADOR
             var driver = new EdgeDriver("drivers");
 
-            //DriverTemplate.EjecutarScript(new RecuperarContrasena(), driver);
+            //DriverTemplate.EjecutarScript(new AfiliacionScript(), driver);
+            //DriverTemplate.EjecutarScript(new RecuperarUsuarioScript(), driver);
+            //DriverTemplate.EjecutarScript(new RecuperarContrasenaScript(), driver);
             //DriverTemplate.EjecutarScript(new ValidarCredencialesIncorrectas(), chrome);
             DriverTemplate.EjecutarScript(new TransferenciaInternaScript(), driver);
         }

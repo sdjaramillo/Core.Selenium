@@ -435,8 +435,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Afiliacion\AfiliacionBLL.cs" />
+    <Compile Include="Beneficiarios\BeneficiariosBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecuperarContrasena\RecuperarContrasenaBLL.cs" />
+    <Compile Include="RecuperarContrasena\RecuperarUsuarioBLL.cs" />
     <Compile Include="TransferenciaInterna\TransferenciaInternaBLL.cs" />
   </ItemGroup>
   <ItemGroup>
