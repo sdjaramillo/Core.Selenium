@@ -1,0 +1,25 @@
+{
+  "scripts": [
+    {
+      "nombre": "Afiliacion",
+      "squema": "Core.Models.Entidad.AfiliacionParametro",
+      "json": "scripts/Afiliacion/AfiliacionScript.json"
+    },
+    {
+      "nombre": "Recuperar Usuario",
+      "squema": "Core.Models.Entidad.RecuperarUsuarioParametro",
+      "json": "scripts/RecuperarContrasena/RecuperarContrasenaScript.json"
+    },
+    {
+      "nombre": "Recuperar Contraseña",
+      "squema": "Core.Models.Entidad.RecuperarContrasena.RecuperarContrasenaParametro",
+      "json": "scripts/RecuperarContrasena/RecuperarContrasenaScript.json"
+    },
+    {
+      "nombre": "Transferencia Interna",
+      "squema": "Core.Models.Entidad.Transferencias.TransferenciaInternaParametro",
+      "json": "scripts/Transferencias/TransferenciaInternaScript.json",
+      "descripcion": "Script para ejecutar flujo de transferencias"
+    }
+  ]
+}

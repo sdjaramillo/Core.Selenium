@@ -1,4 +1,5 @@
-﻿using Core.Models.Interface;
+﻿using Core.Models.Entidad;
+using Core.Models.Interface;
 using OpenQA.Selenium;
 using System;
 
@@ -14,11 +15,11 @@ namespace BancaDigitalSelenium
             try
             {
                 script.SetConfig(driver);
-                script.Execute();                
+                script.Execute();
             }
             catch (Exception ex)
             {
-                script.Error(ex);                
+                script.Error(ex);
             }
             finally
             {

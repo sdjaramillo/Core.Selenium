@@ -11,6 +11,7 @@ namespace Core.Models.Entidad
         public string NumeroCedula { get; set; } = string.Empty;
         public string Pin { get; set; } = string.Empty;
         public string TipoIDentificacion { get; set; } = string.Empty;
+        public string Telefono { get; set; } = string.Empty;
         public string Correo { get; set; }
     }
 }

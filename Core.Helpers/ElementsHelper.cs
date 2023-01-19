@@ -1,9 +1,14 @@
 ﻿using AventStack.ExtentReports;
+using MongoDB.Bson;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using RazorEngine.Compilation.ImpromptuInterface.Dynamic;
 using SeleniumExtras.WaitHelpers;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace Core.Helpers
 {
@@ -66,6 +71,13 @@ namespace Core.Helpers
             return elemento;
         }
 
+        /// <summary>
+        /// Metodo para esperar que un elemento sea visible o aparezca en la página.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="by"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
         public static IWebElement WaitFindElement(this IWebDriver driver, By by, int timeout = 10)
         {
             WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
@@ -73,7 +85,23 @@ namespace Core.Helpers
             return element;
         }
 
-        public static void checkAlert(this IWebDriver driver, int timeout=1)
+        /// <summary>
+        /// Metodo para esperar hasta que un elemento pueda ser clickeado
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="by"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public static IWebElement WaitElementTobeClicked(this IWebDriver driver, By by, int timeout = 10)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+            w.Until(ExpectedConditions.ElementToBeClickable(by));
+
+            return WaitFindElement(driver, by, timeout);
+        }
+
+
+        public static void checkAlert(this IWebDriver driver, int timeout = 1)
         {
             try
             {
@@ -87,5 +115,39 @@ namespace Core.Helpers
                 //exception handling
             }
         }
+
+        public static void ScrollIntoView(this IWebElement element)
+        {
+            var driver = ((IWrapsDriver)element).WrappedDriver;
+            var js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript($"arguments[0].scrollIntoView(true);", element);
+            Thread.Sleep(1000);
+        }
+
+        public static void FindTable(this IWebDriver driver, By by, int? indexColumna = null, string valueToFind = "", string tagRow = "tr", string tagColumn = "td", ElementAction accion = ElementAction.Click, By byInsideColumn = null)
+        {
+            var tabla = driver.FindElement(by);
+            List<IWebElement> filas = tabla.FindElements(By.TagName(tagRow)).ToList();
+            foreach (IWebElement row in filas)
+            {
+                List<IWebElement> columnas = row.FindElements(By.TagName(tagColumn)).ToList();
+
+                if (indexColumna != null)
+                    columnas = new List<IWebElement> { columnas[(int)indexColumna] };
+
+                foreach (IWebElement col in columnas)
+                {
+                    IWebElement element = col;
+                    string valor = element.GetInnerText();
+
+                    if (byInsideColumn != null)
+                    {
+                        element = element.FindElement(byInsideColumn);
+                    }
+
+                }
+            }
+        }
+
     }
 }

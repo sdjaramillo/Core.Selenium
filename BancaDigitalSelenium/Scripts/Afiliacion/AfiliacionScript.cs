@@ -16,8 +16,20 @@ using System.Threading.Tasks;
 
 namespace BancaDigitalSelenium.Scripts.Afiliacion
 {
+    /// <summary>
+    /// Script para automatizar flujo de afiliación
+    /// Recibe como dato parametros Afiliacion parámetro:
+    /// NumeroCedula
+    /// Pin 
+    /// TipoIDentificacion
+    /// Telefono
+    /// Correo
+    /// </summary>
     public class AfiliacionScript : ScriptBase, IScript
     {
+        /// <summary>
+        /// Logica del script
+        /// </summary>
         private AfiliacionBLL Logica { get; set; }
         public void SetConfig(IWebDriver driver)
         {
@@ -41,8 +53,8 @@ namespace BancaDigitalSelenium.Scripts.Afiliacion
                     Logica.IngresarPinTarjetaDebito(data.Pin);
 
                     ///Verificar terminos y condiciones
-                    //var temrinosCondiciones = Driver.FindElement(By.ClassName("terminos-condiciones"));
-                    //temrinosCondiciones.Click();
+                    var temrinosCondiciones = Driver.FindElement(By.ClassName("terminos-condiciones"));
+                    temrinosCondiciones.Click();
 
                     var aceptarTerminosCondiciones = Driver.FindElement(By.Id("cbox2"));
                     aceptarTerminosCondiciones.Click();
@@ -51,10 +63,15 @@ namespace BancaDigitalSelenium.Scripts.Afiliacion
                     var BotonContinuar = Driver.FindElement(By.Id("btn_validar"));
                     BotonContinuar.Click();
 
+                    Thread.Sleep(1000);
 
-                    var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-                    var telefono = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("telefono")));                    
-                    telefono.SendKeys("0992930801");
+                    Logica.ValidarMensajeErrorPin();
+                    ////////// FIN PRIMERA PARTE
+
+
+                    var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(30));
+                    var telefono = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("telefono")));
+                    telefono.SendKeys(data.Telefono);
 
                     var correo = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("correo")));
                     correo.SendKeys(data.Correo);
@@ -63,7 +80,6 @@ namespace BancaDigitalSelenium.Scripts.Afiliacion
                     var botonCotinuar = Driver.FindElement(By.Id("valida_datos"));
                     botonCotinuar.Click();
 
-                    
                     var usuario = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("txtUsuario")));
                     usuario.SendKeys(data.Usuario);
 
@@ -74,11 +90,11 @@ namespace BancaDigitalSelenium.Scripts.Afiliacion
                     contrasenaConfirmacion.SendKeys(data.Contrasena);
 
                     Test.Pass("Usuario y contrasena", Driver.TomarScreen());
-
+                    Thread.Sleep(1000);
                     var botonContinuar = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("btn_valida_usuario")));
+                    botonContinuar = Driver.FindElement(By.Id("btn_valida_usuario"));
                     botonContinuar.Click();
 
-                    
                     wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("submit")));
                     Thread.Sleep(1500);
                     Driver.FindElement(By.Name("submit")).Click();
@@ -105,14 +121,12 @@ namespace BancaDigitalSelenium.Scripts.Afiliacion
 
                     wait.Until(ExpectedConditions.ElementExists(By.ClassName("Gracias-por-confiar-en-nosotros")));
                     Test.Pass("Afiliación", Driver.TomarScreen());
-
                 }
                 catch (Exception ex)
                 {
                     Test.Fail(ex.Message, Driver.TomarScreen());
                 }
             }
-
         }
         public void Error(Exception ex)
         {
@@ -122,6 +136,10 @@ namespace BancaDigitalSelenium.Scripts.Afiliacion
         public void Finalizar()
         {
             Reporte.GuardarReporte();
+            Driver.Quit();
+            Driver.Dispose();
         }
+
+
     }
 }

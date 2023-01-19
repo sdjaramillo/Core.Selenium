@@ -1,4 +1,5 @@
-﻿using Core.Models.Entidad;
+﻿using Core.Helpers;
+using Core.Models.Entidad;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,9 @@ namespace BancaDigitalSelenium.Scripts.Shared
             var campoClave = script.Driver.FindElement(By.Id("Clave"));
             campoClave.SendKeys(clave);
 
-            var botonLogin = script.Driver.FindElement(By.Id("IdBotonIngresarBanca"));
-            botonLogin.Click();
+            script.Driver.WaitElementTobeClicked(By.Id("IdBotonIngresarBanca"));
+            var botonlogin = script.Driver.FindElement(By.Id("IdBotonIngresarBanca"));
+            botonlogin.Click();
         }
 
         public static void IngresarCodigoTemporal(this ScriptBase script, string codigo)

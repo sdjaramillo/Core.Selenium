@@ -32,14 +32,12 @@ namespace BancaDigitalSelenium.Scripts.Beneficiarios
             foreach (var data in ListaDatos)
             {
                 this.Login(data.Usuario,data.Contrasena);
-
-
             }
         }
 
         public void Finalizar()
         {
-            throw new NotImplementedException();
+            Reporte.GuardarReporte();
         }
 
     }

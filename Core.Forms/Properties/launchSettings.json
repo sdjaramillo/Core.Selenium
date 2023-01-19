@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Core.Forms": {
+      "commandName": "Project",
+      "nativeDebugging": false,
+      "remoteDebugEnabled": false
+    }
+  }
+}

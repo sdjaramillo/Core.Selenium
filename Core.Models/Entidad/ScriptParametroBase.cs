@@ -12,5 +12,6 @@ namespace Core.Models.Entidad
         public string CodigoTemporal { get; set; } = "123456";
         public string Usuario { get; set; }
         public string Contrasena { get; set; }
+        public string URL { get; set; }
     }
 }

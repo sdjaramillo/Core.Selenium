@@ -1,4 +1,5 @@
-﻿using Core.Helpers;
+﻿using AventStack.ExtentReports.Model;
+using Core.Helpers;
 using Core.Models.Entidad;
 using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
@@ -32,7 +33,6 @@ namespace Core.LogicaScripts.Afiliacion
                 JObject json = JObject.Parse(sr.ReadToEnd());
                 script.TestData = json.SelectToken("data").ToObject<List<T>>();
             }
-            //script.Test = script.Reporte.CrearTest(script.GetType().ToString()).AssignDevice(driver.GetType().ToString().Split('.').Last());
             return script;
         }
 
@@ -58,6 +58,13 @@ namespace Core.LogicaScripts.Afiliacion
             elemento.SendKeys(Keys.Tab);
         }
 
-       
+        public void ValidarMensajeErrorPin()
+        {
+            var errorPin = _driver.FindElement(By.Id("error-pin"));
+            if (errorPin.Enabled && errorPin.Displayed)
+            {
+                throw new Exception(errorPin.GetInnerText());
+            }
+        }
     }
 }

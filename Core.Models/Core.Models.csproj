@@ -436,11 +436,13 @@
     <Compile Include="Entidad\ScriptParametroBase.cs" />
     <Compile Include="Entidad\RecuperarContrasena\RecuperarUsuarioParametro.cs" />
     <Compile Include="Entidad\ScriptBase.cs" />
+    <Compile Include="Entidad\Script\Script.cs" />
     <Compile Include="Entidad\Transferencias\Transferencia.cs" />
     <Compile Include="Entidad\Transferencias\TransferenciaInternaParametro.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Interface\IBL.cs" />
     <Compile Include="Interface\IScript.cs" />
+    <Compile Include="ModelHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

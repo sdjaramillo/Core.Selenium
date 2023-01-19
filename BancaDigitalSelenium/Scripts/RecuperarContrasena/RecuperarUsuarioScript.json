@@ -2,8 +2,8 @@
   "data": [
     {
       "TipoIdentificacion": "Cedula",
-      "numeroDocumento": "0602975146",
-      "pin": "2532",
+      "numeroDocumento": "0501963201",
+      "pin": "7227",
       "codigoTemporal": "123456",
       "resultadoEsperado": {
 
@@ -11,9 +11,9 @@
     },
     {
       "TipoIdentificacion": "Cedula",
-      "numeroDocumento": "1718615428",
+      "numeroDocumento": "0602975146",
       "codigoTemporal": "123456",
-      "pin": "1234"
+      "pin": "2532"
     }
   ]
 }

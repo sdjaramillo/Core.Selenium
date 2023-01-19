@@ -434,6 +434,7 @@
   <ItemGroup>
     <Compile Include="AutoReportHelper.cs" />
     <Compile Include="ElementsHelper.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

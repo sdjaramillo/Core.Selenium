@@ -4,14 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Models
+namespace Core.Helpers
 {
-    public enum ResultadosPrueba
-    {
-        Exitoso,
-        Fallido
-    }
-
     public enum ElementAction
     {
         Click
