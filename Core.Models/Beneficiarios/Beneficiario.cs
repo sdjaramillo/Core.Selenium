@@ -13,5 +13,9 @@ namespace Core.Models.Beneficiarios
         public string Alias { get; set; } = string.Empty;
         public string Correo { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
+        public string TipoDocumento { get; set; }
+        public string Banco { get; set; }
+        public string NumeroIdentificacion { get; set; }
+        public string TipoCuenta { get; set; }
     }
 }

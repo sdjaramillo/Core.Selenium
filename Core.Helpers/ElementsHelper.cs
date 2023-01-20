@@ -132,6 +132,21 @@ namespace Core.Helpers
             }
         }
 
+        public static void FireClick(this IWebElement element, int wait = 500)
+        {
+            try
+            {
+                var driver = ((IWrapsDriver)element).WrappedDriver;
+                var js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript($"arguments[0].click();", element);
+                Thread.Sleep(wait);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al hacer click al objeto");
+            }
+        }
+
         public static void SetValue(this IWebElement element, string value)
         {
             try
