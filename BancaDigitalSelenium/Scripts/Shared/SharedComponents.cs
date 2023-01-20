@@ -37,12 +37,13 @@ namespace BancaDigitalSelenium.Scripts.Shared
             foreach (var p in pin)
             {
                 var pinInput = script.Driver.FindElement(By.Id(p));
+                pinInput.ScrollIntoView(500);
                 pinInput.SendKeys(codigo[pin.IndexOf(p)].ToString());
             }
 
         }
 
-        public static void SeleccionarOpcionMenu(this ScriptBase script,By by)
+        public static void SeleccionarOpcionMenu(this ScriptBase script, By by)
         {
             var opcMenu = script.Driver.FindElement(by);
             opcMenu.Click();

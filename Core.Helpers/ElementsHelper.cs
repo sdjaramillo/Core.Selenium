@@ -116,12 +116,34 @@ namespace Core.Helpers
             }
         }
 
-        public static void ScrollIntoView(this IWebElement element)
+        public static void ScrollIntoView(this IWebElement element, int wait=1000)
         {
-            var driver = ((IWrapsDriver)element).WrappedDriver;
-            var js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript($"arguments[0].scrollIntoView(true);", element);
-            Thread.Sleep(1000);
+            try
+            {
+                var driver = ((IWrapsDriver)element).WrappedDriver;
+                var js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript($"arguments[0].scrollIntoView(true);", element);
+                Thread.Sleep(wait);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al mover al objeto");
+            }
+        }
+
+        public static void SetValue(this IWebElement element, string value)
+        {
+            try
+            {
+                var driver = ((IWrapsDriver)element).WrappedDriver;
+                var js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript($"arguments[0].value='{value}'", element);
+                Thread.Sleep(200);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al mover al objeto");
+            }
         }
 
         public static void FindTable(this IWebDriver driver, By by, int? indexColumna = null, string valueToFind = "", string tagRow = "tr", string tagColumn = "td", ElementAction accion = ElementAction.Click, By byInsideColumn = null)

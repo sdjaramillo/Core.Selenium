@@ -31,27 +31,29 @@ namespace BancaDigitalSelenium.Scripts
                     var nombreTest = $"{this.GetType().ToString().Split('.').Last()} {ListaDatos.IndexOf(data) + 1}";
                     var navegador = Driver.GetType().ToString().Split('.').Last();
                     Test = Reporte.CrearTest(nombreTest).AssignDevice(navegador);
+                    Test.CreateNode("Datos Ejecución").AgregarInformacionParametro<RecuperarContrasenaParametro>(data);
 
                     Driver.Url = URL;
                     Logica.SeleccionarTipoDocumento(data.TipoIdentificacion);
                     Logica.IngresarNumeroDocumento(data.NumeroDocumento, data.TipoIdentificacion);
                     Logica.ValidarMensajeErrorDatosValidacion();
-                    Test.Info("Ingreso número documento correcto", Driver.TomarScreen());
+                    Test.Pass("Ingreso número documento correcto", Driver.TomarScreen());
                     Logica.ContinuarValidarIdentificacion();
                     Logica.IngresarPinTarjetaDebito(data.Pin);
+                    Test.Pass("Ingreso PIN", Driver.TomarScreen());
                     Logica.ValidaMensajeErrorTarjetaDebito();
                     Logica.ValidarPin();
                     Logica.EsperarMensajeValidando();
                     Logica.ValidaMensajeErrorTarjetaDebito();
+                    Test.Pass("Restaurar Usuario");
                     Logica.RestaurarUsuario();
                     this.IngresarCodigoTemporal(data.CodigoTemporal);
                     Driver.checkAlert();
                     string usuarioRecuperado = Logica.ObtenerUsuarioRecuperado();
-                    Test.Pass($"Usuario Recuperado {usuarioRecuperado}", Driver.TomarScreen());
+                    Test.Pass($"Usuario Recuperado: {usuarioRecuperado}", Driver.TomarScreen());
                 }
                 catch (Exception ex)
                 {
-
                     Test.Fail(ex.Message, Driver.TomarScreen());
                 }
             }

@@ -25,5 +25,14 @@ namespace Core.Helpers
                 test.Info($"{info.Key} {info.Value}");
             }
         }
+
+        public static void AgregarInformacionParametro<T>(this ExtentTest test, object data)
+        {
+
+            var propiedades = data.GetType().GetProperties();
+
+            foreach (var pro in propiedades)
+                test.Info($"{pro.Name}: {pro.GetValue(data)}");
+        }
     }
 }

@@ -66,24 +66,37 @@ namespace BancaDigitalSelenium.Scripts.Transferencias
 
                         //CAMPO MONTO
                         Thread.Sleep(500);
-                        Driver.WaitFindElement(By.Id("Monto")).Click();
-                        SeleniumJS.ExecuteScript("document.getElementById('Monto').value= ''");
-                        Driver.WaitFindElement(By.Id("Monto")).SendKeys(transferencia.Monto);
-                        Driver.WaitFindElement(By.Id("Monto")).SendKeys(Keys.Tab);
-                        Driver.WaitFindElement(By.Id("Motivo")).SendKeys(transferencia.Motivo);
-                        Driver.WaitFindElement(By.Id("btnMonto")).Click();
+                        var campoMonto = Driver.WaitFindElement(By.Id("Monto"));
+                        campoMonto.ScrollIntoView();
+                        campoMonto.Click();
+                        campoMonto.SetValue("");
+                        //SeleniumJS.ExecuteScript("document.getElementById('Monto').value= ''");
+                        campoMonto.SendKeys(transferencia.Monto);
+                        campoMonto.SendKeys(Keys.Tab);
+
+                        var campoMotivo = Driver.WaitFindElement(By.Id("Motivo"));
+                        campoMotivo.ScrollIntoView();
+                        campoMotivo.SendKeys(transferencia.Motivo);
+
+                        var botonMonto = Driver.WaitFindElement(By.Id("btnMonto"));
+                        botonMonto.Click();
                         Test.Pass("Detalle Transferencia", Driver.TomarScreen());
 
                         //3
                         Thread.Sleep(500);
-                        SelectElement comboCuentaOrigen = new SelectElement(Driver.FindElement(By.Id("InformacionOrigen_NumeroCuenta")));
+                        var cuentasOrigen = Driver.WaitFindElement(By.Id("InformacionOrigen_NumeroCuenta"));
+                        cuentasOrigen.ScrollIntoView();
+                        SelectElement comboCuentaOrigen = new SelectElement(cuentasOrigen);
+
                         comboCuentaOrigen.SelectByText(transferencia.CuentaOrigen, true);
                         Test.Pass("Cuenta Destino", Driver.TomarScreen());
 
                         var botonCuenta = Driver.FindElement(By.Id("btnCuenta"));
+                        botonCuenta.ScrollIntoView();
                         botonCuenta.Click();
 
                         var botonConfirmarTransferencia = Driver.FindElement(By.Id("button-inactive"));
+                        botonConfirmarTransferencia.ScrollIntoView();
                         botonConfirmarTransferencia.Click();
                         //Driver.Navigate().Refresh();
                         if (data.UrlFallido == Driver.Url)
@@ -97,7 +110,7 @@ namespace BancaDigitalSelenium.Scripts.Transferencias
                     }
                     catch (Exception ex)
                     {
-                        Test.Fail(ex.Message);
+                        Test.Fail(ex.Message, Driver.TomarScreen());
                     }
 
                     this.SeleccionarOpcionMenu(By.Id("menu-transferencias"));

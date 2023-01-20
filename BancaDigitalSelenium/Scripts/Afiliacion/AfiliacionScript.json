@@ -1,6 +1,15 @@
 {
   "data": [
     {
+      "tipoIdentificacion": "Cedula",
+      "numeroCedula": "1719951848",
+      "pin": "0243",
+      "telefono": "0998568774",
+      "correo": "correoc@correob.com",
+      "contrasena": "Administrador1.",
+      "usuario": "Usuario422"
+    },
+    {
       "numeroCedula": "0602975146",
       "pin": "2532",
       "tipoIdentificacion": "Cedula",

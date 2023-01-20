@@ -44,6 +44,7 @@ namespace Core.LogicaScripts.TransferenciaInterna
         {
             const string botonNuevaTransferenciaID = "button-active-transferencia";
             var nuevaTransferencia = _driver.FindElement(By.ClassName(botonNuevaTransferenciaID));
+            nuevaTransferencia.ScrollIntoView();
             nuevaTransferencia.Click();
         }
 

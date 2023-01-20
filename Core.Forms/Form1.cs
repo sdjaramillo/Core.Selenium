@@ -62,13 +62,15 @@ namespace Core.Forms
             {
                 using (StreamReader sr = new StreamReader($"{scriptSeleccionado.Json}"))
                 {
-                    this._txtJson.Text = sr.ReadToEnd();
+                    string json = sr.ReadToEnd();
+                    this._txtJson.Text = json;
 
-                    var tipo = ModelHelper.GetObject(scriptSeleccionado.Squema);
-                    ScriptParametroBase instance = (ScriptParametroBase)Activator.CreateInstance(tipo);
+                    var tipo = ModelHelper.GetObject(scriptSeleccionado.Esquema);
+                    var instance = Activator.CreateInstance(tipo);
 
-                    JObject json = JObject.Parse(sr.ReadToEnd());
-                    //var TestData = json.SelectToken("data").ToObject(tipo);
+                    JObject jsonObject = JObject.Parse(json);
+
+                    var testData = jsonObject.SelectToken("data").ToObject<List<object>>();
                 }
             }
             catch (Exception ex)

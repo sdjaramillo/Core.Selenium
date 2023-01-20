@@ -34,6 +34,7 @@ namespace BancaDigitalSelenium.Scripts.RecuperarContrasena
                     var nombreTest = $"{this.GetType().ToString().Split('.').Last()} {ListaDatos.IndexOf(data) + 1}";
                     var navegador = Driver.GetType().ToString().Split('.').Last();
                     Test = Reporte.CrearTest(nombreTest).AssignDevice(navegador);
+                    Test.CreateNode("Datos Ejecución").AgregarInformacionParametro<RecuperarContrasenaParametro>(data);
 
                     Driver.Url = URL;
                     Logica.SeleccionarTipoDocumento(data.TipoIdentificacion);
@@ -44,21 +45,29 @@ namespace BancaDigitalSelenium.Scripts.RecuperarContrasena
                     Logica.IngresarPinTarjetaDebito(data.Pin);
                     Logica.ValidaMensajeErrorTarjetaDebito();
                     Test.Info("Ingreso Pin", Driver.TomarScreen());
-                    Logica.ValidarPin();                    
+                    Logica.ValidarPin();
                     Logica.EsperarMensajeValidando();
                     Logica.ValidaMensajeErrorTarjetaDebito();
 
-                    //Logica.IngresarContrasenaNueva(data.ContrasenaNueva)
+                    Logica.IngresarContrasenaNueva(data.Contrasena, data.Contrasena);
 
-                    Logica.RestaurarUsuario();
+                    Logica.ValidarClave();
+
+                    Logica.RestaurarContrasena();
+
                     this.IngresarCodigoTemporal(data.CodigoTemporal);
-                    Test.Info("Ingreso códig temporal", Driver.TomarScreen());
-                    string usuarioRecuperado = Logica.ObtenerUsuarioRecuperado();
-                    Test.Pass($"Usuario Recupetado {usuarioRecuperado}", Driver.TomarScreen());
-                }
+                    //Test.Info("Ingreso códig temporal", Driver.TomarScreen());
+                    //string usuarioRecuperado = Logica.ObtenerUsuarioRecuperado();
+                    //Test.Pass($"Usuario Recupetado {usuarioRecuperado}", Driver.TomarScreen());
+                    var x = Driver.WaitFindElement(By.ClassName("fecha-clave-cambiada"));
+                    Test.Pass($"Fecha recuperación: {x.GetInnerText()}");
+                    if (Driver.Url == "https://bgrdigital-test.bgr.com.ec/Cuenta/RecuperarClaveExito")
+                    {
+                        Test.Pass("Clave Recuperada", Driver.TomarScreen());
+                    }
+                }              
                 catch (Exception ex)
                 {
-
                     Test.Fail(ex.Message, Driver.TomarScreen());
                 }
             }

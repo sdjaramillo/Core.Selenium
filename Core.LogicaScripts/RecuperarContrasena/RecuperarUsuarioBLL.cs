@@ -57,6 +57,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
             var elemento = tipoDocumento.Equals("Cedula") ? identificacion : identificacionPersona;
 
             var inputIdentificacon = _driver.FindElement(By.Name(elemento));
+            inputIdentificacon.ScrollIntoView();
             inputIdentificacon.SendKeys(numeroIdentificacion);
             inputIdentificacon.SendKeys(Keys.Tab);
         }
@@ -78,6 +79,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
             const string botonContinuarId = "btnValidarIdentificacion";
 
             var botonContinuar = _driver.FindElement(By.Id(botonContinuarId));
+            botonContinuar.ScrollIntoView();
             botonContinuar.Click();
         }
 
@@ -89,6 +91,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
             const string pin4 = "Pin4";
 
             var elemento = _driver.FindElement(By.Id(pin1));
+            elemento.ScrollIntoView();
             elemento.SendKeys(pin[0].ToString());
 
             elemento = _driver.FindElement(By.Id(pin2));
@@ -119,6 +122,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
             const string botonValidarPinId = "btnValidarPin";
 
             var botonValidarPin = _driver.FindElement(By.Id(botonValidarPinId));
+            botonValidarPin.ScrollIntoView();
             botonValidarPin.Click();
         }
 
@@ -150,6 +154,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
             const string botonRestaurarUsuario = "btnRestaurarUsuario";
 
             var botonRestaurar = _driver.FindElement(By.Id(botonRestaurarUsuario));
+            botonRestaurar.ScrollIntoView();
             botonRestaurar.Click();
         }
 

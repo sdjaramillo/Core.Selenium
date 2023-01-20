@@ -3,10 +3,13 @@ using Core.Helpers;
 using Core.Models.Entidad;
 using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,6 +47,7 @@ namespace Core.LogicaScripts.Afiliacion
             const string pin4 = "Pin4";
 
             var elemento = _driver.FindElement(By.Id(pin1));
+            elemento.ScrollIntoView();
             elemento.SendKeys(pin[0].ToString());
 
             elemento = _driver.FindElement(By.Id(pin2));
@@ -65,6 +69,82 @@ namespace Core.LogicaScripts.Afiliacion
             {
                 throw new Exception(errorPin.GetInnerText());
             }
+        }
+
+        public void IngresarNumeroCedula(string numeroCedula)
+        {
+            const string CampoCedula = "CedulaRuc";
+            var numeroCedulaInput = _driver.FindElement(By.Name(CampoCedula));
+            numeroCedulaInput.ScrollIntoView();
+            numeroCedulaInput.SendKeys(numeroCedula);
+        }
+
+        public void LinkTerminosyCondiciones()
+        {
+            var temrinosCondiciones = _driver.FindElement(By.ClassName("terminos-condiciones"));
+            temrinosCondiciones.Click();
+        }
+
+        public void AceptarTerminosyCondiciones()
+        {
+            var aceptarTerminosCondiciones = _driver.FindElement(By.Id("cbox2"));
+            aceptarTerminosCondiciones.Click();
+        }
+
+        public void BotonContinuar()
+        {
+            var BotonContinuar = _driver.FindElement(By.Id("btn_validar"));
+            BotonContinuar.Click();
+        }
+
+        public void IngresarTelefono(string telefono)
+        {
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+            var telefonoInput = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("telefono")));
+            telefonoInput.SendKeys(telefono);
+        }
+
+        public void IngresarCorreo(string correo)
+        {
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+            var correoInput = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("correo")));
+            correoInput.SendKeys(correo);
+        }
+
+        public void BotonValidarDatosPersonales()
+        {
+            var botonCotinuar = _driver.FindElement(By.Id("valida_datos"));
+            botonCotinuar.ScrollIntoView();
+            botonCotinuar.Click();
+        }
+
+        public void IngresarUsuario(string usuario)
+        {
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+            var usuarioInput = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("txtUsuario")));
+            usuarioInput.ScrollIntoView();
+            usuarioInput.SendKeys(usuario);
+        }
+
+        public void IngresarContraseñaYConfirmacion(string contrasena1, string contrasena2)
+        {
+            var contrasena = _driver.FindElement(By.Id("contrasena"));
+            contrasena.ScrollIntoView();
+            contrasena.SendKeys(contrasena1);
+
+            var contrasenaConfirmacion = _driver.FindElement(By.Id("confirmacion"));
+            contrasenaConfirmacion.ScrollIntoView();
+            contrasenaConfirmacion.SendKeys(contrasena2);
+        }
+
+        public void BotonValidarUsuarioContrasena()
+        {
+            const string botonValidarUsuario = "btn_valida_usuario";
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.Id(botonValidarUsuario)));
+            IWebElement botonContinuar = _driver.FindElement(By.Id(botonValidarUsuario));
+            botonContinuar.ScrollIntoView();
+            botonContinuar.Click();
         }
     }
 }

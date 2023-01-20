@@ -9,7 +9,7 @@ namespace Core.Models.Entidad.Script
     public class Script
     {
         public string Nombre { get; set; }
-        public string Squema { get; set; }
+        public string Esquema { get; set; }
         public string Json { get; set; }
         public string Descripcion { get; set; }
     }

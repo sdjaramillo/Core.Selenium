@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RazorEngine.Compilation.ImpromptuInterface.Dynamic;
 
 namespace Core.Models.Entidad
 {
@@ -67,10 +68,13 @@ namespace Core.Models.Entidad
             return nodo;
         }
 
+  
+        /// <summary>
+        /// Metodo para guardar el reporte en la ruta especificada
+        /// </summary>
         public void GuardarReporte()
         {
-            Reporte.Flush();
-            //System.Diagnostics.Process.Start(PathGuardado);
+            Reporte.Flush();            
         }
     }
 }

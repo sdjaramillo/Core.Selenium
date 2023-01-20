@@ -46,62 +46,42 @@ namespace BancaDigitalSelenium.Scripts.Afiliacion
                 {
                     Driver.Url = URL;
                     Test = Reporte.CrearTest($"Afiliación {data.NumeroCedula}");
-                    //Logica.SeleccionarTipoDocumento(data.TipoIDentificacion);
-                    var numeroCedula = Driver.FindElement(By.Name("CedulaRuc"));
-                    numeroCedula.SendKeys(data.NumeroCedula);
+                    var datosPrueba = Test.CreateNode("Datos Ejecución");
+                    datosPrueba.AgregarInformacionParametro<AfiliacionParametro>(data);
 
+
+                    Logica.IngresarNumeroCedula(data.NumeroCedula);
                     Logica.IngresarPinTarjetaDebito(data.Pin);
-
-                    ///Verificar terminos y condiciones
-                    var temrinosCondiciones = Driver.FindElement(By.ClassName("terminos-condiciones"));
-                    temrinosCondiciones.Click();
-
-                    var aceptarTerminosCondiciones = Driver.FindElement(By.Id("cbox2"));
-                    aceptarTerminosCondiciones.Click();
-
+                    Logica.LinkTerminosyCondiciones();
+                    Logica.AceptarTerminosyCondiciones();
                     Test.Pass("Datos de validación", Driver.TomarScreen());
-                    var BotonContinuar = Driver.FindElement(By.Id("btn_validar"));
-                    BotonContinuar.Click();
+                    Logica.BotonContinuar();
 
                     Thread.Sleep(1000);
 
                     Logica.ValidarMensajeErrorPin();
-                    ////////// FIN PRIMERA PARTE
-
-
-                    var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(30));
-                    var telefono = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("telefono")));
-                    telefono.SendKeys(data.Telefono);
-
-                    var correo = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("correo")));
-                    correo.SendKeys(data.Correo);
-
+                    Logica.IngresarTelefono(data.Telefono);
+                    Logica.IngresarCorreo(data.Correo);
                     Test.Pass("Datos Personales", Driver.TomarScreen());
-                    var botonCotinuar = Driver.FindElement(By.Id("valida_datos"));
-                    botonCotinuar.Click();
+                    Logica.BotonValidarDatosPersonales();
 
-                    var usuario = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("txtUsuario")));
-                    usuario.SendKeys(data.Usuario);
-
-                    var contrasena = Driver.FindElement(By.Id("contrasena"));
-                    contrasena.SendKeys(data.Contrasena);
-
-                    var contrasenaConfirmacion = Driver.FindElement(By.Id("confirmacion"));
-                    contrasenaConfirmacion.SendKeys(data.Contrasena);
-
-                    Test.Pass("Usuario y contrasena", Driver.TomarScreen());
                     Thread.Sleep(1000);
-                    var botonContinuar = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("btn_valida_usuario")));
-                    botonContinuar = Driver.FindElement(By.Id("btn_valida_usuario"));
-                    botonContinuar.Click();
+                    
+                    Logica.IngresarUsuario(data.Usuario);
+                    Logica.IngresarContraseñaYConfirmacion(data.Contrasena,data.Contrasena);                    
+                    Test.Pass("Usuario y contrasena", Driver.TomarScreen());
+                    Logica.BotonValidarUsuarioContrasena();
 
+
+                    var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
                     wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("submit")));
                     Thread.Sleep(1500);
+                    Driver.FindElement(By.Name("submit")).ScrollIntoView();
                     Driver.FindElement(By.Name("submit")).Click();
-
 
                     //INGRESAR CODIGO TEMPORAL
                     var codigo = Driver.FindElement(By.Id("txtCodigo1"));
+                    codigo.ScrollIntoView();
                     codigo.SendKeys(data.CodigoTemporal[0].ToString());
 
                     codigo = Driver.FindElement(By.Id("txtCodigo2"));
@@ -120,7 +100,7 @@ namespace BancaDigitalSelenium.Scripts.Afiliacion
                     codigo.SendKeys(data.CodigoTemporal[5].ToString());
 
                     wait.Until(ExpectedConditions.ElementExists(By.ClassName("Gracias-por-confiar-en-nosotros")));
-                    Test.Pass("Afiliación", Driver.TomarScreen());
+                    Test.Pass("Afiliación Completada", Driver.TomarScreen());
                 }
                 catch (Exception ex)
                 {

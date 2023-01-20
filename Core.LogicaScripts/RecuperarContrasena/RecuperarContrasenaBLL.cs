@@ -2,6 +2,8 @@
 using Core.Models.Entidad;
 using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,6 +45,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
 
             tipoDocumento = tipoDocumento.Equals("Cedula") ? botonCedula : botonPasaporte;
             var botonTipoDocumento = _driver.FindElement(By.Id(tipoDocumento));
+            botonTipoDocumento.ScrollIntoView();
             botonTipoDocumento.Click();
         }
 
@@ -54,6 +57,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
             var elemento = tipoDocumento.Equals("Cedula") ? identificacion : identificacionPersona;
 
             var inputIdentificacon = _driver.FindElement(By.Name(elemento));
+            inputIdentificacon.ScrollIntoView();
             inputIdentificacon.SendKeys(numeroIdentificacion);
             inputIdentificacon.SendKeys(Keys.Tab);
         }
@@ -75,6 +79,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
             const string botonContinuarId = "btnValidarIdentificacion";
 
             var botonContinuar = _driver.FindElement(By.Id(botonContinuarId));
+            botonContinuar.ScrollIntoView();
             botonContinuar.Click();
         }
 
@@ -86,6 +91,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
             const string pin4 = "Pin4";
 
             var elemento = _driver.FindElement(By.Id(pin1));
+            elemento.ScrollIntoView();
             elemento.SendKeys(pin[0].ToString());
 
             elemento = _driver.FindElement(By.Id(pin2));
@@ -116,6 +122,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
             const string botonValidarPinId = "btnValidarPin";
 
             var botonValidarPin = _driver.FindElement(By.Id(botonValidarPinId));
+            botonValidarPin.ScrollIntoView();
             botonValidarPin.Click();
         }
 
@@ -142,12 +149,13 @@ namespace Core.LogicaScripts.RecuperarContrasena
             var divError = _driver.FindElement(By.Id(errorId));
         }
 
-        public void RestaurarUsuario()
+        public void ValidarClave()
         {
-            const string botonRestaurarUsuario = "btnRestaurarUsuario";
+            const string botonRestaurarUsuario = "btnValidaClave";
 
-            var botonRestaurar = _driver.FindElement(By.Id(botonRestaurarUsuario));
-            botonRestaurar.Click();
+            var botonValidarClave = _driver.FindElement(By.Id(botonRestaurarUsuario));
+            botonValidarClave.ScrollIntoView();
+            botonValidarClave.Click();
         }
 
         public string ObtenerUsuarioRecuperado()
@@ -156,6 +164,28 @@ namespace Core.LogicaScripts.RecuperarContrasena
 
             var recuperarUsuario = _driver.WaitFindElement(By.Id(divUsuario));
             return recuperarUsuario.GetInnerText();
+        }
+
+        public void IngresarContrasenaNueva(string contrasena1, string contrasena2)
+        {
+            var inputContrasena = _driver.WaitFindElement(By.Id("contrasena"));
+            inputContrasena.ScrollIntoView();
+            inputContrasena.SendKeys(contrasena1);
+            inputContrasena.SendKeys(Keys.Tab);
+
+            var inputConfirmacion = _driver.WaitFindElement(By.Id("confirmacion"));
+            inputConfirmacion.ScrollIntoView();            
+            inputConfirmacion.SendKeys(contrasena2);
+            inputConfirmacion.SendKeys(Keys.Tab);
+        }
+
+        public void RestaurarContrasena()
+        {
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("submit")));
+            Thread.Sleep(1500);
+            _driver.FindElement(By.Name("submit")).ScrollIntoView();
+            _driver.FindElement(By.Name("submit")).Click();
         }
     }
 }
