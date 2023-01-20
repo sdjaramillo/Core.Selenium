@@ -72,7 +72,7 @@
             this.button1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.Location = new System.Drawing.Point(179, 33);
+            this.button1.Location = new System.Drawing.Point(179, 31);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(55, 37);
             this.button1.TabIndex = 2;
@@ -123,7 +123,7 @@
             // 
             this.groupBox1.Controls.Add(this._rdChrome);
             this.groupBox1.Controls.Add(this._rdEdge);
-            this.groupBox1.Location = new System.Drawing.Point(12, 25);
+            this.groupBox1.Location = new System.Drawing.Point(12, 23);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(161, 45);
             this.groupBox1.TabIndex = 10;

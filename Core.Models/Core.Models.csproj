@@ -429,6 +429,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Beneficiarios\Beneficiario.cs" />
     <Compile Include="Beneficiarios\BeneficiarioParametro.cs" />
     <Compile Include="Entidad\Afiliacion\AfiliacionParametro.cs" />
     <Compile Include="Entidad\AutoReport\AutoReport.cs" />

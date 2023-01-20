@@ -3,8 +3,28 @@
     {
       "usuario": "Usuario421",
       "contrasena": "Administrador1.",
-      "cuentaBeneficiario": "12",
-      "cuentaBgr": true
+      "beneficiarios": [
+        {
+          "cuentaBeneficiario": "8064532200",
+          "cuentaBgr": true,
+          "alias": ""
+        },
+        {
+          "cuentaBeneficiario": "123",
+          "cuentaBgr": false,
+          "alias": ""
+        }
+      ]
+    },
+    {
+      "usuario": "Usuario421",
+      "contrasena": "Administrador1.",
+      "beneficiarios": [
+        {
+          "cuentaBeneficiario": "123",
+          "cuentaBgr": true
+        }
+      ]
     }
 
   ]
