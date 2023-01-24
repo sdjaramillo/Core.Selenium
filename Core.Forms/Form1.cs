@@ -98,7 +98,7 @@ namespace Core.Forms
                         DriverTemplate.EjecutarScript(new RecuperarUsuarioScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
                         break;
 
-                    case "recuperar contrasena":
+                    case "recuperar contraseña":
                         DriverTemplate.EjecutarScript(new RecuperarContrasenaScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
 
                         break;

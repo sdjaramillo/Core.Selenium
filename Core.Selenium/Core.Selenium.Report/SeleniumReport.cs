@@ -1,18 +1,14 @@
-﻿using AventStack.ExtentReports.Reporter;
-using AventStack.ExtentReports;
+﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RazorEngine.Compilation.ImpromptuInterface.Dynamic;
 
-namespace Core.Models.Entidad
+namespace Core.Selenium.Report
 {
-    /// <summary>
-    /// Clase para menejo de reporteria
-    /// </summary>
-    public class AutoReport
+    public class SeleniumReport
     {
         public ExtentHtmlReporter HtmlReporte;
         public ExtentReports Reporte;
@@ -22,7 +18,7 @@ namespace Core.Models.Entidad
         /// </summary>
         public string PathGuardado;
 
-        public AutoReport(string nombrePrueba, string pathGuardado)
+        public SeleniumReport(string pathGuardado)
         {
             PathGuardado = !string.IsNullOrEmpty(pathGuardado) ? $@"{PathGuardado}\" : pathGuardado;
             HtmlReporte = new ExtentHtmlReporter(PathGuardado);

@@ -19,6 +19,13 @@ namespace Core.Selenium.Model
     public enum TipoComando
     {
         comando,
-        script
+        script,
+        condicion
+    }
+
+    public enum ResultadoCondicion
+    {
+        error,
+        ok
     }
 }

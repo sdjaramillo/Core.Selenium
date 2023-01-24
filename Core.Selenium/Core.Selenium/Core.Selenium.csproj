@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Core.Selenium.Logic\Core.Selenium.Logic.csproj" />
     <ProjectReference Include="..\Core.Selenium.Model\Core.Selenium.Model.csproj" />
+    <ProjectReference Include="..\Core.Selenium.Report\Core.Selenium.Report.csproj" />
   </ItemGroup>
 
 </Project>

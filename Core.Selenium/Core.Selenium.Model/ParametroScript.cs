@@ -12,6 +12,9 @@ namespace Core.Selenium.Model
         [JsonProperty("nombrePrueba")]
         public string NombrePrueba { get; set; }
 
+        [JsonProperty("url")]
+        public string Url { get; set; }
+
         [JsonProperty("driver")]
         public string Driver { get; set; }
 
@@ -22,10 +25,10 @@ namespace Core.Selenium.Model
     public partial class DataTest
     {
         [JsonProperty("suiteVars")]
-        public TestVars SuiteVars { get; set; }
+        public Dictionary<string,string> SuiteVars { get; set; }
 
         [JsonProperty("tests")]
-        public TestVars[][] TestsVars { get; set; }
+        public List<Dictionary<string,string>> TestsVars { get; set; }
     }
 
     public partial class TestVars

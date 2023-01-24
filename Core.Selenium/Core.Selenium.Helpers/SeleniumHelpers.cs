@@ -12,7 +12,7 @@ namespace Core.Selenium.Helpers
     public static class SeleniumHelpers
     {
         public static IWebDriver GetDriverInstance(string driver, string ruta = "Drivers")
-        {
+        {            
             switch (driver.ToLower())
             {
                 case "chrome":
@@ -21,7 +21,7 @@ namespace Core.Selenium.Helpers
                 case "edge":
                     return new EdgeDriver(ruta);
             }
-            return new ChromeDriver();
+            return new ChromeDriver("Drivers");
         }
     }
 }
