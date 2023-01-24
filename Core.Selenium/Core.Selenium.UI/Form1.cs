@@ -91,7 +91,7 @@ namespace Core.Selenium.UI
         {
             var script = new ScriptBase();
             script.Nombre = _txtNombrePrueba.Text;
-            script.NombrePrueba = _txtNombrePrueba.Text;
+            
 
             var commands = (List<Comando>)_grdScript.DataSource;
             commands.ForEach(cmd =>

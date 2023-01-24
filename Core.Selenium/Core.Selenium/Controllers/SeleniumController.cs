@@ -15,7 +15,7 @@ namespace Core.Selenium.Controllers
         public IActionResult EjecutarScriptSesion([FromBody] ScriptBase script)
         {
 
-            var nombrePrueba = script.NombrePrueba;
+            
             var driver = SeleniumHelpers.GetDriverInstance(script.ScriptData.Driver);
 
             foreach (var data in script.ScriptData.DataTest)
@@ -24,13 +24,12 @@ namespace Core.Selenium.Controllers
                 {
                     var logica = new LogicBase(driver);
 
-                    var usuarioLogin = data.Usuario;
-                    var contrasena = data.Contrasena;
+                    var variablesSuite = data.SuiteVars;
                     var comandos = script.Comandos.Where(w => w.InicioSesion).OrderBy(ord => ord.Orden).ToList();
 
                     logica.EjecutarComandos(comandos);
 
-                    foreach (var test in data.Tests)
+                    foreach (var test in data.TestsVars)
                     {
                         try
                         {
