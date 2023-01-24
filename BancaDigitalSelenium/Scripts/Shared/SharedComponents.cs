@@ -44,7 +44,7 @@ namespace BancaDigitalSelenium.Scripts.Shared
             linkConfirmar.Click();
             Thread.Sleep(1500);
         }
-        public static void IngresarCodigoTemporal(this ScriptBase script, string codigo = "123456")
+        public static void IngresarCodigoTemporal(this ScriptBase script, string codigo="123456")
         {
             List<string> pin = new List<string> { "Pin1", "Pin2", "Pin3", "Pin4", "Pin5", "Pin6" };
             foreach (var p in pin)

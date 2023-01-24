@@ -442,6 +442,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Afiliacion\AfiliacionScript.cs" />
     <Compile Include="Scripts\Beneficiarios\AgregarBeneficiarioScript.cs" />
+    <Compile Include="Scripts\Beneficiarios\EditarBeneficiarioScript.cs" />
     <Compile Include="Scripts\RecuperarContrasena\RecuperarContrasenaScript.cs" />
     <Compile Include="Scripts\RecuperarContrasena\RecuperarUsuarioScript.cs" />
     <Compile Include="Scripts\Shared\SharedComponents.cs" />
@@ -467,6 +468,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Beneficiarios\AgregarBeneficiarioScript.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Beneficiarios\EditarBeneficiarioScript.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

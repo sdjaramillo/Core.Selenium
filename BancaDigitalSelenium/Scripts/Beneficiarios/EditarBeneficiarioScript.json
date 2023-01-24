@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "usuario": "Usuario421",
+      "contrasena": "Administrador1.",
+      "beneficiarios": [
+        {
+          "cuentaBeneficiario": "8064532200",
+          "cuentaBgr": true,
+          "alias": ""
+        },
+        {
+          "cuentaBeneficiario": "2200476872",
+          "cuentaBgr": false,
+          "alias": "aliasExterno1",
+          "Banco": "BANCO PICHIN",
+          "correo": "correoben1@correo.com",
+          "telefono": "2343454",
+          "tipoDocumento": "Pasaporte",
+          "numeroIdentificacion": "1718987652",
+          "TipoCuenta": "CA"
+        }
+      ]
+    },
+    {
+      "usuario": "Usuario421",
+      "contrasena": "Administrador1.",
+      "beneficiarios": [
+        {
+          "cuentaBeneficiario": "123",
+          "cuentaBgr": true
+        }
+      ]
+    }
+
+  ]
+}

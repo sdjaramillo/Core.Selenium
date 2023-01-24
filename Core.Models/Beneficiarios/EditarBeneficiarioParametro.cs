@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models.Beneficiarios
 {
-    public class BeneficiarioParametro : ScriptParametroBase
+    public class EditarBeneficiarioParametro : ScriptParametroBase
     {
-        public List<Beneficiario> Beneficiarios { get; set; }
     }
 }
