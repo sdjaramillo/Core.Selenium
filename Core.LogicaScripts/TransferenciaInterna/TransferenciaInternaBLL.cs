@@ -19,7 +19,7 @@ namespace Core.LogicaScripts.TransferenciaInterna
     public class TransferenciaInternaBLL
     {
         private IWebDriver _driver;
-        public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver)
+        public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver, string source="")
         {
             _driver = driver;
             var logicaInyectada = script.GetType().Name;
@@ -31,11 +31,21 @@ namespace Core.LogicaScripts.TransferenciaInterna
             script.Variables = script.Variables ?? new Dictionary<string, string>();
             script.SeleniumJS = (IJavaScriptExecutor)driver;
 
-            using (StreamReader sr = new StreamReader($"scripts/Transferencias/{logicaInyectada}.json"))
+            if (!string.IsNullOrEmpty(source))
             {
-                JObject json = JObject.Parse(sr.ReadToEnd());
+                JObject json = JObject.Parse(source);
                 script.TestData = json.SelectToken("data").ToObject<List<T>>();
             }
+            else
+            {
+                using (StreamReader sr = new StreamReader($"scripts/Transferencias/{logicaInyectada}.json"))
+                {
+                    JObject json = JObject.Parse(sr.ReadToEnd());
+                    script.TestData = json.SelectToken("data").ToObject<List<T>>();
+                }
+            }
+
+            
             //script.Test = script.Reporte.CrearTest(script.GetType().ToString()).AssignDevice(driver.GetType().ToString().Split('.').Last());
             return script;
         }

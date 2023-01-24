@@ -18,10 +18,10 @@ namespace BancaDigitalSelenium.Scripts.RecuperarContrasena
     public class RecuperarContrasenaScript : ScriptBase, IScript
     {
         private RecuperarContrasenaBLL Logica { get; set; }
-        public void SetConfig(IWebDriver driver)
+        public void SetConfig(IWebDriver driver, string jsonOrigen)
         {
             Logica = new RecuperarContrasenaBLL();
-            Logica.SetConfig<RecuperarContrasenaParametro>(this, driver);
+            Logica.SetConfig<RecuperarContrasenaParametro>(this, driver, jsonOrigen);
         }
 
         public void Execute()

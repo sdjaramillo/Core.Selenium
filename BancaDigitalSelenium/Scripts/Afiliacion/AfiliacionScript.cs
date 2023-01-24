@@ -31,10 +31,10 @@ namespace BancaDigitalSelenium.Scripts.Afiliacion
         /// Logica del script
         /// </summary>
         private AfiliacionBLL Logica { get; set; }
-        public void SetConfig(IWebDriver driver)
+        public void SetConfig(IWebDriver driver, string jsonOrigen)
         {
             Logica = new AfiliacionBLL();
-            Logica.SetConfig<AfiliacionParametro>(this, driver);
+            Logica.SetConfig<AfiliacionParametro>(this, driver,jsonOrigen);
         }
         public void Execute()
         {
@@ -66,9 +66,9 @@ namespace BancaDigitalSelenium.Scripts.Afiliacion
                     Logica.BotonValidarDatosPersonales();
 
                     Thread.Sleep(1000);
-                    
+
                     Logica.IngresarUsuario(data.Usuario);
-                    Logica.IngresarContraseñaYConfirmacion(data.Contrasena,data.Contrasena);                    
+                    Logica.IngresarContraseñaYConfirmacion(data.Contrasena, data.Contrasena);
                     Test.Pass("Usuario y contrasena", Driver.TomarScreen());
                     Logica.BotonValidarUsuarioContrasena();
 

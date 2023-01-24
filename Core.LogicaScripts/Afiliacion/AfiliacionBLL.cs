@@ -19,7 +19,7 @@ namespace Core.LogicaScripts.Afiliacion
     public class AfiliacionBLL
     {
         private IWebDriver _driver;
-        public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver)
+        public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver, string source="")
         {
             _driver = driver;
             var logicaInyectada = script.GetType().Name;
@@ -31,11 +31,21 @@ namespace Core.LogicaScripts.Afiliacion
             script.Variables = script.Variables ?? new Dictionary<string, string>();
             script.SeleniumJS = (IJavaScriptExecutor)driver;
 
-            using (StreamReader sr = new StreamReader($"scripts/Afiliacion/{logicaInyectada}.json"))
+
+            if (!string.IsNullOrEmpty(source))
             {
-                JObject json = JObject.Parse(sr.ReadToEnd());
-                script.TestData = json.SelectToken("data").ToObject<List<T>>();
+                JObject json = JObject.Parse(source);
+                script.TestData = json.SelectToken("data").ToObject<List<T>>();                
             }
+            else
+            {
+                using (StreamReader sr = new StreamReader($"scripts/Afiliacion/{logicaInyectada}.json"))
+                {
+                    JObject json = JObject.Parse(sr.ReadToEnd());
+                    script.TestData = json.SelectToken("data").ToObject<List<T>>();
+                }
+
+            }           
             return script;
         }
 

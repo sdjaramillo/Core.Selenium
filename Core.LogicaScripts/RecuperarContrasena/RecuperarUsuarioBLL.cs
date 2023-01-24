@@ -18,7 +18,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
     public class RecuperarUsuarioBLL
     {
         private IWebDriver _driver;
-        public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver)
+        public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver, string source = "")
         {
             _driver = driver;
             var logicaInyectada = script.GetType().Name;
@@ -30,11 +30,20 @@ namespace Core.LogicaScripts.RecuperarContrasena
             script.Variables = script.Variables ?? new Dictionary<string, string>();
             script.SeleniumJS = (IJavaScriptExecutor)driver;
 
-            using (StreamReader sr = new StreamReader($"scripts/RecuperarContrasena/{logicaInyectada}.json"))
+            if (!string.IsNullOrEmpty(source))
             {
-                JObject json = JObject.Parse(sr.ReadToEnd());
+                JObject json = JObject.Parse(source);
                 script.TestData = json.SelectToken("data").ToObject<List<T>>();
             }
+            else
+            {
+                using (StreamReader sr = new StreamReader($"scripts/RecuperarContrasena/{logicaInyectada}.json"))
+                {
+                    JObject json = JObject.Parse(sr.ReadToEnd());
+                    script.TestData = json.SelectToken("data").ToObject<List<T>>();
+                }
+            }
+
             //script.Test = script.Reporte.CrearTest(script.GetType().ToString()).AssignDevice(driver.GetType().ToString().Split('.').Last());
             return script;
         }
@@ -162,7 +171,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
         {
             const string divUsuario = "usuario-recuperado";
 
-            var recuperarUsuario = _driver.WaitFindElement(By.Id(divUsuario),30);
+            var recuperarUsuario = _driver.WaitFindElement(By.Id(divUsuario), 30);
             return recuperarUsuario.GetInnerText();
         }
     }

@@ -10,11 +10,11 @@ namespace BancaDigitalSelenium
     /// </summary>
     public class DriverTemplate
     {
-        public static void EjecutarScript(IScript script, IWebDriver driver)
+        public static void EjecutarScript(IScript script, IWebDriver driver, string jsonOrigen)
         {
             try
             {
-                script.SetConfig(driver);
+                script.SetConfig(driver, jsonOrigen);
                 script.Execute();
             }
             catch (Exception ex)

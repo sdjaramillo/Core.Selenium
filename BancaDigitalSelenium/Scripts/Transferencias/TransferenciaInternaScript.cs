@@ -23,10 +23,10 @@ namespace BancaDigitalSelenium.Scripts.Transferencias
     {
         private TransferenciaInternaBLL Logica { get; set; }
 
-        public void SetConfig(IWebDriver driver)
+        public void SetConfig(IWebDriver driver, string jsonOrigen)
         {
             Logica = new TransferenciaInternaBLL();
-            Logica.SetConfig<TransferenciaInternaParametro>(this, driver);
+            Logica.SetConfig<TransferenciaInternaParametro>(this, driver, jsonOrigen);
             driver.Manage().Window.Maximize();
 
         }

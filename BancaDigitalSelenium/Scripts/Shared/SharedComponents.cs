@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BancaDigitalSelenium.Scripts.Shared
@@ -31,12 +32,24 @@ namespace BancaDigitalSelenium.Scripts.Shared
             botonlogin.Click();
         }
 
-        public static void IngresarCodigoTemporal(this ScriptBase script, string codigo)
+        public static void Logout(this ScriptBase script)
+        {
+            var botonSalir = script.Driver.FindElement(By.ClassName("img-salir"));
+
+            botonSalir.ScrollIntoView();
+            botonSalir.Click();
+
+            var linkConfirmar = script.Driver.WaitFindElement(By.LinkText("Continuar"));
+            linkConfirmar.ScrollIntoView();
+            linkConfirmar.Click();
+            Thread.Sleep(1500);
+        }
+        public static void IngresarCodigoTemporal(this ScriptBase script, string codigo = "123456")
         {
             List<string> pin = new List<string> { "Pin1", "Pin2", "Pin3", "Pin4", "Pin5", "Pin6" };
             foreach (var p in pin)
             {
-                var pinInput = script.Driver.FindElement(By.Id(p));
+                var pinInput = script.Driver.WaitFindElement(By.Id(p));
                 pinInput.ScrollIntoView(500);
                 pinInput.SendKeys(codigo[pin.IndexOf(p)].ToString());
             }

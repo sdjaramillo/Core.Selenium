@@ -20,7 +20,7 @@ namespace BancaDigitalSelenium.Scripts
         /// Metodo para configurar script
         /// </summary>
         /// <param name="driver"></param>
-        public void SetConfig(IWebDriver driver)
+        public void SetConfig(IWebDriver driver, string jsonOrigen)
         {
             this.Reporte = new AutoReport(this.GetType().ToString().Split('.').Last(),this.PathGuardado);
             this.URL = "https://bgrdigital-test.bgr.com.ec/Cuenta/Login";

@@ -14,7 +14,7 @@ namespace Core.Models.Interface
         /// Metodo para configuración de scripts
         /// </summary>
         /// <param name="driver"></param>
-        void SetConfig(IWebDriver driver);
+        void SetConfig(IWebDriver driver, string jsonOrigen);
 
         /// <summary>
         /// Metodo para ejecutar script

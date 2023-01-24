@@ -44,12 +44,12 @@ namespace BancaDigitalSelenium
 
 
 
-            //DriverTemplate.EjecutarScript(new AgregarBeneficiarioScript(),driver);
-            //DriverTemplate.EjecutarScript(new AfiliacionScript(), driver);
-            //DriverTemplate.EjecutarScript(new RecuperarUsuarioScript(), driver);
-            //DriverTemplate.EjecutarScript(new RecuperarContrasenaScript(), driver);
-            //DriverTemplate.EjecutarScript(new ValidarCredencialesIncorrectas(), chrome);
-            DriverTemplate.EjecutarScript(new TransferenciaInternaScript(), driver);
+            //DriverTemplate.EjecutarScript(new AgregarBeneficiarioScript(),driver,"");
+            //DriverTemplate.EjecutarScript(new AfiliacionScript(), driver,"");
+            //DriverTemplate.EjecutarScript(new RecuperarUsuarioScript(), driver,"");
+            //DriverTemplate.EjecutarScript(new RecuperarContrasenaScript(), driver,"");
+            //DriverTemplate.EjecutarScript(new ValidarCredencialesIncorrectas(), chrome,"");
+            DriverTemplate.EjecutarScript(new TransferenciaInternaScript(), driver,"");
         }
     }
 }

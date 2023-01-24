@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Xml.Linq;
 
 namespace Core.Helpers
 {
@@ -116,7 +117,7 @@ namespace Core.Helpers
             }
         }
 
-        public static void ScrollIntoView(this IWebElement element, int wait=1000)
+        public static void ScrollIntoView(this IWebElement element, int wait = 1000)
         {
             try
             {
@@ -128,6 +129,21 @@ namespace Core.Helpers
             catch (Exception ex)
             {
                 throw new Exception("Error al mover al objeto");
+            }
+        }
+
+        public static void FireClick(this IWebElement element, int wait = 500)
+        {
+            try
+            {
+                var driver = ((IWrapsDriver)element).WrappedDriver;
+                var js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript($"arguments[0].click();", element);
+                Thread.Sleep(wait);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al hacer click al objeto");
             }
         }
 
@@ -146,6 +162,19 @@ namespace Core.Helpers
             }
         }
 
+        public static T GetValue<T>(this IWebElement element)
+        {
+            var driver = ((IWrapsDriver)element).WrappedDriver;
+            var js = (IJavaScriptExecutor)driver;
+            var result = js.ExecuteScript($"return arguments[0].value", element);
+
+            return (T)result;
+        }
+
+        public static bool CheckIfIsVisible(this IWebElement element)
+        {
+            return element.Displayed;
+        }
         public static void FindTable(this IWebDriver driver, By by, int? indexColumna = null, string valueToFind = "", string tagRow = "tr", string tagColumn = "td", ElementAction accion = ElementAction.Click, By byInsideColumn = null)
         {
             var tabla = driver.FindElement(by);

@@ -41,7 +41,6 @@
             this._rdExcel = new System.Windows.Forms.RadioButton();
             this._rdJson = new System.Windows.Forms.RadioButton();
             this._grdExcel = new System.Windows.Forms.DataGridView();
-            this._txtInfoScript = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._grdExcel)).BeginInit();
@@ -51,7 +50,7 @@
             // 
             this._lstScripts.FormattingEnabled = true;
             this._lstScripts.ItemHeight = 15;
-            this._lstScripts.Location = new System.Drawing.Point(12, 102);
+            this._lstScripts.Location = new System.Drawing.Point(12, 54);
             this._lstScripts.Name = "_lstScripts";
             this._lstScripts.Size = new System.Drawing.Size(239, 454);
             this._lstScripts.TabIndex = 0;
@@ -59,9 +58,9 @@
             // 
             // _txtJson
             // 
-            this._txtJson.Location = new System.Drawing.Point(257, 102);
+            this._txtJson.Location = new System.Drawing.Point(257, 54);
             this._txtJson.Name = "_txtJson";
-            this._txtJson.Size = new System.Drawing.Size(737, 346);
+            this._txtJson.Size = new System.Drawing.Size(737, 454);
             this._txtJson.TabIndex = 1;
             this._txtJson.Text = "";
             this._txtJson.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -72,7 +71,7 @@
             this.button1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.Location = new System.Drawing.Point(179, 33);
+            this.button1.Location = new System.Drawing.Point(180, 9);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(55, 37);
             this.button1.TabIndex = 2;
@@ -83,7 +82,7 @@
             // 
             // btnGuardarJson
             // 
-            this.btnGuardarJson.Location = new System.Drawing.Point(907, 526);
+            this.btnGuardarJson.Location = new System.Drawing.Point(907, 478);
             this.btnGuardarJson.Name = "btnGuardarJson";
             this.btnGuardarJson.Size = new System.Drawing.Size(75, 23);
             this.btnGuardarJson.TabIndex = 4;
@@ -93,16 +92,16 @@
             // 
             // _txtPath
             // 
-            this._txtPath.Location = new System.Drawing.Point(357, 12);
+            this._txtPath.Location = new System.Drawing.Point(628, 25);
             this._txtPath.Name = "_txtPath";
-            this._txtPath.Size = new System.Drawing.Size(548, 23);
+            this._txtPath.Size = new System.Drawing.Size(366, 23);
             this._txtPath.TabIndex = 5;
             this._txtPath.Click += new System.EventHandler(this._txtPath_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(269, 18);
+            this.label1.Location = new System.Drawing.Point(540, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 15);
             this.label1.TabIndex = 6;
@@ -123,7 +122,7 @@
             // 
             this.groupBox1.Controls.Add(this._rdChrome);
             this.groupBox1.Controls.Add(this._rdEdge);
-            this.groupBox1.Location = new System.Drawing.Point(12, 25);
+            this.groupBox1.Location = new System.Drawing.Point(13, 1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(161, 45);
             this.groupBox1.TabIndex = 10;
@@ -145,7 +144,7 @@
             // 
             this.groupBox2.Controls.Add(this._rdExcel);
             this.groupBox2.Controls.Add(this._rdJson);
-            this.groupBox2.Location = new System.Drawing.Point(257, 51);
+            this.groupBox2.Location = new System.Drawing.Point(257, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(239, 45);
             this.groupBox2.TabIndex = 11;
@@ -179,27 +178,18 @@
             // _grdExcel
             // 
             this._grdExcel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._grdExcel.Location = new System.Drawing.Point(257, 102);
+            this._grdExcel.Location = new System.Drawing.Point(257, 54);
             this._grdExcel.Name = "_grdExcel";
             this._grdExcel.RowTemplate.Height = 25;
-            this._grdExcel.Size = new System.Drawing.Size(737, 346);
+            this._grdExcel.Size = new System.Drawing.Size(737, 454);
             this._grdExcel.TabIndex = 12;
             this._grdExcel.Visible = false;
-            // 
-            // _txtInfoScript
-            // 
-            this._txtInfoScript.Location = new System.Drawing.Point(257, 454);
-            this._txtInfoScript.Name = "_txtInfoScript";
-            this._txtInfoScript.Size = new System.Drawing.Size(293, 96);
-            this._txtInfoScript.TabIndex = 13;
-            this._txtInfoScript.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 561);
-            this.Controls.Add(this._txtInfoScript);
+            this.ClientSize = new System.Drawing.Size(1006, 518);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -237,6 +227,5 @@
         private RadioButton _rdExcel;
         private RadioButton _rdJson;
         private DataGridView _grdExcel;
-        private RichTextBox _txtInfoScript;
     }
 }

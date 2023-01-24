@@ -15,10 +15,10 @@ namespace BancaDigitalSelenium.Scripts
     public class RecuperarUsuarioScript : ScriptBase, IScript
     {
         private RecuperarUsuarioBLL Logica { get; set; }
-        public void SetConfig(IWebDriver driver)
+        public void SetConfig(IWebDriver driver, string jsonOrigen)
         {
             Logica = new RecuperarUsuarioBLL();
-            Logica.SetConfig<RecuperarContrasenaParametro>(this, driver);
+            Logica.SetConfig<RecuperarContrasenaParametro>(this, driver, jsonOrigen);
         }
 
         public void Execute()

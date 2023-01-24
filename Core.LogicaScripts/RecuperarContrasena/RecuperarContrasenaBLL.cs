@@ -17,7 +17,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
     public class RecuperarContrasenaBLL
     {
         private IWebDriver _driver;
-        public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver)
+        public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver, string source = "")
         {
             _driver = driver;
             var logicaInyectada = script.GetType().Name;
@@ -29,10 +29,19 @@ namespace Core.LogicaScripts.RecuperarContrasena
             script.Variables = script.Variables ?? new Dictionary<string, string>();
             script.SeleniumJS = (IJavaScriptExecutor)driver;
 
-            using (StreamReader sr = new StreamReader($"scripts/RecuperarContrasena/{logicaInyectada}.json"))
+
+            if (!string.IsNullOrEmpty(source))
             {
-                JObject json = JObject.Parse(sr.ReadToEnd());
+                JObject json = JObject.Parse(source);
                 script.TestData = json.SelectToken("data").ToObject<List<T>>();
+            }
+            else
+            {
+                using (StreamReader sr = new StreamReader($"scripts/RecuperarContrasena/{logicaInyectada}.json"))
+                {
+                    JObject json = JObject.Parse(sr.ReadToEnd());
+                    script.TestData = json.SelectToken("data").ToObject<List<T>>();
+                }
             }
             //script.Test = script.Reporte.CrearTest(script.GetType().ToString()).AssignDevice(driver.GetType().ToString().Split('.').Last());
             return script;
@@ -174,7 +183,7 @@ namespace Core.LogicaScripts.RecuperarContrasena
             inputContrasena.SendKeys(Keys.Tab);
 
             var inputConfirmacion = _driver.WaitFindElement(By.Id("confirmacion"));
-            inputConfirmacion.ScrollIntoView();            
+            inputConfirmacion.ScrollIntoView();
             inputConfirmacion.SendKeys(contrasena2);
             inputConfirmacion.SendKeys(Keys.Tab);
         }

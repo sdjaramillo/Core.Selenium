@@ -8,6 +8,7 @@ using Core.Config;
 using Core.Models;
 using Core.Models.Entidad;
 using Core.Models.Entidad.Script;
+using Core.Models.Interface;
 using Newtonsoft.Json.Linq;
 using OfficeOpenXml;
 using OpenQA.Selenium;
@@ -69,7 +70,6 @@ namespace Core.Forms
                     var instance = Activator.CreateInstance(tipo);
 
                     JObject jsonObject = JObject.Parse(json);
-
                     var testData = jsonObject.SelectToken("data").ToObject<List<object>>();
                 }
             }
@@ -82,25 +82,29 @@ namespace Core.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var scriptSeleccionado = (Script)_lstScripts.SelectedItem;
             Driver = GetSelectedDriver();
-            switch (IndexScript)
+            
+
+            switch (scriptSeleccionado.Nombre.ToLower())
             {
-                case 0:
-                    DriverTemplate.EjecutarScript(new AfiliacionScript() { PathGuardado = _txtPath.Text }, Driver);
+                case "afiliacion":
+                    DriverTemplate.EjecutarScript(new AfiliacionScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
                     break;
 
-                case 1:
-                    DriverTemplate.EjecutarScript(new RecuperarUsuarioScript() { PathGuardado = _txtPath.Text }, Driver);
+                case "recuperar usuario":
+                    DriverTemplate.EjecutarScript(new RecuperarUsuarioScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
                     break;
 
-                case 2:
-                    DriverTemplate.EjecutarScript(new TransferenciaInternaScript() { PathGuardado = _txtPath.Text }, Driver);
+                case "recuperar contrasena":
+                    DriverTemplate.EjecutarScript(new RecuperarContrasenaScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
+                    
                     break;
-                case 3:
-                    DriverTemplate.EjecutarScript(new RecuperarContrasenaScript() { PathGuardado = _txtPath.Text }, Driver);
+                case "transferencia interna":
+                    DriverTemplate.EjecutarScript(new TransferenciaInternaScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
                     break;
-                case 4:
-                    DriverTemplate.EjecutarScript(new AgregarBeneficiarioScript() { PathGuardado = _txtPath.Text }, Driver);
+                case "agregar beneficiario":
+                    DriverTemplate.EjecutarScript(new AgregarBeneficiarioScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
                     break;
             }
             MessageBox.Show("Ejecución Finalizada");
@@ -166,12 +170,6 @@ namespace Core.Forms
                 var result = JS.ExecuteScript(_txtJson.Text);
                 _txtJson.Text = result.ToString();
             }
-        }
-
-        private void _btnDebug_Click(object sender, EventArgs e)
-        {
-            Driver = new EdgeDriver();
-            JS = (IJavaScriptExecutor)Driver;
         }
 
         private IWebDriver GetSelectedDriver()
@@ -252,6 +250,7 @@ namespace Core.Forms
                     _grdExcel.Rows.Clear();
                     _grdExcel.Columns.Clear();
                     //provide file path
+                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                     FileInfo existingFile = new FileInfo($"{fd.FileName}");
                     //use EPPlus
                     using (ExcelPackage package = new ExcelPackage(existingFile))
