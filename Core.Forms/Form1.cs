@@ -82,78 +82,58 @@ namespace Core.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var scriptSeleccionado = (Script)_lstScripts.SelectedItem;
-            Driver = GetSelectedDriver();
-            
-
-            switch (scriptSeleccionado.Nombre.ToLower())
+            try
             {
-                case "afiliacion":
-                    DriverTemplate.EjecutarScript(new AfiliacionScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
-                    break;
+                var scriptSeleccionado = (Script)_lstScripts.SelectedItem;
+                Driver = GetSelectedDriver();
 
-                case "recuperar usuario":
-                    DriverTemplate.EjecutarScript(new RecuperarUsuarioScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
-                    break;
 
-                case "recuperar contrasena":
-                    DriverTemplate.EjecutarScript(new RecuperarContrasenaScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
-                    
-                    break;
-                case "transferencia interna":
-                    DriverTemplate.EjecutarScript(new TransferenciaInternaScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
-                    break;
-                case "agregar beneficiario":
-                    DriverTemplate.EjecutarScript(new AgregarBeneficiarioScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
-                    break;
+                switch (scriptSeleccionado.Nombre.ToLower())
+                {
+                    case "afiliacion":
+                        DriverTemplate.EjecutarScript(new AfiliacionScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
+                        break;
+
+                    case "recuperar usuario":
+                        DriverTemplate.EjecutarScript(new RecuperarUsuarioScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
+                        break;
+
+                    case "recuperar contrasena":
+                        DriverTemplate.EjecutarScript(new RecuperarContrasenaScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
+
+                        break;
+                    case "transferencia interna":
+                        DriverTemplate.EjecutarScript(new TransferenciaInternaScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
+                        break;
+                    case "agregar beneficiario":
+                        DriverTemplate.EjecutarScript(new AgregarBeneficiarioScript() { PathGuardado = _txtPath.Text }, Driver, _txtJson.Text);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
             }
             MessageBox.Show("Ejecución Finalizada");
         }
 
         private void btnGuardarJson_Click(object sender, EventArgs e)
         {
-            var jsonNuevo = _txtJson.Text;
-
-            switch (IndexScript)
+            try
             {
-                case 0:
-                    using (StreamWriter sw = new StreamWriter($"scripts/Afiliacion/AfiliacionScript.json"))
-                    {
-                        sw.Write(jsonNuevo);
-
-                    }
-                    MessageBox.Show("Guardado!");
-                    break;
-                case 1:
-                    using (StreamWriter sw = new StreamWriter($"scripts/RecuperarContrasena/RecuperarUsuarioScript.json"))
-                    {
-                        sw.Write(jsonNuevo);
-                    }
-                    MessageBox.Show("Guardado!");
-                    break;
-                case 2:
-                    using (StreamWriter sw = new StreamWriter($"scripts/Transferencias/TransferenciaInternaScript.json"))
-                    {
-                        sw.Write(jsonNuevo);
-                    }
-                    MessageBox.Show("Guardado!");
-                    break;
-                case 3:
-                    using (StreamWriter sw = new StreamWriter($"scripts/RecuperarContrasena/RecuperarContrasenaScript.json"))
-                    {
-                        sw.Write(jsonNuevo);
-                    }
-                    MessageBox.Show("Guardado!");
-                    break;
-                case 4:
-                    using (StreamWriter sw = new StreamWriter($"scripts/Beneficiarios/AgregarBeneficiarioScript.json"))
-                    {
-                        sw.Write(jsonNuevo);
-                    }
-                    MessageBox.Show("Guardado!");
-                    break;
+                var scriptSeleccionado = (Script)_lstScripts.SelectedItem;
+                using (StreamWriter sw = new StreamWriter($"{scriptSeleccionado.Json}"))
+                {
+                    sw.Write(_txtJson.Text);
+                }
+                MessageBox.Show("Guardado");
             }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void _txtPath_Click(object sender, EventArgs e)

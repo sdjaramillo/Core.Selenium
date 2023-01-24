@@ -17,7 +17,7 @@ namespace BancaDigitalSelenium.Scripts.Beneficiarios
     {
         private EditarBeneficiarioBLL Logica { get; set; }
 
-        public void SetConfig(IWebDriver driver)
+        public void SetConfig(IWebDriver driver, string json)
         {
             Logica = new EditarBeneficiarioBLL();
             Logica.SetConfig<EditarBeneficiarioParametro>(this, driver);

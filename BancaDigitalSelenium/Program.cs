@@ -47,7 +47,7 @@ namespace BancaDigitalSelenium
 
 
 
-            DriverTemplate.EjecutarScript(new EditarBeneficiarioScript(), driver);
+//            DriverTemplate.EjecutarScript(new EditarBeneficiarioScript(), driver);
             //DriverTemplate.EjecutarScript(new AgregarBeneficiarioScript(), driver);
             //DriverTemplate.EjecutarScript(new AfiliacionScript(), driver);
             //DriverTemplate.EjecutarScript(new RecuperarUsuarioScript(), driver);

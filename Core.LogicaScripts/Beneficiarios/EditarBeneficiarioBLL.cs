@@ -13,7 +13,7 @@ namespace Core.LogicaScripts.Beneficiarios
     public class EditarBeneficiarioBLL
     {
         private IWebDriver _driver;
-        public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver)
+        public ScriptBase SetConfig<T>(ScriptBase script, IWebDriver driver, string source = "")
         {
             _driver = driver;
             var logicaInyectada = script.GetType().Name;
@@ -25,12 +25,19 @@ namespace Core.LogicaScripts.Beneficiarios
             script.Variables = script.Variables ?? new Dictionary<string, string>();
             script.SeleniumJS = (IJavaScriptExecutor)driver;
 
-            using (StreamReader sr = new StreamReader($"scripts/Beneficiarios/{logicaInyectada}.json"))
+            if (!string.IsNullOrEmpty(source))
             {
-                JObject json = JObject.Parse(sr.ReadToEnd());
+                JObject json = JObject.Parse(source);
                 script.TestData = json.SelectToken("data").ToObject<List<T>>();
             }
-            //script.Test = script.Reporte.CrearTest(script.GetType().ToString()).AssignDevice(driver.GetType().ToString().Split('.').Last());
+            else
+            {
+                using (StreamReader sr = new StreamReader($"scripts/Beneficiarios/{logicaInyectada}.json"))
+                {
+                    JObject json = JObject.Parse(sr.ReadToEnd());
+                    script.TestData = json.SelectToken("data").ToObject<List<T>>();
+                }
+            }
             return script;
         }
     }
