@@ -9,9 +9,6 @@ namespace Core.Selenium.Model
 {
     public class ParametroScript
     {
-        [JsonProperty("nombrePrueba")]
-        public string NombrePrueba { get; set; }
-
         [JsonProperty("url")]
         public string Url { get; set; }
 
@@ -24,11 +21,14 @@ namespace Core.Selenium.Model
 
     public partial class DataTest
     {
+        [JsonProperty("nombrePrueba")]
+        public string NombrePrueba { get; set; }
+
         [JsonProperty("suiteVars")]
-        public Dictionary<string,string> SuiteVars { get; set; }
+        public Dictionary<string, string> SuiteVars { get; set; }
 
         [JsonProperty("tests")]
-        public List<Dictionary<string,string>> TestsVars { get; set; }
+        public List<Dictionary<string, string>> TestsVars { get; set; }
     }
 
     public partial class TestVars

@@ -33,15 +33,14 @@ namespace Core.Selenium.Logic
                 {
                     if (cmd.Tipo == null || cmd?.Tipo?.ToLower() == TipoComando.comando.ToString().ToLower())
                     {
-                        IWebElement elemento = null;
-
+                        
                         string[] targetSplit = cmd.Target.Split('=');
                         string identificador = targetSplit[0];
                         string valor = string.Join("=", targetSplit.Skip(1));
 
                         By by = ObtenerIdentificador(identificador, valor);
-                        elemento = _driver.WaitFindElement(by);
-                        PerformAction(elemento, cmd, by);
+                        
+                        PerformAction(cmd, by, test);
                     }
 
                     if (cmd?.Tipo?.ToLower() == TipoComando.script.ToString().ToLower())
@@ -94,16 +93,19 @@ namespace Core.Selenium.Logic
             }
         }
 
-        private void PerformAction(IWebElement element, Comando comando, By by)
+        private void PerformAction(Comando comando, By by, ExtentTest test)
         {
+            IWebElement element;
             switch (comando.Command.ToLower())
             {
                 case "type":
+                    element = _driver.WaitFindElement(by);
                     element.ScrollIntoView();
                     element.SendKeys(comando.Value);
                     break;
 
                 case "click":
+                    element = _driver.WaitFindElement(by);
                     element.ScrollIntoView();
                     _driver.WaitElementTobeClicked(by, 10);
                     element = _driver.WaitFindElement(by, 5);
@@ -112,12 +114,14 @@ namespace Core.Selenium.Logic
                     break;
                 case "sendkeys":
                 case "send keys":
+                    element = _driver.WaitFindElement(by);
                     element.ScrollIntoView();
                     var key = GetKeyString(comando);
                     element.SendKeys(key);
                     break;
 
                 case "select":
+                    element = _driver.WaitFindElement(by);
                     element.ScrollIntoView();
                     SelectElement comboCuentaOrigen = new SelectElement(element);
                     var valueImput = comando.Value.Split('=');
@@ -130,6 +134,24 @@ namespace Core.Selenium.Logic
                         comboCuentaOrigen.SelectByValue(valor);
                     if (tag == "index")
                         comboCuentaOrigen.SelectByIndex(Convert.ToInt32(valor));
+                    break;
+
+                case "open":
+                    _driver.Url = comando.Target;
+                    break;
+
+                case "screen":
+                    test?.Pass(comando.Target, _driver.TomarScreen());
+                    break;
+
+                case "assertalert":
+
+                    //Make sure the click above generates the alert
+                    var textoAlerta = _driver.AssertAlert();
+                    if (!textoAlerta.Contains(comando.Target))
+                    {
+                        throw new Exception($"alerta {comando.Target} no encontrada");
+                    }                    
                     break;
             }
         }
@@ -194,7 +216,7 @@ namespace Core.Selenium.Logic
                     return By.ClassName(valor);
             }
 
-            throw new Exception($"no definido: {identificador}:{valor}");
+            return null;
         }
 
         public void GuardarReporte()

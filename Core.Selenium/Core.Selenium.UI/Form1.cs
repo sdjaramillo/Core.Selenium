@@ -1,3 +1,4 @@
+using Core.Selenium.Logic;
 using Core.Selenium.Model;
 using Newtonsoft.Json;
 using OfficeOpenXml;
@@ -89,47 +90,95 @@ namespace Core.Selenium.UI
 
         private void btnEmpezar_Click(object sender, EventArgs e)
         {
-            var script = new ScriptBase();
-            script.Nombre = _txtNombrePrueba.Text;
-            
-
             var commands = (List<Comando>)_grdScript.DataSource;
             commands.ForEach(cmd =>
             {
                 cmd.Orden = commands.IndexOf(cmd);
                 cmd.Tipo = string.IsNullOrEmpty(cmd.Tipo) ? "comando" : cmd.Tipo;
             });
-            script.Comandos = commands;
-            script.ScriptData = new ParametroScript();
 
-            List<Tuple<string, string, string>> VariablesInicio = new List<Tuple<string, string, string>>();
 
-            foreach (DataGridViewRow row in _grdDatosExternos.Rows)
+            Dictionary<string, string> variablesInicio = new Dictionary<string, string>();
+            foreach (DataGridViewRow rw in _grdSuites.Rows)
             {
-                var key = row.Cells[clmKey.Index].Value ?? string.Empty;
-                var valor = row.Cells[clmValue.Index].Value ?? string.Empty;
-                var test = row.Cells[clmTestInicio.Index].Value ?? string.Empty;
+                var key = rw.Cells[clmKey.Index].Value;
+                var value = rw.Cells[clmValue.Index].Value;
 
-                if (!string.IsNullOrEmpty(key.ToString()) && !string.IsNullOrEmpty(valor.ToString()) && !string.IsNullOrEmpty(test.ToString()))
+                if (key != null && value != null)
                 {
-                    VariablesInicio.Add(new Tuple<string, string, string>(key.ToString(), valor.ToString(), test.ToString()));
+                    variablesInicio.Add(key.ToString(), value.ToString());
                 }
             }
 
-            if (VariablesInicio.Count > 0)
+            List<Dictionary<string, string>> VariablesPruebas = new List<Dictionary<string, string>>();
+            foreach (DataGridViewRow row in _grdDatosExternos.Rows)
             {
+                var variablesPrueba = new Dictionary<string, string>();
+                foreach (DataGridViewCell celda in row.Cells)
+                {
+                    var columna = celda.ColumnIndex;
+                    var valor = celda.Value;
 
+                    if (valor != null)
+                        variablesPrueba.Add(celda.OwningColumn.HeaderText, valor?.ToString());
+                }
+                VariablesPruebas.Add(variablesPrueba);
             }
-            else
+
+
+
+            var script = new ScriptBase
             {
-                script.ScriptData.DataTest = new DataTest[] {
-                    new DataTest{
+                Nombre = _txtNombrePrueba.Text,
+                Comandos = (List<Comando>)_grdScript.DataSource,
+                ScriptData = new ParametroScript
+                {
+                    Url = "https://bgrdigital-test.bgr.com.ec/Cuenta/Login",
+                    Driver = "chrome",
+                    DataTest = new DataTest[] {
+                                                new DataTest{
+                                                NombrePrueba = _txtNombrePrueba.Text,
+                                                SuiteVars= variablesInicio,
+                                                TestsVars= VariablesPruebas
+                 }
+                 }
+                }
+            };
 
-                    }
-                };
-            }
 
-            _grdScript.Refresh();
+            var json = JsonConvert.SerializeObject(script);
+            LogicTemplate.EjecutarScript(script);
+
+            //script.ScriptData = new ParametroScript();
+
+
+
+            //foreach (DataGridViewRow row in _grdDatosExternos.Rows)
+            //{
+            //    var key = row.Cells[clmKey.Index].Value ?? string.Empty;
+            //    var valor = row.Cells[clmValue.Index].Value ?? string.Empty;
+            //    var test = row.Cells[clmTestInicio.Index].Value ?? string.Empty;
+
+            //    if (!string.IsNullOrEmpty(key.ToString()) && !string.IsNullOrEmpty(valor.ToString()) && !string.IsNullOrEmpty(test.ToString()))
+            //    {
+            //        VariablesInicio.Add(new Tuple<string, string, string>(key.ToString(), valor.ToString(), test.ToString()));
+            //    }
+            //}
+
+            //if (VariablesInicio.Count > 0)
+            //{
+
+            //}
+            //else
+            //{
+            //    script.ScriptData.DataTest = new DataTest[] {
+            //        new DataTest{
+
+            //        }
+            //    };
+            //}
+
+            //_grdScript.Refresh();
 
         }
 
@@ -139,6 +188,16 @@ namespace Core.Selenium.UI
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 LeerExcel(fd.FileName, _grdDatosExternos);
+            }
+        }
+
+        private void _txtNombrePrueba_Click(object sender, EventArgs e)
+        {
+            var fd = new FolderBrowserDialog();
+
+            if (fd.ShowDialog()==DialogResult.OK)
+            {
+                _txtNombrePrueba.Text = $@"{fd.SelectedPath}\";
             }
         }
     }

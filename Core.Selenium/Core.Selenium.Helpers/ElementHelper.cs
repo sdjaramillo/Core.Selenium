@@ -1,6 +1,7 @@
 ﻿using AventStack.ExtentReports;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using RazorEngine.Compilation.ImpromptuInterface.Dynamic;
 using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
@@ -108,6 +109,23 @@ namespace Core.Selenium.Helpers
             catch (Exception e)
             {
                 //exception handling
+            }
+        }
+
+        public static string AssertAlert(this IWebDriver driver, int timeout = 20)
+        {
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+                wait.Until(ExpectedConditions.AlertIsPresent());
+                var alert = driver.SwitchTo().Alert();
+                var textoAlerta = alert.Text;
+                alert.Accept();
+                return textoAlerta;
+            }
+            catch (Exception ex)
+            {
+                return $"No se encontro alerta :{ex.Message}";
             }
         }
 

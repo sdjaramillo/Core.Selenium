@@ -19,6 +19,6 @@ namespace Core.Selenium.Model
         public string? Tipo { get; set; }
         public bool InicioSesion { get; set; }
         public bool FinSesion { get; set; }
-        public bool Iterar { get; set; }
+        public bool Iterar { get; set; } = true;
     }
 }

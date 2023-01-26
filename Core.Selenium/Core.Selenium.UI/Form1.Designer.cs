@@ -43,8 +43,11 @@
             this.clmId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this._grdSuites = new System.Windows.Forms.DataGridView();
+            this.clmKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this._grdDatosExternos = new System.Windows.Forms.DataGridView();
             this.clmIterar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.clmEjecutarFin = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -56,16 +59,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this._txtNombrePrueba = new System.Windows.Forms.TextBox();
             this.btnEmpezar = new System.Windows.Forms.Button();
-            this.clmKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTestInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button2 = new System.Windows.Forms.Button();
             this._tab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._grdScript)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._grdSuites)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._grdDatosExternos)).BeginInit();
             this.SuspendLayout();
@@ -108,6 +107,7 @@
             // 
             // _grdScript
             // 
+            this._grdScript.AllowUserToAddRows = false;
             this._grdScript.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._grdScript.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmOrden,
@@ -199,7 +199,7 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this._grdSuites);
             this.groupBox2.Location = new System.Drawing.Point(6, 270);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1023, 167);
@@ -207,19 +207,30 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Variables Inicio/fin";
             // 
-            // dataGridView1
+            // _grdSuites
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this._grdSuites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._grdSuites.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmKey,
-            this.clmValue,
-            this.clmTestInicio});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 19);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(1017, 145);
-            this.dataGridView1.TabIndex = 0;
+            this.clmValue});
+            this._grdSuites.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._grdSuites.Location = new System.Drawing.Point(3, 19);
+            this._grdSuites.Name = "_grdSuites";
+            this._grdSuites.RowTemplate.Height = 25;
+            this._grdSuites.Size = new System.Drawing.Size(1017, 145);
+            this._grdSuites.TabIndex = 0;
+            // 
+            // clmKey
+            // 
+            this.clmKey.HeaderText = "Nombre";
+            this.clmKey.Name = "clmKey";
+            this.clmKey.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clmValue
+            // 
+            this.clmValue.HeaderText = "Valor";
+            this.clmValue.Name = "clmValue";
+            this.clmValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // groupBox1
             // 
@@ -235,8 +246,20 @@
             this.groupBox1.Text = "Datos Externos";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(942, 232);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Cargar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // _grdDatosExternos
             // 
+            this._grdDatosExternos.AllowUserToAddRows = false;
             this._grdDatosExternos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._grdDatosExternos.Dock = System.Windows.Forms.DockStyle.Fill;
             this._grdDatosExternos.Location = new System.Drawing.Point(3, 19);
@@ -299,6 +322,7 @@
             this._txtNombrePrueba.Name = "_txtNombrePrueba";
             this._txtNombrePrueba.Size = new System.Drawing.Size(454, 23);
             this._txtNombrePrueba.TabIndex = 2;
+            this._txtNombrePrueba.Click += new System.EventHandler(this._txtNombrePrueba_Click);
             // 
             // btnEmpezar
             // 
@@ -309,34 +333,6 @@
             this.btnEmpezar.Text = "▶️";
             this.btnEmpezar.UseVisualStyleBackColor = true;
             this.btnEmpezar.Click += new System.EventHandler(this.btnEmpezar_Click);
-            // 
-            // clmKey
-            // 
-            this.clmKey.HeaderText = "Nombre";
-            this.clmKey.Name = "clmKey";
-            this.clmKey.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmValue
-            // 
-            this.clmValue.HeaderText = "Valor";
-            this.clmValue.Name = "clmValue";
-            this.clmValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmTestInicio
-            // 
-            this.clmTestInicio.HeaderText = "Test";
-            this.clmTestInicio.Name = "clmTestInicio";
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(942, 232);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Cargar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
@@ -355,7 +351,7 @@
             ((System.ComponentModel.ISupportInitialize)(this._grdScript)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._grdSuites)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._grdDatosExternos)).EndInit();
             this.ResumeLayout(false);
@@ -370,7 +366,7 @@
         private DataGridView _grdDatosExternos;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private DataGridView dataGridView1;
+        private DataGridView _grdSuites;
         private TabPage tabPage1;
         private Button button1;
         private DataGridView _grdScript;
@@ -393,9 +389,8 @@
         private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
         private DataGridViewTextBoxColumn clmComentario;
         private DataGridViewTextBoxColumn clmId;
+        private Button button2;
         private DataGridViewTextBoxColumn clmKey;
         private DataGridViewTextBoxColumn clmValue;
-        private DataGridViewTextBoxColumn clmTestInicio;
-        private Button button2;
     }
 }
