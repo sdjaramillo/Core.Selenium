@@ -1,15 +1,24 @@
 ﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Model;
 using Core.Selenium.Helpers;
 using Core.Selenium.Model;
+using Core.Selenium.Model.Exepciones;
 using Core.Selenium.Report;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MongoDB.Driver;
 using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V107.Debugger;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Core.Selenium.Logic
 {
@@ -17,79 +26,159 @@ namespace Core.Selenium.Logic
     {
         private IWebDriver _driver { get; set; }
         private SeleniumReport _reporte { get; set; }
+        private Dictionary<string, string> variablesEjecucion { get; set; }
         public LogicBase(IWebDriver driver, string testName)
         {
             _driver = driver;
             _reporte = new SeleniumReport(testName);
+            variablesEjecucion = new Dictionary<string, string>();
         }
 
-        public void EjecutarComandos(List<Comando> comandosEjecutar, bool screenIteration = true, string? testName = null)
+        public void EjecutarComandos(List<Comando> comandosEjecutar, ExtentTest test = null, bool screenIteration = true, string? testName = null)
         {
-            var test = _reporte.CrearTest($"{testName ?? "test"} {_reporte?.Reporte.Stats.ChildCount}");
+            test = (test == null) ? _reporte.CrearTest($"{testName ?? "test"}") : test.CreateNode(testName ?? "test");
 
             foreach (var cmd in comandosEjecutar)
             {
                 try
                 {
-                    if (cmd.Tipo == null || cmd?.Tipo?.ToLower() == TipoComando.comando.ToString().ToLower())
+                    if (cmd.Tipo == null || cmd?.Tipo?.ToLower() == TipoComando.Comando.ToLower())
                     {
-                        
-                        string[] targetSplit = cmd.Target.Split('=');
-                        string identificador = targetSplit[0];
-                        string valor = string.Join("=", targetSplit.Skip(1));
-
-                        By by = ObtenerIdentificador(identificador, valor);
-                        
+                        var splitTarget = SplitTarget.GetSplitTarget(cmd.Target);
+                        By by = SeleniumHelpers.ObtenerIdentificador(splitTarget.Identificador, splitTarget.Valor);
                         PerformAction(cmd, by, test);
                     }
 
-                    if (cmd?.Tipo?.ToLower() == TipoComando.script.ToString().ToLower())
+                    if (cmd?.Tipo?.ToLower() == TipoComando.Script.ToLower())
                     {
-                        IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
-                        var resultadoScript = js.ExecuteScript(cmd.Target);
+                        EvaluarScript(cmd);
                     }
 
-                    if (cmd?.Tipo?.ToLower() == TipoComando.condicion.ToString().ToLower())
+                    if (cmd?.Tipo?.ToLower() == TipoComando.Condicion.ToLower())
                     {
-                        try
-                        {
-                            IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
-                            bool resultadoScript = (bool)js.ExecuteScript(cmd.Target);
-
-                            if (resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.error.ToString().ToLower())
-                            {
-                                throw new Exception($"Cumple condición : {cmd.Target}");
-                            }
-                            else if (!resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.error.ToString().ToLower())
-                            {
-                                test.Pass($"Condicion: {cmd.Target}", _driver.TomarScreen());
-                            }
-
-                            if (resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.ok.ToString().ToLower())
-                            {
-                                test.Pass($"Condicion: {cmd.Target}", _driver.TomarScreen());
-                            }
-                            else if (!resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.ok.ToString().ToLower())
-                            {
-                                throw new Exception($"No cumple condición {cmd.Target}");
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            test.Fail(ex.Message, _driver.TomarScreen());
-                        }
+                        EvaluarCondicion(cmd, test);
                     }
 
                     if (screenIteration)
                         test.Pass($"{cmd?.Command} - {cmd?.Target}", _driver.TomarScreen());
 
                 }
+                catch (CondicionException ex)
+                {
+                    test.Fail(ex.Message, _driver.TomarScreen());
+                    throw new CondicionException(ex.Message);
+                }
                 catch (Exception ex)
                 {
                     test.Fail($"Error al ejecutar comando: {cmd.Orden}: {cmd.Command} - {ex.Message}", _driver.TomarScreen());
                     throw new Exception($"Error al ejecutar comando: {cmd.Orden}: {cmd.Command}");
                 }
+            }
+
+            test.AgregarDatosEjecucion(variablesEjecucion, "Variables Recuperadas");
+        }
+
+        private void EvaluarScript(Comando cmd)
+        {
+            var js = (IJavaScriptExecutor)_driver;
+            switch (cmd.Command)
+            {
+                case AccionesJS.SaveVar:
+
+                    var resultado = js.ExecuteScript(cmd.Target);
+                    string stringResult = resultado?.ToString() ?? "";
+                    if (resultado is bool)
+                    {
+                        stringResult = resultado?.ToString()?.ToLower() ?? string.Empty;
+                    }
+                    AddVarEjecution(cmd.Value, stringResult);
+
+                    break;
+
+                default:
+                    js.ExecuteScript(cmd.Target);
+                    break;
+            }
+        }
+
+        private void EvaluarCondicion(Comando cmd, ExtentTest test)
+        {
+            try
+            {
+                switch (cmd?.Command?.ToLower())
+                {
+                    case Condiciones.Js:
+                        IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+                        var targetInject = cmd.Target.Inject(dictionary: variablesEjecucion);
+                        bool resultadoScript = (bool)js.ExecuteScript(cmd.Target.Inject(dictionary: variablesEjecucion));
+
+                        EvaluarResultadoCondicion(resultadoScript, cmd, test);
+
+                        //if ((resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.Error.ToLower()) ||
+                        //    (!resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.Ok.ToLower()))
+                        //{
+                        //    if (cmd?.ComandosError?.Count > 0)
+                        //    {
+                        //        EjecutarComandos(cmd.ComandosError, test: test, testName: cmd.Tipo);
+                        //    }
+                        //    throw new Exception($"Cumple condición : {targetInject}");
+                        //}
+
+                        //if ((!resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.Error.ToLower()) ||
+                        //    (resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.Ok.ToLower()))
+                        //{
+                        //    if (cmd?.ComandosOk?.Count > 0)
+                        //    {
+                        //        EjecutarComandos(cmd.ComandosOk, test: test, testName: cmd.Tipo);
+                        //    }
+                        //    test.Pass($"Condicion: {targetInject}", _driver.TomarScreen());
+                        //}
+                        break;
+                    case Condiciones.Clickable:
+
+                        break;
+
+                    case Condiciones.IsVisible:
+                        var splitTarget = SplitTarget.GetSplitTarget(cmd.Target);
+                        splitTarget.By = SeleniumHelpers.ObtenerIdentificador(splitTarget.Identificador, splitTarget.Valor);
+
+                        var esVivisble = _driver.ElementIsVisible(splitTarget.By);
+                        EvaluarResultadoCondicion(esVivisble, cmd, test);
+                        break;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new CondicionException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para evaluar y ejecutar comandos
+        /// </summary>
+        /// <param name="resultado"></param>
+        /// <param name="accionCondicion"></param>
+        private void EvaluarResultadoCondicion(bool resultado, Comando comando, ExtentTest test)
+        {
+            if ((resultado && comando?.Action?.ToLower() == ResultadoCondicion.Error.ToLower()) ||
+                           (!resultado && comando?.Action?.ToLower() == ResultadoCondicion.Ok.ToLower()))
+            {
+                if (comando?.ComandosError?.Count > 0)
+                {
+                    EjecutarComandos(comando.ComandosError, test: test, testName: comando.Tipo);
+                }
+                throw new Exception($"{comando?.Command}: {comando?.Target} - {comando?.Tipo}");
+            }
+
+            if ((!resultado && comando?.Action?.ToLower() == ResultadoCondicion.Error.ToLower()) ||
+                (resultado && comando?.Action?.ToLower() == ResultadoCondicion.Ok.ToLower()))
+            {
+                if (comando?.ComandosOk?.Count > 0)
+                {
+                    EjecutarComandos(comando.ComandosOk, test: test, testName: comando.Tipo);
+                }
+                test.Pass($"Condicion: {comando?.Command}: {comando?.Action}", _driver.TomarScreen());
             }
         }
 
@@ -116,7 +205,7 @@ namespace Core.Selenium.Logic
                 case "send keys":
                     element = _driver.WaitFindElement(by);
                     element.ScrollIntoView();
-                    var key = GetKeyString(comando);
+                    var key = SeleniumKeysHelpers.GetKeyString(comando);
                     element.SendKeys(key);
                     break;
 
@@ -151,77 +240,76 @@ namespace Core.Selenium.Logic
                     if (!textoAlerta.Contains(comando.Target))
                     {
                         throw new Exception($"alerta {comando.Target} no encontrada");
-                    }                    
+                    }
                     break;
+
+                case Acciones.CheckAlert:
+
+                    _driver.checkAlert(3);
+
+                    break;
+
+                case "gettext":
+                    element = _driver.WaitFindElement(by);
+                    var text = element.GetInnerText();
+                    AddVarEjecution(comando.Value, text);
+                    break;
+
+                case Acciones.GetValue:
+                    element = _driver.WaitFindElement(by);
+                    var valorElemento = element.GetValue();
+                    AddVarEjecution(comando.Value, valorElemento);
+                    break;
+
+                case Acciones.GetTextLength:
+                    element = _driver.WaitFindElement(by);
+                    var longitudText = element.GetInnerText().Length.ToString();
+                    AddVarEjecution(comando.Value, longitudText);
+
+                    break;
+
+                case Acciones.GetValueLength:
+                    element = _driver.WaitFindElement(by);
+                    var longitudValor = element.GetValue().Length.ToString();
+                    AddVarEjecution(comando.Value, longitudValor);
+
+                    break;
+
+                case Acciones.GetIsVisible:
+
+                    var isVisible = _driver.ElementIsVisible(by);
+                    AddVarEjecution(comando.Value, isVisible.ToString().ToLower());
+
+                    break;
+
+                case "wait":
+                    int tiempo;
+                    if (int.TryParse(comando.Target, out tiempo))
+                    {
+                        Thread.Sleep(TimeSpan.FromSeconds(tiempo));
+                    }
+                    break;
+
+
             }
-        }
-
-        public static string GetKeyString(Comando command)
-        {
-            if (command.Value == SeleniumKeysHelpers.KEY_ENTER)
-                return Keys.Enter;
-
-            if (command.Value == SeleniumKeysHelpers.KEY_BACKSPACE || command.Value == SeleniumKeysHelpers.KEY_BKSP)
-                return Keys.Backspace;
-
-            if (command.Value == SeleniumKeysHelpers.KEY_DEL || command.Value == SeleniumKeysHelpers.KEY_DELETE)
-                return Keys.Delete;
-
-            if (command.Value == SeleniumKeysHelpers.KEY_DOWN)
-                return Keys.Down;
-
-            if (command.Value == SeleniumKeysHelpers.KEY_LEFT)
-                return Keys.Left;
-
-            if (command.Value == SeleniumKeysHelpers.KEY_PAGE_DOWN || command.Value == SeleniumKeysHelpers.KEY_PGDN)
-                return Keys.PageDown;
-
-            if (command.Value == SeleniumKeysHelpers.KEY_PAGE_UP || command.Value == SeleniumKeysHelpers.KEY_PGUP)
-                return Keys.PageUp;
-
-            if (command.Value == SeleniumKeysHelpers.KEY_RIGHT)
-                return Keys.Right;
-
-            if (command.Value == SeleniumKeysHelpers.KEY_TAB)
-                return Keys.Tab;
-
-            if (command.Value == SeleniumKeysHelpers.KEY_UP)
-                return Keys.Up;
-
-            if (command.Value == SeleniumKeysHelpers.KEY_ESC)
-                return Keys.Escape;
-
-            return string.Empty;
-        }
-
-        private By ObtenerIdentificador(string identificador, string valor)
-        {
-            switch (identificador.ToLower())
-            {
-                case "id":
-
-                    return By.Id(valor);
-
-                case "name":
-                    return By.Name(valor);
-
-                case "css":
-                    return By.CssSelector(valor);
-
-                case "xpath":
-                    return By.XPath(valor);
-
-                case "classname":
-
-                    return By.ClassName(valor);
-            }
-
-            return null;
         }
 
         public void GuardarReporte()
         {
             _reporte.GuardarReporte();
+        }
+
+
+        private void AddVarEjecution(string key, string value)
+        {
+            if (variablesEjecucion.ContainsKey(key))
+            {
+                variablesEjecucion[key] = value;
+            }
+            else
+            {
+                variablesEjecucion.Add(key, value);
+            }
         }
 
     }

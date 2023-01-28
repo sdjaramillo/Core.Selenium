@@ -39,6 +39,10 @@ namespace Core.Selenium.Report
             Reporte.AddSystemInfo(nombre, valor);
         }
 
+        /// <summary>
+        /// Agregar información de un diccionario a los datros de prueba
+        /// </summary>
+        /// <param name="info"></param>
         public void AgregarInformacionReporte(Dictionary<string, string> info)
         {
             foreach (var i in info)
@@ -58,6 +62,12 @@ namespace Core.Selenium.Report
             return test;
         }
 
+        /// <summary>
+        /// Metodo para generar un nodo o subseccion de un test
+        /// </summary>
+        /// <param name="testPadre"></param>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
         public static ExtentTest CrearNodo(ExtentTest testPadre, string descripcion)
         {
             var nodo = testPadre.CreateNode(descripcion);

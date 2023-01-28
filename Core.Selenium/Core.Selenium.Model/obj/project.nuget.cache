@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Kd0DmfYFoFffYhy/0l8yQk0GKZUTql4FNBE56LuIdoKmYvhPQc/K7CgQSq0N+mGhahB18o0FsoHaIp+YFaOT3w==",
+  "success": true,
+  "projectFilePath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\diego\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
+    "C:\\Users\\diego\\.nuget\\packages\\selenium.support\\4.8.0\\selenium.support.4.8.0.nupkg.sha512",
+    "C:\\Users\\diego\\.nuget\\packages\\selenium.webdriver\\4.8.0\\selenium.webdriver.4.8.0.nupkg.sha512"
+  ],
+  "logs": []
+}

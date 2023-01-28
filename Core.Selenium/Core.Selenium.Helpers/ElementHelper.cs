@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Core.Selenium.Helpers
 {
@@ -55,17 +57,7 @@ namespace Core.Selenium.Helpers
             return ss.AsBase64EncodedString;
         }
 
-        public static IWebElement FluentWait(this IWebDriver driver, By by, int timeout = 30)
-        {
-            DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver);
-            fluentWait.Timeout = TimeSpan.FromSeconds(timeout);
-            fluentWait.PollingInterval = TimeSpan.FromMilliseconds(250);
-            fluentWait.IgnoreExceptionTypes(typeof(OpenQA.Selenium.NoSuchElementException));
 
-            IWebElement elemento = fluentWait.Until(x => x.FindElement(by));
-
-            return elemento;
-        }
 
         /// <summary>
         /// Metodo para esperar que un elemento sea visible o aparezca en la página.
@@ -79,6 +71,51 @@ namespace Core.Selenium.Helpers
             WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
             var element = w.Until(ExpectedConditions.ElementExists(by));
             return element;
+        }
+
+        public static bool ElementIsVisible(this IWebDriver driver, By by, int timeout = 10)
+        {
+            try
+            {
+                WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+                var element = w.Until(ExpectedConditions.ElementIsVisible(by));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static void CheckElementExist(this IWebDriver driver, By by, int timeout = 5)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+            w.Until(ExpectedConditions.ElementExists(by));
+        }
+
+        public static IWebElement FindInsideElement(this IWebDriver driver, string targets, int timeout = 10)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+
+            IWebElement element = null;
+            string[] comandos = targets.Split(';');
+            foreach (var cmd in comandos)
+            {
+                string[] comandoSplit = cmd.Split('=');
+                string target = comandoSplit[0];
+                string valor = string.Join("=", comandoSplit.Skip(1));
+
+                By by = SeleniumHelpers.ObtenerIdentificador(target, valor);
+                element = element == null ? driver.WaitFindElement(by) : element.FindElement(by);
+            }
+            return element;
+        }
+
+        public static IWebElement WaitFindElement(this IWebElement element, By by, int timeout = 5)
+        {
+            var driver = ((IWrapsDriver)element).WrappedDriver;
+
+            return element.FindElement(by);
         }
 
         /// <summary>
@@ -96,6 +133,19 @@ namespace Core.Selenium.Helpers
             return WaitFindElement(driver, by, timeout);
         }
 
+        public static bool IsClickable(this IWebDriver driver, By by, int timeout = 5)
+        {
+            try
+            {
+                WaitElementTobeClicked(driver, by, timeout);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
 
         public static void checkAlert(this IWebDriver driver, int timeout = 1)
         {
@@ -156,6 +206,22 @@ namespace Core.Selenium.Helpers
             catch (Exception ex)
             {
                 throw new Exception("Error al mover al objeto");
+            }
+        }
+
+        public static string GetValue(this IWebElement element, bool trim=true)
+        {
+            try
+            {
+                var driver = ((IWrapsDriver)element).WrappedDriver;
+                var js = (IJavaScriptExecutor)driver;
+                var value = js.ExecuteScript($"return arguments[0].value", element);
+                Thread.Sleep(200);
+                return value?.ToString()?.Trim() ?? "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener valor {ex.Message}");
             }
         }
 

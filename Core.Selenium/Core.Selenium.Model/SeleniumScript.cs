@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Core.Selenium.Model
 {
-
+    /// <summary>
+    /// CLASE PARA IMPORTAR LOS PROYECTOS DE SELENIUM IDE
+    /// </summary>
     public class Command
     {
         public string id { get; set; }

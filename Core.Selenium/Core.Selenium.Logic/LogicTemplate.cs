@@ -1,5 +1,6 @@
 ﻿using Core.Selenium.Helpers;
 using Core.Selenium.Model;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,18 @@ namespace Core.Selenium.Logic
     {
         public static void EjecutarScript(ScriptBase script)
         {
-            var driver = SeleniumHelpers.GetDriverInstance(script.ScriptData.Driver);
-            driver.Url = script.ScriptData.Url;
-            string jsonCommands = Newtonsoft.Json.JsonConvert.SerializeObject(script.Comandos);
-            var logica = new LogicBase(driver, script.Nombre);
+            IWebDriver driver;
+            LogicBase logica = null;
 
             foreach (var data in script.ScriptData.DataTest)
             {
                 try
                 {
+                    driver = SeleniumHelpers.GetDriverInstance(script.ScriptData.Driver);
+                    driver.Url = script.ScriptData.Url;
+                    string jsonCommands = Newtonsoft.Json.JsonConvert.SerializeObject(script.Comandos);
+                    logica = new LogicBase(driver, data.NombrePrueba);
+
                     var listaComandos = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Comando>>(jsonCommands);
                     var comandos = listaComandos.Where(w => w.InicioSesion).OrderBy(ord => ord.Orden).ToList();
                     comandos.ForEach(f =>
@@ -28,7 +32,7 @@ namespace Core.Selenium.Logic
                         f.Value = f.Value.Inject(dictionary: data.SuiteVars);
                         f.Target = f.Target.Inject(dictionary: data.SuiteVars);
                     });
-                    if (comandos.Count > 0) logica.EjecutarComandos(comandos);
+                    if (comandos.Count > 0) logica.EjecutarComandos(comandos, testName: data.NombrePrueba);
 
                     foreach (var test in data.TestsVars)
                     {
@@ -43,7 +47,7 @@ namespace Core.Selenium.Logic
                                 f.Target = f.Target.Inject(dictionary: test);
                             });
 
-                            logica.EjecutarComandos(comandosIterar);
+                            if (comandosIterar?.Count > 0) logica.EjecutarComandos(comandosIterar, testName: data.NombrePrueba);
                         }
                         catch (Exception exTest)
                         {
@@ -57,11 +61,10 @@ namespace Core.Selenium.Logic
                 catch (Exception exPrueba)
                 {
                     Console.WriteLine(exPrueba.Message);
-                    driver = SeleniumHelpers.GetDriverInstance(script.ScriptData.Driver);
                 }
             }
 
-            logica.GuardarReporte();
+            logica?.GuardarReporte();
         }
     }
 }

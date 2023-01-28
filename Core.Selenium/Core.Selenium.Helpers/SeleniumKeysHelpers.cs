@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core.Selenium.Model;
+using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,6 +11,43 @@ namespace Core.Selenium.Helpers
 {
     public static class SeleniumKeysHelpers
     {
+        public static string GetKeyString(Comando command)
+        {
+            if (command.Value == SeleniumKeysHelpers.KEY_ENTER)
+                return Keys.Enter;
+
+            if (command.Value == SeleniumKeysHelpers.KEY_BACKSPACE || command.Value == SeleniumKeysHelpers.KEY_BKSP)
+                return Keys.Backspace;
+
+            if (command.Value == SeleniumKeysHelpers.KEY_DEL || command.Value == SeleniumKeysHelpers.KEY_DELETE)
+                return Keys.Delete;
+
+            if (command.Value == SeleniumKeysHelpers.KEY_DOWN)
+                return Keys.Down;
+
+            if (command.Value == SeleniumKeysHelpers.KEY_LEFT)
+                return Keys.Left;
+
+            if (command.Value == SeleniumKeysHelpers.KEY_PAGE_DOWN || command.Value == SeleniumKeysHelpers.KEY_PGDN)
+                return Keys.PageDown;
+
+            if (command.Value == SeleniumKeysHelpers.KEY_PAGE_UP || command.Value == SeleniumKeysHelpers.KEY_PGUP)
+                return Keys.PageUp;
+
+            if (command.Value == SeleniumKeysHelpers.KEY_RIGHT)
+                return Keys.Right;
+
+            if (command.Value == SeleniumKeysHelpers.KEY_TAB)
+                return Keys.Tab;
+
+            if (command.Value == SeleniumKeysHelpers.KEY_UP)
+                return Keys.Up;
+
+            if (command.Value == SeleniumKeysHelpers.KEY_ESC)
+                return Keys.Escape;
+
+            return string.Empty;
+        }
         public static string KEY_ENTER { get { return SetSeleniumFormat(GetMemberName(() => KEY_ENTER)); } }
         public static string KEY_LEFT { get { return SetSeleniumFormat(GetMemberName(() => KEY_LEFT)); } }
         public static string KEY_UP { get { return SetSeleniumFormat(GetMemberName(() => KEY_UP)); } }

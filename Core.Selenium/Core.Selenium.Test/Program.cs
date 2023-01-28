@@ -1,7 +1,13 @@
-﻿var comando = string.Empty;
+﻿using Core.Selenium.Helpers;
+using OpenQA.Selenium;
+using SeleniumExtras.WaitHelpers;
 
-string[] comandoSplit = comando.Split('=');
-string target = comandoSplit[0];
-string valor = string.Join("=", comandoSplit.Skip(1));
+var driver = SeleniumHelpers.GetDriverInstance("chrome");
+string textoBuscar = "¡Hola!";
+var element = driver.FindElement(By.XPath($"//*[contains(text(),'{textoBuscar}')]"));
+
+
+
+var innerText = element.GetInnerText();
 
 Console.ReadLine();

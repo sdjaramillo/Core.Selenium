@@ -8,9 +8,19 @@ namespace Core.Selenium.Model
 {
     public class ScriptBase
     {
-        //Nombre de la prueba
-        public string Nombre { get; set; }                
+        /// <summary>
+        /// Nombre de la prueba 
+        /// </summary>
+        public string Nombre { get; set; }         
+        
+        /// <summary>
+        /// Comandos de la prueba
+        /// </summary>
         public List<Comando> Comandos { get; set; }
+
+        /// <summary>
+        /// Datos de ejecución del script
+        /// </summary>
         public ParametroScript ScriptData { get; set; }        
     }
 }
