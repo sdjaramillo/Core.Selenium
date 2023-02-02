@@ -169,7 +169,7 @@ namespace Core.Selenium.Logic
                         EvaluarResultadoCondicion(existe, cmd, test);
                         break;
                     default:
-                        throw new Exception($"Instrucción no reconozida: {cmd?.Command} - {cmd?.Tipo}");
+                        throw new Exception($"Instrucción no reconocida: {cmd?.Command} - {cmd?.Tipo}");
                 }
             }
             catch (EjecucionTerminadaException ex)
