@@ -147,7 +147,8 @@ namespace Core.Selenium.UI
 
 
             var json = JsonConvert.SerializeObject(script);
-            LogicTemplate.EjecutarScript(script);
+            _txtJson.Text = json;
+            //LogicTemplate.EjecutarScript(script);
 
             //script.ScriptData = new ParametroScript();
 

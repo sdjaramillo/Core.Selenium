@@ -87,10 +87,19 @@ namespace Core.Selenium.Helpers
             }
         }
 
-        public static void CheckElementExist(this IWebDriver driver, By by, int timeout = 5)
+        public static bool CheckElementExist(this IWebDriver driver, By by, int timeout = 5)
         {
-            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-            w.Until(ExpectedConditions.ElementExists(by));
+            try
+            {
+                WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+                w.Until(ExpectedConditions.ElementExists(by));
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
 
         public static IWebElement FindInsideElement(this IWebDriver driver, string targets, int timeout = 10)

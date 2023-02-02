@@ -17,13 +17,13 @@ namespace Core.Selenium.Model
         public string Value { get; set; }
         //public List<Listring> Targets { get; set; }
         public string? Tipo { get; set; }
-        public string? Action { get; set; }
+        //public string? Action { get; set; }
         public bool InicioSesion { get; set; }
         public bool FinSesion { get; set; }
         public bool Iterar { get; set; } = true;
 
 
-        public List<Comando>? ComandosError { get; set; } = new List<Comando>();
-        public List<Comando>? ComandosOk { get; set; } = new List<Comando>();
+        public List<Comando>? ComandosVerdadero { get; set; } = new List<Comando>();
+        public List<Comando>? ComandosFalso { get; set; } = new List<Comando>();
     }
 }

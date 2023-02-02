@@ -42,6 +42,8 @@ namespace Core.Selenium.Logic
             {
                 try
                 {
+                    cmd.Target = cmd.Target.Inject(dictionary: variablesEjecucion);
+                    cmd.Value = cmd.Value.Inject(dictionary: variablesEjecucion);
                     if (cmd.Tipo == null || cmd?.Tipo?.ToLower() == TipoComando.Comando.ToLower())
                     {
                         var splitTarget = SplitTarget.GetSplitTarget(cmd.Target);
@@ -60,8 +62,20 @@ namespace Core.Selenium.Logic
                     }
 
                     if (screenIteration)
-                        test.Pass($"{cmd?.Command} - {cmd?.Target}", _driver.TomarScreen());
+                        test.Pass($"{cmd?.Orden} {cmd?.Tipo} {cmd?.Command} - {cmd?.Target}", _driver.TomarScreen());
 
+                }
+                catch (EjecucionTerminadaException ex)
+                {
+                    if (ex.TerminarConError)
+                    {
+                        test.Fail(ex.Message);
+                    }
+                    else
+                    {
+                        test.Pass(ex.Message);
+                    }
+                    throw ex;
                 }
                 catch (CondicionException ex)
                 {
@@ -70,7 +84,7 @@ namespace Core.Selenium.Logic
                 }
                 catch (Exception ex)
                 {
-                    test.Fail($"Error al ejecutar comando: {cmd.Orden}: {cmd.Command} - {ex.Message}", _driver.TomarScreen());
+                    test.Fail($"Error al ejecutar comando: {cmd.Orden}: {cmd.Command} {cmd.Target} - {ex.Message}", _driver.TomarScreen());
                     throw new Exception($"Error al ejecutar comando: {cmd.Orden}: {cmd.Command}");
                 }
             }
@@ -111,42 +125,48 @@ namespace Core.Selenium.Logic
                         IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
                         var targetInject = cmd.Target.Inject(dictionary: variablesEjecucion);
                         bool resultadoScript = (bool)js.ExecuteScript(cmd.Target.Inject(dictionary: variablesEjecucion));
-
+                        test.Info($"{targetInject}");
+                        test.Info($"Resultado condicion {cmd.Comment}: {resultadoScript}");
                         EvaluarResultadoCondicion(resultadoScript, cmd, test);
 
-                        //if ((resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.Error.ToLower()) ||
-                        //    (!resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.Ok.ToLower()))
-                        //{
-                        //    if (cmd?.ComandosError?.Count > 0)
-                        //    {
-                        //        EjecutarComandos(cmd.ComandosError, test: test, testName: cmd.Tipo);
-                        //    }
-                        //    throw new Exception($"Cumple condición : {targetInject}");
-                        //}
-
-                        //if ((!resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.Error.ToLower()) ||
-                        //    (resultadoScript && cmd?.Command.ToLower() == ResultadoCondicion.Ok.ToLower()))
-                        //{
-                        //    if (cmd?.ComandosOk?.Count > 0)
-                        //    {
-                        //        EjecutarComandos(cmd.ComandosOk, test: test, testName: cmd.Tipo);
-                        //    }
-                        //    test.Pass($"Condicion: {targetInject}", _driver.TomarScreen());
-                        //}
                         break;
                     case Condiciones.Clickable:
+                        var splitTargetClick = SplitTarget.GetSplitTarget(cmd.Target);
+                        splitTargetClick.By = SeleniumHelpers.ObtenerIdentificador(splitTargetClick.Identificador, splitTargetClick.Valor);
+
+                        var esclickeable = _driver.IsClickable(splitTargetClick.By);
+                        EvaluarResultadoCondicion(esclickeable, cmd, test);
 
                         break;
 
                     case Condiciones.IsVisible:
                         var splitTarget = SplitTarget.GetSplitTarget(cmd.Target);
                         splitTarget.By = SeleniumHelpers.ObtenerIdentificador(splitTarget.Identificador, splitTarget.Valor);
+                        int timeoutVisible;
+                        if (int.TryParse(cmd.Value, out timeoutVisible))
+                        {
+                            var esVivisble = _driver.ElementIsVisible(splitTarget.By, timeoutVisible);
+                            EvaluarResultadoCondicion(esVivisble, cmd, test);
+                        }
+                        else
+                        {
+                            var esVivisble = _driver.ElementIsVisible(splitTarget.By);
+                            EvaluarResultadoCondicion(esVivisble, cmd, test);
+                        }
 
-                        var esVivisble = _driver.ElementIsVisible(splitTarget.By);
-                        EvaluarResultadoCondicion(esVivisble, cmd, test);
                         break;
 
+                    case Condiciones.Exist:
+                        var splitTargetExist = SplitTarget.GetSplitTarget(cmd.Target);
+                        splitTargetExist.By = SeleniumHelpers.ObtenerIdentificador(splitTargetExist.Identificador, splitTargetExist.Valor);
+                        var existe = _driver.CheckElementExist(splitTargetExist.By);
+                        EvaluarResultadoCondicion(existe, cmd, test);
+                        break;
                 }
+            }
+            catch (EjecucionTerminadaException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
@@ -161,24 +181,14 @@ namespace Core.Selenium.Logic
         /// <param name="accionCondicion"></param>
         private void EvaluarResultadoCondicion(bool resultado, Comando comando, ExtentTest test)
         {
-            if ((resultado && comando?.Action?.ToLower() == ResultadoCondicion.Error.ToLower()) ||
-                           (!resultado && comando?.Action?.ToLower() == ResultadoCondicion.Ok.ToLower()))
+            if (resultado && comando?.ComandosVerdadero?.Count > 0)
             {
-                if (comando?.ComandosError?.Count > 0)
-                {
-                    EjecutarComandos(comando.ComandosError, test: test, testName: comando.Tipo);
-                }
-                throw new Exception($"{comando?.Command}: {comando?.Target} - {comando?.Tipo}");
+                EjecutarComandos(comando.ComandosVerdadero, test: test, testName: $"Condición: {comando.Comment}");
             }
 
-            if ((!resultado && comando?.Action?.ToLower() == ResultadoCondicion.Error.ToLower()) ||
-                (resultado && comando?.Action?.ToLower() == ResultadoCondicion.Ok.ToLower()))
+            if (!resultado && comando?.ComandosFalso?.Count > 0)
             {
-                if (comando?.ComandosOk?.Count > 0)
-                {
-                    EjecutarComandos(comando.ComandosOk, test: test, testName: comando.Tipo);
-                }
-                test.Pass($"Condicion: {comando?.Command}: {comando?.Action}", _driver.TomarScreen());
+                EjecutarComandos(comando.ComandosFalso, test: test, testName: $"Condición: {comando.Comment}");
             }
         }
 
@@ -253,6 +263,7 @@ namespace Core.Selenium.Logic
                     element = _driver.WaitFindElement(by);
                     var text = element.GetInnerText();
                     AddVarEjecution(comando.Value, text);
+                    test.Pass($"{text} = {comando.Value}");
                     break;
 
                 case Acciones.GetValue:
@@ -265,14 +276,14 @@ namespace Core.Selenium.Logic
                     element = _driver.WaitFindElement(by);
                     var longitudText = element.GetInnerText().Length.ToString();
                     AddVarEjecution(comando.Value, longitudText);
-
+                    test.Pass($"{comando.Value}:{longitudText}");
                     break;
 
                 case Acciones.GetValueLength:
                     element = _driver.WaitFindElement(by);
                     var longitudValor = element.GetValue().Length.ToString();
                     AddVarEjecution(comando.Value, longitudValor);
-
+                    test.Pass($"{comando.Value}:{longitudValor}");
                     break;
 
                 case Acciones.GetIsVisible:
@@ -289,6 +300,16 @@ namespace Core.Selenium.Logic
                         Thread.Sleep(TimeSpan.FromSeconds(tiempo));
                     }
                     break;
+
+
+
+                case Acciones.TerminarSinError:
+                    test.Pass($"{Acciones.TerminarSinError} : {comando.Target}",_driver.TomarScreen());
+                    throw new EjecucionTerminadaException(comando.Target, false);
+
+                case Acciones.TerminarConError:
+                    test.Pass($"{Acciones.TerminarConError} : {comando.Target}", _driver.TomarScreen());
+                    throw new EjecucionTerminadaException(comando.Target, true);
 
 
             }
@@ -312,5 +333,9 @@ namespace Core.Selenium.Logic
             }
         }
 
+        public void LimpiarVaraiblesEjecucion()
+        {
+            this.variablesEjecucion = new Dictionary<string, string>();
+        }
     }
 }

@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Selenium.Helpers", "Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Selenium.UI", "Core.Selenium.UI\Core.Selenium.UI.csproj", "{3A3A0C33-9394-4725-B7F3-D39526276860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Selenium.Report", "Core.Selenium.Report\Core.Selenium.Report.csproj", "{E33CB1BB-2008-46E3-A0FD-E4431A82A827}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Selenium.Report", "Core.Selenium.Report\Core.Selenium.Report.csproj", "{E33CB1BB-2008-46E3-A0FD-E4431A82A827}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -30,6 +30,7 @@
         {
             this._tab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this._grdScript = new System.Windows.Forms.DataGridView();
             this.clmOrden = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +50,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this._grdDatosExternos = new System.Windows.Forms.DataGridView();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this._txtJson = new System.Windows.Forms.RichTextBox();
             this.clmIterar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.clmEjecutarFin = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.clmInicio = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -61,12 +64,14 @@
             this.btnEmpezar = new System.Windows.Forms.Button();
             this._tab.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._grdScript)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._grdSuites)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._grdDatosExternos)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // _tab
@@ -76,6 +81,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this._tab.Controls.Add(this.tabPage1);
             this._tab.Controls.Add(this.tabPage2);
+            this._tab.Controls.Add(this.tabPage3);
             this._tab.Location = new System.Drawing.Point(12, 44);
             this._tab.Name = "_tab";
             this._tab.SelectedIndex = 0;
@@ -84,6 +90,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this._grdScript);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
@@ -94,10 +101,19 @@
             this.tabPage1.Text = "Script";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 322);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(1032, 196);
+            this.dataGridView1.TabIndex = 2;
+            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(944, 480);
+            this.button1.Location = new System.Drawing.Point(954, 283);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -119,11 +135,10 @@
             this.dataGridViewCheckBoxColumn2,
             this.clmComentario,
             this.clmId});
-            this._grdScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this._grdScript.Location = new System.Drawing.Point(3, 3);
             this._grdScript.Name = "_grdScript";
             this._grdScript.RowTemplate.Height = 25;
-            this._grdScript.Size = new System.Drawing.Size(1029, 512);
+            this._grdScript.Size = new System.Drawing.Size(1029, 313);
             this._grdScript.TabIndex = 0;
             // 
             // clmOrden
@@ -268,6 +283,26 @@
             this._grdDatosExternos.Size = new System.Drawing.Size(1017, 239);
             this._grdDatosExternos.TabIndex = 0;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this._txtJson);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1035, 518);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Petición";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // _txtJson
+            // 
+            this._txtJson.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._txtJson.Location = new System.Drawing.Point(3, 3);
+            this._txtJson.Name = "_txtJson";
+            this._txtJson.Size = new System.Drawing.Size(1029, 512);
+            this._txtJson.TabIndex = 1;
+            this._txtJson.Text = "";
+            // 
             // clmIterar
             // 
             this.clmIterar.HeaderText = "Iterar";
@@ -348,12 +383,14 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this._tab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._grdScript)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._grdSuites)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._grdDatosExternos)).EndInit();
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -392,5 +429,9 @@
         private Button button2;
         private DataGridViewTextBoxColumn clmKey;
         private DataGridViewTextBoxColumn clmValue;
+        private DataGridView dataGridView1;
+        private TabPage tabPage3;
+        private RichTextBox _txtJson;
+        private RichTextBox richTextBox1;
     }
 }

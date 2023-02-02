@@ -45,6 +45,8 @@ namespace Core.Selenium.Model
         public const string GetValueLength = "getvaluelength";
         public const string GetTextLength = "gettextlength";
         public const string GetIsVisible = "getisvisible";
+        public const string TerminarConError = "terminarconerror";
+        public const string TerminarSinError = "terminarsinerror";
     }
 
     public static class Condiciones
@@ -52,6 +54,7 @@ namespace Core.Selenium.Model
         public const string Js = "js";
         public const string Clickable = "clickable";
         public const string IsVisible = "isvisible";
+        public const string Exist = "exist";
     }
 
     public static class AccionesJS

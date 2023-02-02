@@ -13,6 +13,7 @@ namespace Core.Selenium.Logic
     {
         public static void EjecutarScript(ScriptBase script)
         {
+            var x = SeleniumKeysHelpers.KEY_TAB;
             IWebDriver driver;
             LogicBase logica = null;
 
@@ -27,25 +28,19 @@ namespace Core.Selenium.Logic
 
                     var listaComandos = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Comando>>(jsonCommands);
                     var comandos = listaComandos.Where(w => w.InicioSesion).OrderBy(ord => ord.Orden).ToList();
-                    comandos.ForEach(f =>
-                    {
-                        f.Value = f.Value.Inject(dictionary: data.SuiteVars);
-                        f.Target = f.Target.Inject(dictionary: data.SuiteVars);
-                    });
+                    InyectarVariables(comandos, data.SuiteVars);
+                    
                     if (comandos.Count > 0) logica.EjecutarComandos(comandos, testName: data.NombrePrueba);
 
                     foreach (var test in data.TestsVars)
                     {
                         try
                         {
+                            logica.LimpiarVaraiblesEjecucion();
                             var variables = test;
                             var ListacomandosIterar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Comando>>(jsonCommands);
                             var comandosIterar = ListacomandosIterar?.Where(w => w.Iterar).OrderBy(ord => ord.Orden).ToList();
-                            comandosIterar?.ForEach(f =>
-                            {
-                                f.Value = f.Value.Inject(dictionary: test);
-                                f.Target = f.Target.Inject(dictionary: test);
-                            });
+                            InyectarVariables(comandosIterar, test);
 
                             if (comandosIterar?.Count > 0) logica.EjecutarComandos(comandosIterar, testName: data.NombrePrueba);
                         }
@@ -65,6 +60,24 @@ namespace Core.Selenium.Logic
             }
 
             logica?.GuardarReporte();
+        }
+
+        private static void InyectarVariables(List<Comando> comandos, Dictionary<string, string> variables)
+        {
+            comandos.ForEach(f =>
+            {
+                f.Value = f.Value.Inject(dictionary: variables);
+                f.Target = f.Target.Inject(dictionary: variables);
+                if (f.ComandosVerdadero?.Count > 0)
+                {
+                    InyectarVariables(f.ComandosVerdadero, variables);
+                }
+
+                if (f.ComandosFalso?.Count > 0)
+                {
+                    InyectarVariables(f.ComandosFalso, variables);
+                }
+            });
         }
     }
 }

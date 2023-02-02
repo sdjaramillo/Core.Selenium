@@ -8,10 +8,22 @@ namespace Core.Selenium.Model.Exepciones
 {
     public class CondicionException : Exception
     {
-        
-        public CondicionException(string mensajeError):base(mensajeError) {
-            
+
+        public CondicionException(string mensajeError) : base(mensajeError)
+        {
+
 
         }
     }
+
+
+    public class EjecucionTerminadaException : Exception
+    {
+        public bool TerminarConError { get; private set; }
+        public EjecucionTerminadaException(string mensajeError, bool terminarConError) : base(mensajeError)
+        {
+            TerminarConError = terminarConError;
+        }
+    }
+
 }

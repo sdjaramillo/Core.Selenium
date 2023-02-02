@@ -1,0 +1,15 @@
+C:\Dev\Core.Selenium\Core.Selenium.Model\bin\Debug\net6.0\selenium-manager\linux\selenium-manager
+C:\Dev\Core.Selenium\Core.Selenium.Model\bin\Debug\net6.0\selenium-manager\macos\selenium-manager
+C:\Dev\Core.Selenium\Core.Selenium.Model\bin\Debug\net6.0\selenium-manager\windows\selenium-manager.exe
+C:\Dev\Core.Selenium\Core.Selenium.Model\bin\Debug\net6.0\Core.Selenium.Model.deps.json
+C:\Dev\Core.Selenium\Core.Selenium.Model\bin\Debug\net6.0\Core.Selenium.Model.dll
+C:\Dev\Core.Selenium\Core.Selenium.Model\bin\Debug\net6.0\Core.Selenium.Model.pdb
+C:\Dev\Core.Selenium\Core.Selenium.Model\obj\Debug\net6.0\Core.Selenium.Model.csproj.AssemblyReference.cache
+C:\Dev\Core.Selenium\Core.Selenium.Model\obj\Debug\net6.0\Core.Selenium.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\Core.Selenium\Core.Selenium.Model\obj\Debug\net6.0\Core.Selenium.Model.AssemblyInfoInputs.cache
+C:\Dev\Core.Selenium\Core.Selenium.Model\obj\Debug\net6.0\Core.Selenium.Model.AssemblyInfo.cs
+C:\Dev\Core.Selenium\Core.Selenium.Model\obj\Debug\net6.0\Core.Selenium.Model.csproj.CoreCompileInputs.cache
+C:\Dev\Core.Selenium\Core.Selenium.Model\obj\Debug\net6.0\Core.Selenium.Model.dll
+C:\Dev\Core.Selenium\Core.Selenium.Model\obj\Debug\net6.0\refint\Core.Selenium.Model.dll
+C:\Dev\Core.Selenium\Core.Selenium.Model\obj\Debug\net6.0\Core.Selenium.Model.pdb
+C:\Dev\Core.Selenium\Core.Selenium.Model\obj\Debug\net6.0\ref\Core.Selenium.Model.dll
