@@ -10,3 +10,15 @@ C:\Dev\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.
 C:\Dev\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\refint\Core.Selenium.Report.dll
 C:\Dev\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.pdb
 C:\Dev\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\ref\Core.Selenium.Report.dll
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\bin\Debug\net6.0\Core.Selenium.Report.deps.json
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\bin\Debug\net6.0\Core.Selenium.Report.dll
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\bin\Debug\net6.0\Core.Selenium.Report.pdb
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.csproj.AssemblyReference.cache
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.AssemblyInfoInputs.cache
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.AssemblyInfo.cs
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.csproj.CoreCompileInputs.cache
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.dll
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\refint\Core.Selenium.Report.dll
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.pdb
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\ref\Core.Selenium.Report.dll

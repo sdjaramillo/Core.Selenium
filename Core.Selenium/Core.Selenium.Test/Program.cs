@@ -2,12 +2,7 @@
 using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 
-var driver = SeleniumHelpers.GetDriverInstance("chrome");
-string textoBuscar = "¡Hola!";
-var element = driver.FindElement(By.XPath($"//*[contains(text(),'{textoBuscar}')]"));
 
-
-
-var innerText = element.GetInnerText();
+string nombrePrueba = "";
 
 Console.ReadLine();

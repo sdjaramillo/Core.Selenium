@@ -22,14 +22,14 @@ namespace Core.Selenium.Logic
                 try
                 {
                     driver = SeleniumHelpers.GetDriverInstance(script.ScriptData.Driver);
-                    driver.Url = script.ScriptData.Url;
+                    driver.Url = string.IsNullOrEmpty(script.ScriptData.Url) ? driver.Url : script.ScriptData.Url;
                     string jsonCommands = Newtonsoft.Json.JsonConvert.SerializeObject(script.Comandos);
                     logica = new LogicBase(driver, data.NombrePrueba);
 
                     var listaComandos = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Comando>>(jsonCommands);
                     var comandos = listaComandos.Where(w => w.InicioSesion).OrderBy(ord => ord.Orden).ToList();
                     InyectarVariables(comandos, data.SuiteVars);
-                    
+
                     if (comandos.Count > 0) logica.EjecutarComandos(comandos, testName: data.NombrePrueba);
 
                     foreach (var test in data.TestsVars)

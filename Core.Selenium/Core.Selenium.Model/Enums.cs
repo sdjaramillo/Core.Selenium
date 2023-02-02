@@ -47,6 +47,8 @@ namespace Core.Selenium.Model
         public const string GetIsVisible = "getisvisible";
         public const string TerminarConError = "terminarconerror";
         public const string TerminarSinError = "terminarsinerror";
+        public const string AssertAlert = "assertalert";
+        public const string Wait = "wait";
     }
 
     public static class Condiciones

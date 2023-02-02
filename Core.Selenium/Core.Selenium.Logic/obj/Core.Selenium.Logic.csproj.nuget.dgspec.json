@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj": {}
+    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj": {
+    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
+        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
         "projectName": "Core.Selenium.Helpers",
-        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
-        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Helpers\\obj\\",
+        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
+        "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
-                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
+              "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
+                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
               }
             }
           }
@@ -81,17 +81,17 @@
         }
       }
     },
-    "C:\\Dev\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj": {
+    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
+        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
         "projectName": "Core.Selenium.Logic",
-        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
-        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Logic\\obj\\",
+        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
+        "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -105,14 +105,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Dev\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj": {
-                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj"
+              "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj": {
+                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj"
               },
-              "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
-                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
+              "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
+                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
               },
-              "C:\\Dev\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj": {
-                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj"
+              "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj": {
+                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj"
               }
             }
           }
@@ -156,17 +156,17 @@
         }
       }
     },
-    "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
+    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
+        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
         "projectName": "Core.Selenium.Model",
-        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
-        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\obj\\",
+        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
+        "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -225,17 +225,17 @@
         }
       }
     },
-    "C:\\Dev\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj": {
+    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
+        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
         "projectName": "Core.Selenium.Report",
-        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
-        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Report\\obj\\",
+        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
+        "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

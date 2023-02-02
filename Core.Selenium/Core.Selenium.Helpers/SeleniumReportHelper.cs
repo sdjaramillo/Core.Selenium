@@ -20,9 +20,10 @@ namespace Core.Selenium.Helpers
         /// <param name="label"></param>
         public static void AgregarDatosEjecucion(this ExtentTest test, Dictionary<string, string> infoEjecucion, string label = "")
         {
+            var nodo = test.CreateNode(string.IsNullOrEmpty(label) ? "Datos Ejecución" : label);
             foreach (var info in infoEjecucion)
             {
-                test.Info($"{info.Key}: {info.Value}");
+                nodo.Info($"{info.Key}: {info.Value}");
             }
         }
 

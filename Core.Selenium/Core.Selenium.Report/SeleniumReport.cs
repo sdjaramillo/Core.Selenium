@@ -18,9 +18,13 @@ namespace Core.Selenium.Report
         /// </summary>
         public string PathGuardado;
 
+        /// <summary>
+        /// Constructor para reporte de seleniu, recibe la ruta de guardado como parámetro.
+        /// </summary>
+        /// <param name="pathGuardado"></param>
         public SeleniumReport(string pathGuardado)
         {
-            PathGuardado = !string.IsNullOrEmpty(pathGuardado) ? $@"{PathGuardado}\" : pathGuardado;
+            PathGuardado = !string.IsNullOrEmpty(pathGuardado) ? $@"{pathGuardado}\" : PathGuardado;
             HtmlReporte = new ExtentHtmlReporter(PathGuardado);
             Reporte = new ExtentReports();
             Reporte.AttachReporter(HtmlReporte);

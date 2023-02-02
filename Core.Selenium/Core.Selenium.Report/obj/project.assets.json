@@ -9246,19 +9246,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\diego\\.nuget\\packages\\": {}
+    "C:\\Users\\usrtqaon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
+      "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
       "projectName": "Core.Selenium.Report",
-      "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
-      "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-      "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Report\\obj\\",
+      "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
+      "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+      "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

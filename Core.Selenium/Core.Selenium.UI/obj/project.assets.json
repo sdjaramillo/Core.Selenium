@@ -9985,19 +9985,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\diego\\.nuget\\packages\\": {}
+    "C:\\Users\\usrtqaon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj",
+      "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj",
       "projectName": "Core.Selenium.UI",
-      "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj",
-      "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-      "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.UI\\obj\\",
+      "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj",
+      "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+      "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10011,11 +10011,11 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Dev\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj": {
-              "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj"
+            "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj": {
+              "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj"
             },
-            "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
-              "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
+            "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
+              "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
             }
           }
         }

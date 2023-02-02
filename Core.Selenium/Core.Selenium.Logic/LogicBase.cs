@@ -36,7 +36,7 @@ namespace Core.Selenium.Logic
 
         public void EjecutarComandos(List<Comando> comandosEjecutar, ExtentTest test = null, bool screenIteration = true, string? testName = null)
         {
-            test = (test == null) ? _reporte.CrearTest($"{testName ?? "test"}") : test.CreateNode(testName ?? "test");
+            test = (test == null) ? _reporte.CrearTest($"{testName ?? "test"}") : test.CreateNode(testName ?? "test", "Detalle:");
 
             foreach (var cmd in comandosEjecutar)
             {
@@ -52,17 +52,13 @@ namespace Core.Selenium.Logic
                     }
 
                     if (cmd?.Tipo?.ToLower() == TipoComando.Script.ToLower())
-                    {
                         EvaluarScript(cmd);
-                    }
 
                     if (cmd?.Tipo?.ToLower() == TipoComando.Condicion.ToLower())
-                    {
                         EvaluarCondicion(cmd, test);
-                    }
 
                     if (screenIteration)
-                        test.Pass($"{cmd?.Orden} {cmd?.Tipo} {cmd?.Command} - {cmd?.Target}", _driver.TomarScreen());
+                        test.Pass($"{cmd?.Orden}. {cmd?.Comment} > {cmd?.Tipo} > {cmd?.Command} : {cmd?.Target}", _driver.TomarScreen());
 
                 }
                 catch (EjecucionTerminadaException ex)
@@ -75,6 +71,7 @@ namespace Core.Selenium.Logic
                     {
                         test.Pass(ex.Message);
                     }
+                    AgregarVariablesEjecucion(test, variablesEjecucion);
                     throw ex;
                 }
                 catch (CondicionException ex)
@@ -89,7 +86,15 @@ namespace Core.Selenium.Logic
                 }
             }
 
-            test.AgregarDatosEjecucion(variablesEjecucion, "Variables Recuperadas");
+            AgregarVariablesEjecucion(test, variablesEjecucion);
+        }
+
+        private void AgregarVariablesEjecucion(ExtentTest test, Dictionary<string, string> variablesEjecucion)
+        {
+            if (!test.Model.IsChild)
+            {
+                test.AgregarDatosEjecucion(variablesEjecucion, "Variables Recuperadas");
+            }
         }
 
         private void EvaluarScript(Comando cmd)
@@ -134,7 +139,12 @@ namespace Core.Selenium.Logic
                         var splitTargetClick = SplitTarget.GetSplitTarget(cmd.Target);
                         splitTargetClick.By = SeleniumHelpers.ObtenerIdentificador(splitTargetClick.Identificador, splitTargetClick.Valor);
 
+                        int timeoutClickable = 0;
+                        timeoutClickable = int.TryParse(cmd.Value, out timeoutClickable) ? timeoutClickable : 5;
+
                         var esclickeable = _driver.IsClickable(splitTargetClick.By);
+
+                        test.Info($"Resultado condición \"{cmd.Comment}\": {esclickeable}");
                         EvaluarResultadoCondicion(esclickeable, cmd, test);
 
                         break;
@@ -143,16 +153,12 @@ namespace Core.Selenium.Logic
                         var splitTarget = SplitTarget.GetSplitTarget(cmd.Target);
                         splitTarget.By = SeleniumHelpers.ObtenerIdentificador(splitTarget.Identificador, splitTarget.Valor);
                         int timeoutVisible;
-                        if (int.TryParse(cmd.Value, out timeoutVisible))
-                        {
-                            var esVivisble = _driver.ElementIsVisible(splitTarget.By, timeoutVisible);
-                            EvaluarResultadoCondicion(esVivisble, cmd, test);
-                        }
-                        else
-                        {
-                            var esVivisble = _driver.ElementIsVisible(splitTarget.By);
-                            EvaluarResultadoCondicion(esVivisble, cmd, test);
-                        }
+                        timeoutVisible = int.TryParse(cmd.Value, out timeoutVisible) ? timeoutVisible : 10;
+
+                        var esVivisble = _driver.ElementIsVisible(splitTarget.By, timeoutVisible);
+
+                        test.Info($"Resultado condición \"{cmd.Comment}\": {esVivisble}");
+                        EvaluarResultadoCondicion(esVivisble, cmd, test);
 
                         break;
 
@@ -162,6 +168,8 @@ namespace Core.Selenium.Logic
                         var existe = _driver.CheckElementExist(splitTargetExist.By);
                         EvaluarResultadoCondicion(existe, cmd, test);
                         break;
+                    default:
+                        throw new Exception($"Instrucción no reconozida: {cmd?.Command} - {cmd?.Tipo}");
                 }
             }
             catch (EjecucionTerminadaException ex)
@@ -183,27 +191,35 @@ namespace Core.Selenium.Logic
         {
             if (resultado && comando?.ComandosVerdadero?.Count > 0)
             {
-                EjecutarComandos(comando.ComandosVerdadero, test: test, testName: $"Condición: {comando.Comment}");
+                EjecutarComandos(comando.ComandosVerdadero, test: test, testName: $"Condición: {comando.Orden}. {comando.Comment}: {resultado}");
             }
 
             if (!resultado && comando?.ComandosFalso?.Count > 0)
             {
-                EjecutarComandos(comando.ComandosFalso, test: test, testName: $"Condición: {comando.Comment}");
+                EjecutarComandos(comando.ComandosFalso, test: test, testName: $"Condición: {comando.Comment}: {resultado}");
             }
         }
 
+        /// <summary>
+        /// Ejecuta comandos
+        /// </summary>
+        /// <param name="comando"></param>
+        /// <param name="by"></param>
+        /// <param name="test"></param>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="EjecucionTerminadaException"></exception>
         private void PerformAction(Comando comando, By by, ExtentTest test)
         {
             IWebElement element;
             switch (comando.Command.ToLower())
             {
-                case "type":
+                case Acciones.Type:
                     element = _driver.WaitFindElement(by);
                     element.ScrollIntoView();
                     element.SendKeys(comando.Value);
                     break;
 
-                case "click":
+                case Acciones.Click:
                     element = _driver.WaitFindElement(by);
                     element.ScrollIntoView();
                     _driver.WaitElementTobeClicked(by, 10);
@@ -211,7 +227,7 @@ namespace Core.Selenium.Logic
                     element.Click();
 
                     break;
-                case "sendkeys":
+                case Acciones.SendKeys:
                 case "send keys":
                     element = _driver.WaitFindElement(by);
                     element.ScrollIntoView();
@@ -219,7 +235,7 @@ namespace Core.Selenium.Logic
                     element.SendKeys(key);
                     break;
 
-                case "select":
+                case Acciones.Select:
                     element = _driver.WaitFindElement(by);
                     element.ScrollIntoView();
                     SelectElement comboCuentaOrigen = new SelectElement(element);
@@ -235,15 +251,15 @@ namespace Core.Selenium.Logic
                         comboCuentaOrigen.SelectByIndex(Convert.ToInt32(valor));
                     break;
 
-                case "open":
+                case Acciones.Open:
                     _driver.Url = comando.Target;
                     break;
 
-                case "screen":
-                    test?.Pass(comando.Target, _driver.TomarScreen());
+                case Acciones.Screen:
+                    test?.Info(comando.Target, _driver.TomarScreen());
                     break;
 
-                case "assertalert":
+                case Acciones.AssertAlert:
 
                     //Make sure the click above generates the alert
                     var textoAlerta = _driver.AssertAlert();
@@ -259,41 +275,43 @@ namespace Core.Selenium.Logic
 
                     break;
 
-                case "gettext":
+                case Acciones.GetText:
                     element = _driver.WaitFindElement(by);
                     var text = element.GetInnerText();
                     AddVarEjecution(comando.Value, text);
-                    test.Pass($"{text} = {comando.Value}");
+                    test.Info($"{comando.Orden}. Variable recuperada: {comando.Value} = {text}");
                     break;
 
                 case Acciones.GetValue:
                     element = _driver.WaitFindElement(by);
                     var valorElemento = element.GetValue();
                     AddVarEjecution(comando.Value, valorElemento);
+                    test.Info($"{comando.Orden}. Variable recuperada: {comando.Value} = {valorElemento}");
                     break;
 
                 case Acciones.GetTextLength:
                     element = _driver.WaitFindElement(by);
                     var longitudText = element.GetInnerText().Length.ToString();
                     AddVarEjecution(comando.Value, longitudText);
-                    test.Pass($"{comando.Value}:{longitudText}");
+                    test.Info($"{comando.Orden}. Variable recuperada: {comando.Value} = {longitudText}");
                     break;
 
                 case Acciones.GetValueLength:
                     element = _driver.WaitFindElement(by);
                     var longitudValor = element.GetValue().Length.ToString();
                     AddVarEjecution(comando.Value, longitudValor);
-                    test.Pass($"{comando.Value}:{longitudValor}");
+                    test.Info($"{comando.Orden}. Variable recuperada: {comando.Value} = {longitudValor}");
                     break;
 
                 case Acciones.GetIsVisible:
 
                     var isVisible = _driver.ElementIsVisible(by);
                     AddVarEjecution(comando.Value, isVisible.ToString().ToLower());
+                    test.Info($"{comando.Orden}. Variable recuperada: {comando.Value} = {isVisible.ToString().ToLower()}");
 
                     break;
 
-                case "wait":
+                case Acciones.Wait:
                     int tiempo;
                     if (int.TryParse(comando.Target, out tiempo))
                     {
@@ -301,26 +319,32 @@ namespace Core.Selenium.Logic
                     }
                     break;
 
-
-
                 case Acciones.TerminarSinError:
-                    test.Pass($"{Acciones.TerminarSinError} : {comando.Target}",_driver.TomarScreen());
+                    test.Pass($"{Acciones.TerminarSinError} : {comando.Target}", _driver.TomarScreen());
                     throw new EjecucionTerminadaException(comando.Target, false);
 
                 case Acciones.TerminarConError:
                     test.Pass($"{Acciones.TerminarConError} : {comando.Target}", _driver.TomarScreen());
                     throw new EjecucionTerminadaException(comando.Target, true);
 
-
+                default:
+                    throw new Exception($"Instrucción no reconozida: {comando.Command} - {comando.Tipo}");
             }
         }
 
+        /// <summary>
+        /// Guarda reporte de ejecución de pruebas
+        /// </summary>
         public void GuardarReporte()
         {
             _reporte.GuardarReporte();
         }
 
-
+        /// <summary>
+        /// Agrega varaibles de ejecución
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         private void AddVarEjecution(string key, string value)
         {
             if (variablesEjecucion.ContainsKey(key))
@@ -333,6 +357,9 @@ namespace Core.Selenium.Logic
             }
         }
 
+        /// <summary>
+        /// Limpia las varaibles de ejecución
+        /// </summary>
         public void LimpiarVaraiblesEjecucion()
         {
             this.variablesEjecucion = new Dictionary<string, string>();
