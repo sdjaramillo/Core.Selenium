@@ -1,15 +1,8 @@
 ﻿using AventStack.ExtentReports;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using RazorEngine.Compilation.ImpromptuInterface.Dynamic;
 using SeleniumExtras.WaitHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Core.Selenium.Helpers
 {
@@ -79,6 +72,31 @@ namespace Core.Selenium.Helpers
             {
                 WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
                 var element = w.Until(ExpectedConditions.ElementIsVisible(by));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool ElementIsEnabled(this IWebDriver driver, By by, int timeout = 10)
+        {
+            try
+            {
+                return WaitFindElement(driver, by, timeout).Enabled;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool TextIsPresent(this IWebDriver driver, string text, int timeout = 10)
+        {
+            try
+            {
+                var exist = WaitFindElement(driver, By.XPath($"//*[contains(text(),'{text}')]"));
                 return true;
             }
             catch (Exception)
@@ -218,7 +236,7 @@ namespace Core.Selenium.Helpers
             }
         }
 
-        public static string GetValue(this IWebElement element, bool trim=true)
+        public static string GetValue(this IWebElement element, bool trim = true)
         {
             try
             {

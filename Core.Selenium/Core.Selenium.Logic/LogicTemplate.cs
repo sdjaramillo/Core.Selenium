@@ -12,8 +12,7 @@ namespace Core.Selenium.Logic
     public class LogicTemplate
     {
         public static void EjecutarScript(ScriptBase script)
-        {
-            var x = SeleniumKeysHelpers.KEY_TAB;
+        {            
             IWebDriver driver;
             LogicBase logica = null;
 

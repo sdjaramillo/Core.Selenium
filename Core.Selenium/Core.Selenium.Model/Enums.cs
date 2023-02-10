@@ -57,6 +57,8 @@ namespace Core.Selenium.Model
         public const string Clickable = "clickable";
         public const string IsVisible = "isvisible";
         public const string Exist = "exist";
+        public const string IsEnabled = "isenabled";
+        public const string TextIsPresent = "textispresent";
     }
 
     public static class AccionesJS

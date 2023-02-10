@@ -196,10 +196,25 @@ namespace Core.Selenium.UI
         {
             var fd = new FolderBrowserDialog();
 
-            if (fd.ShowDialog()==DialogResult.OK)
+            if (fd.ShowDialog() == DialogResult.OK)
             {
                 _txtNombrePrueba.Text = $@"{fd.SelectedPath}\";
             }
+        }
+
+        private void eliminarFilaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var fila = _grdScript.SelectedRows;
+
+            foreach (DataGridViewRow f in fila)
+            {
+                _grdScript.Rows.Remove(f);
+            }
+        }
+
+        private void agregarFilaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _grdScript.Rows.Add();
         }
     }
 }

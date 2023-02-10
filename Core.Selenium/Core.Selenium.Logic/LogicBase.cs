@@ -159,7 +159,6 @@ namespace Core.Selenium.Logic
 
                         test.Info($"Resultado condición \"{cmd.Comment}\": {esVivisble}");
                         EvaluarResultadoCondicion(esVivisble, cmd, test);
-
                         break;
 
                     case Condiciones.Exist:
@@ -168,6 +167,25 @@ namespace Core.Selenium.Logic
                         var existe = _driver.CheckElementExist(splitTargetExist.By);
                         EvaluarResultadoCondicion(existe, cmd, test);
                         break;
+
+                    case Condiciones.IsEnabled:
+                        var splitTargetEnabled = SplitTarget.GetSplitTarget(cmd.Target); ;
+                        splitTargetEnabled.By = SeleniumHelpers.ObtenerIdentificador(splitTargetEnabled.Identificador, splitTargetEnabled.Valor);
+                        int timeOutEnabled;
+                        timeOutEnabled = int.TryParse(cmd.Value, out timeOutEnabled) ? timeOutEnabled : 10;
+                        bool esEnabled = _driver.ElementIsEnabled(splitTargetEnabled.By, timeOutEnabled);
+                        test.Info($"Resultado Condición \"{cmd.Comment}\": {esEnabled}");
+                        EvaluarResultadoCondicion(esEnabled, cmd, test);
+                        break;
+
+                    case Condiciones.TextIsPresent:
+                        int timeOutText = 0;
+                        timeOutText = int.TryParse(cmd.Value, out timeOutText) ? timeOutText : 10;
+                        bool textoPresente = _driver.TextIsPresent(cmd.Target);
+                        test.Info($"Resultado Condición \"{cmd.Comment}\" '{cmd.Target}': {textoPresente}");
+                        EvaluarResultadoCondicion(textoPresente, cmd, test);
+                        break;
+
                     default:
                         throw new Exception($"Instrucción no reconocida: {cmd?.Command} - {cmd?.Tipo}");
                 }

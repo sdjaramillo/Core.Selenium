@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this._tab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -42,6 +43,9 @@
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.clmComentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._menuGridScript = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.eliminarFilaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarFilaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this._grdSuites = new System.Windows.Forms.DataGridView();
@@ -66,6 +70,7 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._grdScript)).BeginInit();
+            this._menuGridScript.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._grdSuites)).BeginInit();
@@ -91,7 +96,6 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this._grdScript);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
@@ -113,7 +117,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(954, 283);
+            this.button1.Location = new System.Drawing.Point(794, 26);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -135,6 +139,7 @@
             this.dataGridViewCheckBoxColumn2,
             this.clmComentario,
             this.clmId});
+            this._grdScript.ContextMenuStrip = this._menuGridScript;
             this._grdScript.Location = new System.Drawing.Point(3, 3);
             this._grdScript.Name = "_grdScript";
             this._grdScript.RowTemplate.Height = 25;
@@ -196,6 +201,28 @@
             this.clmId.DataPropertyName = "id";
             this.clmId.HeaderText = "Id";
             this.clmId.Name = "clmId";
+            // 
+            // _menuGridScript
+            // 
+            this._menuGridScript.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eliminarFilaToolStripMenuItem,
+            this.agregarFilaToolStripMenuItem});
+            this._menuGridScript.Name = "_menuGridScript";
+            this._menuGridScript.Size = new System.Drawing.Size(139, 48);
+            // 
+            // eliminarFilaToolStripMenuItem
+            // 
+            this.eliminarFilaToolStripMenuItem.Name = "eliminarFilaToolStripMenuItem";
+            this.eliminarFilaToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.eliminarFilaToolStripMenuItem.Text = "Eliminar Fila";
+            this.eliminarFilaToolStripMenuItem.Click += new System.EventHandler(this.eliminarFilaToolStripMenuItem_Click);
+            // 
+            // agregarFilaToolStripMenuItem
+            // 
+            this.agregarFilaToolStripMenuItem.Name = "agregarFilaToolStripMenuItem";
+            this.agregarFilaToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.agregarFilaToolStripMenuItem.Text = "Agregar Fila";
+            this.agregarFilaToolStripMenuItem.Click += new System.EventHandler(this.agregarFilaToolStripMenuItem_Click);
             // 
             // tabPage2
             // 
@@ -374,6 +401,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 602);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnEmpezar);
             this.Controls.Add(this._txtNombrePrueba);
             this.Controls.Add(this.label1);
@@ -385,6 +413,7 @@
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._grdScript)).EndInit();
+            this._menuGridScript.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._grdSuites)).EndInit();
@@ -433,5 +462,8 @@
         private TabPage tabPage3;
         private RichTextBox _txtJson;
         private RichTextBox richTextBox1;
+        private ContextMenuStrip _menuGridScript;
+        private ToolStripMenuItem eliminarFilaToolStripMenuItem;
+        private ToolStripMenuItem agregarFilaToolStripMenuItem;
     }
 }

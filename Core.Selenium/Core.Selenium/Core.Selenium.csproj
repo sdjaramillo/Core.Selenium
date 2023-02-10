@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="RecuperarUsuario\**" />
+    <Compile Remove="TEST\**" />
+    <Content Remove="RecuperarUsuario\**" />
+    <Content Remove="TEST\**" />
+    <EmbeddedResource Remove="RecuperarUsuario\**" />
+    <EmbeddedResource Remove="TEST\**" />
+    <None Remove="RecuperarUsuario\**" />
+    <None Remove="TEST\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
