@@ -49,6 +49,7 @@ namespace Core.Selenium.Model
         public const string TerminarSinError = "terminarsinerror";
         public const string AssertAlert = "assertalert";
         public const string Wait = "wait";
+        public const string FindClick = "findclick";
     }
 
     public static class Condiciones

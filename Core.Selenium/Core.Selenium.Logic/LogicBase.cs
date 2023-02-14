@@ -9,6 +9,7 @@ using MongoDB.Driver;
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools.V107.Debugger;
 using OpenQA.Selenium.Support.UI;
+using RazorEngine.Compilation.ImpromptuInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -335,6 +336,13 @@ namespace Core.Selenium.Logic
                     {
                         Thread.Sleep(TimeSpan.FromSeconds(tiempo));
                     }
+                    break;
+
+                case Acciones.FindClick:
+
+                    var elementoClick = _driver.FindElements(by).FirstOrDefault(w => w.GetInnerText().Contains(comando.Value));
+                    elementoClick.ScrollIntoView();
+                    elementoClick.Click();
                     break;
 
                 case Acciones.TerminarSinError:

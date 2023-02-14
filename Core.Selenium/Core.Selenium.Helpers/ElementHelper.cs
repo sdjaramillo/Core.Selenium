@@ -65,7 +65,12 @@ namespace Core.Selenium.Helpers
             var element = w.Until(ExpectedConditions.ElementExists(by));
             return element;
         }
-
+        public static List<IWebElement> WaitFindElements(this IWebDriver driver, By by, int timeout = 10)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+            var elements = w.Until(ExpectedConditions.ElementExists(by));
+            return driver.FindElements(by).ToList();
+        }
         public static bool ElementIsVisible(this IWebDriver driver, By by, int timeout = 10)
         {
             try
@@ -144,6 +149,8 @@ namespace Core.Selenium.Helpers
 
             return element.FindElement(by);
         }
+
+
 
         /// <summary>
         /// Metodo para esperar hasta que un elemento pueda ser clickeado
