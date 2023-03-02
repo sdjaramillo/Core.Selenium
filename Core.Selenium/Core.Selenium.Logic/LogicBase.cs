@@ -1,25 +1,13 @@
 ﻿using AventStack.ExtentReports;
-using AventStack.ExtentReports.Model;
 using Core.Selenium.Helpers;
 using Core.Selenium.Model;
 using Core.Selenium.Model.Exepciones;
 using Core.Selenium.Report;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MongoDB.Driver;
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools.V107.Debugger;
 using OpenQA.Selenium.Support.UI;
-using RazorEngine.Compilation.ImpromptuInterface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Markup;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Core.Selenium.Logic
 {
@@ -28,6 +16,7 @@ namespace Core.Selenium.Logic
         private IWebDriver _driver { get; set; }
         private SeleniumReport _reporte { get; set; }
         private Dictionary<string, string> variablesEjecucion { get; set; }
+        private Dictionary<string, TablaBase> Tablas { get; set; } = new Dictionary<string, TablaBase>();
         public LogicBase(IWebDriver driver, string testName)
         {
             _driver = driver;
@@ -186,6 +175,12 @@ namespace Core.Selenium.Logic
                         test.Info($"Resultado Condición \"{cmd.Comment}\" '{cmd.Target}': {textoPresente}");
                         EvaluarResultadoCondicion(textoPresente, cmd, test);
                         break;
+                    case Condiciones.Table:
+
+                        var tabla = Tablas[cmd.Target];
+                        bool resultadoCondicionTabla = EvaluarCondicionTabla(tabla, cmd);
+                        EvaluarResultadoCondicion(resultadoCondicionTabla, cmd, test);
+                        break;
 
                     default:
                         throw new Exception($"Instrucción no reconocida: {cmd?.Command} - {cmd?.Tipo}");
@@ -199,6 +194,53 @@ namespace Core.Selenium.Logic
             {
                 throw new CondicionException(ex.Message);
             }
+        }
+
+        private bool EvaluarCondicionTabla(TablaBase tabla, Comando comando)
+        {
+            var parametros = comando.Value.Split(',');
+            var comandoTabla = parametros[0];
+
+            switch (comandoTabla)
+            {
+                case "rowCount":
+                    var operador = parametros[1];
+                    var valor = parametros[2];
+
+                    if (operador.Equals("="))
+                    {
+                        return tabla.TotalFilas == int.Parse(valor);
+                    }
+
+                    if (operador.Equals(">"))
+                    {
+                        return tabla.TotalFilas > int.Parse(valor);
+                    }
+
+                    if (operador.Equals("<"))
+                    {
+                        return tabla.TotalFilas < int.Parse(valor);
+                    }
+
+                    break;
+
+                case "containcolumns":
+                    var columnasBuscadas = parametros.Skip(1);
+                    foreach (var fila in tabla.Filas)
+                    {
+                        var keys = fila.Select(s => s.Key);
+                        var num = columnasBuscadas.Except(keys).Count();
+                        if (num > 0)
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                    break;
+
+            }
+
+            throw new Exception("Comando condición tabla no especificado");
         }
 
         /// <summary>
@@ -232,6 +274,10 @@ namespace Core.Selenium.Logic
             IWebElement element;
             switch (comando.Command.ToLower())
             {
+                case Acciones.Maximizar:
+                    _driver.Manage().Window.Maximize();
+                    break;
+
                 case Acciones.Type:
                     element = _driver.WaitFindElement(by);
                     element.ScrollIntoView();
@@ -352,6 +398,44 @@ namespace Core.Selenium.Logic
                 case Acciones.TerminarConError:
                     test.Pass($"{Acciones.TerminarConError} : {comando.Target}", _driver.TomarScreen());
                     throw new EjecucionTerminadaException(comando.Target, true);
+
+                case Acciones.InformacionTabla:
+
+                    var tabla = new TablaBase();
+
+                    var tablaElement = _driver.WaitFindElement(by);
+                    var columnas = tablaElement.WaitFindElement(By.TagName("thead")).FindElements(By.TagName("th"));
+                    var filas = tablaElement.WaitFindElement(By.TagName("tbody")).FindElements(By.TagName("tr"));
+
+                    foreach (var col in columnas)
+                    {
+                        tabla.Columnas.Add(col.GetInnerText());
+                    }
+
+                    foreach (var row in filas)
+                    {
+                        var rows = new Dictionary<string, string>();
+                        var celdas = row.FindElements(By.TagName("td"));
+                        for (int i = 0; i < tabla.TotalColumnas; i++)
+                        {
+                            string nombreColumna = tabla.Columnas[i];
+                            string valorCelda = celdas[i].GetInnerText();
+
+                            rows.Add(nombreColumna, valorCelda);
+                        }
+                        tabla.Filas.Add(rows);
+                    }
+
+                    if (Tablas.ContainsKey(comando.Value))
+                    {
+                        Tablas[comando.Value] = tabla;
+                    }
+                    else
+                    {
+                        Tablas.Add(comando.Value, tabla);
+                    }
+                    
+                    break;
 
                 default:
                     throw new Exception($"Instrucción no reconozida: {comando.Command} - {comando.Tipo}");

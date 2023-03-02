@@ -50,6 +50,8 @@ namespace Core.Selenium.Model
         public const string AssertAlert = "assertalert";
         public const string Wait = "wait";
         public const string FindClick = "findclick";
+        public const string Maximizar = "Maximizar";
+        public const string InformacionTabla = "informaciontabla";
     }
 
     public static class Condiciones
@@ -60,6 +62,7 @@ namespace Core.Selenium.Model
         public const string Exist = "exist";
         public const string IsEnabled = "isenabled";
         public const string TextIsPresent = "textispresent";
+        public const string Table = "table";
     }
 
     public static class AccionesJS

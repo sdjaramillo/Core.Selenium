@@ -44,6 +44,10 @@ namespace Core.Selenium.Helpers
                 case "classname":
 
                     return By.ClassName(valor);
+
+                case "link":
+
+                    return By.PartialLinkText(valor);
             }
 
             return null;
