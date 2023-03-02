@@ -39,6 +39,7 @@ namespace Core.Selenium.Logic
                             var variables = test;
                             var ListacomandosIterar = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Comando>>(jsonCommands);
                             var comandosIterar = ListacomandosIterar?.Where(w => w.Iterar).OrderBy(ord => ord.Orden).ToList();
+                            InyectarVariables(comandosIterar, data.SuiteVars);
                             InyectarVariables(comandosIterar, test);
 
                             if (comandosIterar?.Count > 0) logica.EjecutarComandos(comandosIterar, testName: data.NombrePrueba);
