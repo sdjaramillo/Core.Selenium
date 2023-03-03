@@ -11,12 +11,36 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Core.Selenium.Logic
 {
+    /// <summary>
+    /// Clase encargada de manejar
+    /// </summary>
     public class LogicBase
     {
+        /// <summary>
+        /// Driver Chromium
+        /// </summary>
         private IWebDriver _driver { get; set; }
+
+        /// <summary>
+        /// Clase para generar reporte de ejecución
+        /// </summary>
         private SeleniumReport _reporte { get; set; }
+
+        /// <summary>
+        /// Diccionario para variables de ejecución
+        /// </summary>
         private Dictionary<string, string> variablesEjecucion { get; set; }
+
+        /// <summary>
+        /// Variable para guardar información de tablas.
+        /// </summary>
         private Dictionary<string, TablaBase> Tablas { get; set; } = new Dictionary<string, TablaBase>();
+
+        /// <summary>
+        /// Constructor que recibe instancia de driver
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="testName"></param>
         public LogicBase(IWebDriver driver, string testName)
         {
             _driver = driver;
@@ -24,6 +48,15 @@ namespace Core.Selenium.Logic
             variablesEjecucion = new Dictionary<string, string>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="comandosEjecutar"></param>
+        /// <param name="test"></param>
+        /// <param name="screenIteration"></param>
+        /// <param name="testName"></param>
+        /// <exception cref="CondicionException"></exception>
+        /// <exception cref="Exception"></exception>
         public void EjecutarComandos(List<Comando> comandosEjecutar, ExtentTest test = null, bool screenIteration = true, string? testName = null)
         {
             test = (test == null) ? _reporte.CrearTest($"{testName ?? "test"}") : test.CreateNode(testName ?? "test", "Detalle:");
@@ -79,14 +112,23 @@ namespace Core.Selenium.Logic
             AgregarVariablesEjecucion(test, variablesEjecucion);
         }
 
+        /// <summary>
+        /// Agrega variables de la ejecución
+        /// </summary>
+        /// <param name="test"></param>
+        /// <param name="variablesEjecucion"></param>
         private void AgregarVariablesEjecucion(ExtentTest test, Dictionary<string, string> variablesEjecucion)
         {
-            if (!test.Model.IsChild)
+            if (!test.Model.IsChild && variablesEjecucion.Count>0)
             {
                 test.AgregarDatosEjecucion(variablesEjecucion, "Variables Recuperadas");
             }
         }
 
+        /// <summary>
+        /// Metodo encargado de manejar los comandos de tipo JS
+        /// </summary>
+        /// <param name="cmd"></param>
         private void EvaluarScript(Comando cmd)
         {
             var js = (IJavaScriptExecutor)_driver;
@@ -110,6 +152,12 @@ namespace Core.Selenium.Logic
             }
         }
 
+        /// <summary>
+        /// Metodo para evaluar los comandos de tipo condición
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <param name="test"></param>
+        /// <exception cref="CondicionException"></exception>
         private void EvaluarCondicion(Comando cmd, ExtentTest test)
         {
             try
@@ -178,7 +226,7 @@ namespace Core.Selenium.Logic
                     case Condiciones.Table:
 
                         var tabla = Tablas[cmd.Target];
-                        bool resultadoCondicionTabla = EvaluarCondicionTabla(tabla, cmd);
+                        bool resultadoCondicionTabla = EvaluarCondicionTabla(tabla, cmd, test);
                         EvaluarResultadoCondicion(resultadoCondicionTabla, cmd, test);
                         break;
 
@@ -196,7 +244,15 @@ namespace Core.Selenium.Logic
             }
         }
 
-        private bool EvaluarCondicionTabla(TablaBase tabla, Comando comando)
+        /// <summary>
+        /// Metodo para evaluar los comandos de tipo tabla
+        /// </summary>
+        /// <param name="tabla"></param>
+        /// <param name="comando"></param>
+        /// <param name="test"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        private bool EvaluarCondicionTabla(TablaBase tabla, Comando comando, ExtentTest test)
         {
             var parametros = comando.Value.Split(',');
             var comandoTabla = parametros[0];
@@ -230,10 +286,17 @@ namespace Core.Selenium.Logic
                     {
                         var keys = fila.Select(s => s.Key);
                         var num = columnasBuscadas.Except(keys).Count();
+                        string rowInfo = string.Empty;
+                        fila.ToList().ForEach(f =>
+                        {
+                            rowInfo += $" {f.Key}:{f.Value}";
+
+                        });
                         if (num > 0)
                         {
                             return false;
                         }
+                        test.Pass(rowInfo);
                     }
                     return true;
                     break;
@@ -311,6 +374,7 @@ namespace Core.Selenium.Logic
                     if (tag == "label")
                         comboCuentaOrigen.SelectByText(valor, true);
                     if (tag == "value")
+
                         comboCuentaOrigen.SelectByValue(valor);
                     if (tag == "index")
                         comboCuentaOrigen.SelectByIndex(Convert.ToInt32(valor));
@@ -325,8 +389,7 @@ namespace Core.Selenium.Logic
                     break;
 
                 case Acciones.AssertAlert:
-
-                    //Make sure the click above generates the alert
+                    
                     var textoAlerta = _driver.AssertAlert();
                     if (!textoAlerta.Contains(comando.Target))
                     {
@@ -409,7 +472,8 @@ namespace Core.Selenium.Logic
 
                     foreach (var col in columnas)
                     {
-                        tabla.Columnas.Add(col.GetInnerText());
+                        if (!string.IsNullOrEmpty(col.GetInnerText()))
+                            tabla.Columnas.Add(col.GetInnerText());
                     }
 
                     foreach (var row in filas)
@@ -434,7 +498,7 @@ namespace Core.Selenium.Logic
                     {
                         Tablas.Add(comando.Value, tabla);
                     }
-                    
+
                     break;
 
                 default:

@@ -9,10 +9,14 @@ using System.Threading.Tasks;
 
 namespace Core.Selenium.Logic
 {
-    public class LogicTemplate
+    public static class LogicTemplate
     {
+        /// <summary>
+        /// Plantilla base para ejecución de script de automatización
+        /// </summary>
+        /// <param name="script">script con los comandos y datos de prueba</param>
         public static void EjecutarScript(ScriptBase script)
-        {            
+        {
             IWebDriver driver;
             LogicBase logica = null;
 
@@ -62,6 +66,11 @@ namespace Core.Selenium.Logic
             logica?.GuardarReporte();
         }
 
+        /// <summary>
+        /// Metodo que ayuda a inyectar varaibles de ejecución en los comandos
+        /// </summary>
+        /// <param name="comandos"></param>
+        /// <param name="variables"></param>
         private static void InyectarVariables(List<Comando> comandos, Dictionary<string, string> variables)
         {
             comandos.ForEach(f =>

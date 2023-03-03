@@ -147,40 +147,7 @@ namespace Core.Selenium.UI
 
 
             var json = JsonConvert.SerializeObject(script);
-            _txtJson.Text = json;
-            //LogicTemplate.EjecutarScript(script);
-
-            //script.ScriptData = new ParametroScript();
-
-
-
-            //foreach (DataGridViewRow row in _grdDatosExternos.Rows)
-            //{
-            //    var key = row.Cells[clmKey.Index].Value ?? string.Empty;
-            //    var valor = row.Cells[clmValue.Index].Value ?? string.Empty;
-            //    var test = row.Cells[clmTestInicio.Index].Value ?? string.Empty;
-
-            //    if (!string.IsNullOrEmpty(key.ToString()) && !string.IsNullOrEmpty(valor.ToString()) && !string.IsNullOrEmpty(test.ToString()))
-            //    {
-            //        VariablesInicio.Add(new Tuple<string, string, string>(key.ToString(), valor.ToString(), test.ToString()));
-            //    }
-            //}
-
-            //if (VariablesInicio.Count > 0)
-            //{
-
-            //}
-            //else
-            //{
-            //    script.ScriptData.DataTest = new DataTest[] {
-            //        new DataTest{
-
-            //        }
-            //    };
-            //}
-
-            //_grdScript.Refresh();
-
+            _txtJson.Text = json;            
         }
 
         private void button2_Click(object sender, EventArgs e)

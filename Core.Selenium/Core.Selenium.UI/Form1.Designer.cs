@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this._tab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this._grdScript = new System.Windows.Forms.DataGridView();
             this.clmOrden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmCommand = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +54,7 @@
             this._grdDatosExternos = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this._txtJson = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.clmIterar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.clmEjecutarFin = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.clmInicio = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -68,7 +67,6 @@
             this.btnEmpezar = new System.Windows.Forms.Button();
             this._tab.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._grdScript)).BeginInit();
             this._menuGridScript.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -95,7 +93,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this._grdScript);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
@@ -104,26 +101,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Script";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 322);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(1032, 196);
-            this.dataGridView1.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(794, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Cargar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // _grdScript
             // 
@@ -143,7 +120,7 @@
             this._grdScript.Location = new System.Drawing.Point(3, 3);
             this._grdScript.Name = "_grdScript";
             this._grdScript.RowTemplate.Height = 25;
-            this._grdScript.Size = new System.Drawing.Size(1029, 313);
+            this._grdScript.Size = new System.Drawing.Size(1029, 509);
             this._grdScript.TabIndex = 0;
             // 
             // clmOrden
@@ -330,6 +307,17 @@
             this._txtJson.TabIndex = 1;
             this._txtJson.Text = "";
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(572, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Cargar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // clmIterar
             // 
             this.clmIterar.HeaderText = "Iterar";
@@ -388,7 +376,7 @@
             // 
             // btnEmpezar
             // 
-            this.btnEmpezar.Location = new System.Drawing.Point(973, 26);
+            this.btnEmpezar.Location = new System.Drawing.Point(973, 5);
             this.btnEmpezar.Name = "btnEmpezar";
             this.btnEmpezar.Size = new System.Drawing.Size(75, 23);
             this.btnEmpezar.TabIndex = 3;
@@ -411,7 +399,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this._tab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._grdScript)).EndInit();
             this._menuGridScript.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -458,7 +445,6 @@
         private Button button2;
         private DataGridViewTextBoxColumn clmKey;
         private DataGridViewTextBoxColumn clmValue;
-        private DataGridView dataGridView1;
         private TabPage tabPage3;
         private RichTextBox _txtJson;
         private RichTextBox richTextBox1;
