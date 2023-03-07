@@ -19,7 +19,7 @@ namespace Core.Selenium.Controllers
         public IActionResult EjecutarScriptSesion([FromBody] ScriptBase script)
         {
             LogicTemplate.EjecutarScript(script);
-            return Ok();
+            return Ok("Ejecución Finalizada");
         }
     }
 }

@@ -9407,7 +9407,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\usrtqaon\\.nuget\\packages\\": {}
+    "C:\\Users\\diego\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -9415,11 +9415,11 @@
       "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
       "projectName": "Core.Selenium.Logic",
       "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
-      "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
       "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9480,7 +9480,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

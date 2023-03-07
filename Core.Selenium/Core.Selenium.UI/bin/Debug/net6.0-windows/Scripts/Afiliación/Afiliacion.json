@@ -1,0 +1,153 @@
+{
+  "Nombre": "Afiliacion",
+  "Comandos": [
+    {
+      "Id": "1",
+      "Orden": 0,
+      "Command": "type",
+      "Comment": "",
+      "Target": "id=numero-cedula",
+      "Value": "{cedula}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "1",
+      "Orden": 1,
+      "Command": "sendkeys",
+      "Comment": "",
+      "Target": "id=numero-cedula",
+      "Value": "${KEY_TAB}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "1",
+      "Orden": 2,
+      "Command": "isvisible",
+      "Comment": "",
+      "Target": "id=error-identificacion",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [
+        {
+          "Id": "Condición Verdadero",
+          "Orden": 1,
+          "Command": "terminarconerror",
+          "Comment": "Existe validación de cédula",
+          "Target": "Existe validación de cédula",
+          "Value": "Existe validación de cédula",
+          "Tipo": "comando",
+          "InicioSesion": false,
+          "FinSesion": false,
+          "Iterar": true,
+          "ComandosVerdadero": [],
+          "ComandosFalso": []
+        }
+      ],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "2",
+      "Orden": 3,
+      "Command": "type",
+      "Comment": "Ingresa pin 1 de TD",
+      "Target": "id=Pin1",
+      "Value": "{pin1}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": false,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "PIN 2",
+      "Orden": 4,
+      "Command": "type",
+      "Comment": "Ingresa pin 2 de TD",
+      "Target": "id=Pin2",
+      "Value": "{pin2}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": false,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "PIN 3",
+      "Orden": 5,
+      "Command": "type",
+      "Comment": "Ingresa pin 3 de TD",
+      "Target": "id=Pin3",
+      "Value": "{pin3}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": false,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "PIN 4",
+      "Orden": 6,
+      "Command": "type",
+      "Comment": "Ingresa pin 4 de TD",
+      "Target": "id=Pin4",
+      "Value": "{pin4}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": false,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    }
+  ],
+  "ScriptData": {
+    "url": "https://bgrdigital-test.bgr.com.ec/Afiliacion/Index",
+    "driver": "chrome",
+    "dataTest": [
+      {
+        "nombrePrueba": "Afiliacion",
+        "suiteVars": {
+          "usuario": "test1",
+          "clave": "admin",
+          "otro": "otro"
+        },
+        "testsVars": [
+          {
+            "cedula": "090115169",
+            "pin1": "3",
+            "pin2": "3",
+            "pin3": "0",
+            "pin4": "2"
+          },
+          {
+            "cedula": "090115169",
+            "pin1": "3",
+            "pin2": "3",
+            "pin3": "0",
+            "pin4": "2"
+          },
+          {
+            "cedula": "090115169",
+            "nombre": "",
+            "apellido": ""
+          }
+        ]
+      }
+    ]
+  }
+}

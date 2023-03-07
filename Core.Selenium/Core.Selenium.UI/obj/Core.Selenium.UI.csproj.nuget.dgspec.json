@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
         "projectName": "Core.Selenium.Helpers",
         "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
-        "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
         "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -77,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -87,11 +87,11 @@
         "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
         "projectName": "Core.Selenium.Logic",
         "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
-        "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
         "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -152,7 +152,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -162,11 +162,11 @@
         "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
         "projectName": "Core.Selenium.Model",
         "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
-        "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
         "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -221,7 +221,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -231,11 +231,11 @@
         "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
         "projectName": "Core.Selenium.Report",
         "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
-        "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
         "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -282,7 +282,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -292,11 +292,11 @@
         "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj",
         "projectName": "Core.Selenium.UI",
         "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj",
-        "packagesPath": "C:\\Users\\usrtqaon\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
         "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\usrtqaon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -353,7 +353,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

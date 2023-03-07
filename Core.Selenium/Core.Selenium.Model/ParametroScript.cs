@@ -27,7 +27,7 @@ namespace Core.Selenium.Model
         [JsonProperty("suiteVars")]
         public Dictionary<string, string> SuiteVars { get; set; }
 
-        [JsonProperty("tests")]
+        [JsonProperty("testsVars")]
         public List<Dictionary<string, string>> TestsVars { get; set; }
     }
 

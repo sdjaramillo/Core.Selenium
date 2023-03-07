@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Ui63LJ+Kf8/01M6IVV0YS6oNKxmPiXGSVJdAXi7L6S9jwcNuztuD3wnaejUAJZOBxXECqBv1C/MtgMkVW4WSIg==",
+  "dgSpecHash": "GYLFZYKBCCB4w0Aqa+jvbMRPiZpZ39us0EBqUOW85e1vsliz9PWZWTQpbxyrMviGvkEGmMCNV93uhLvyiz4Oyw==",
   "success": true,
   "projectFilePath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\usrtqaon\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
-    "C:\\Users\\usrtqaon\\.nuget\\packages\\selenium.support\\4.8.0\\selenium.support.4.8.0.nupkg.sha512",
-    "C:\\Users\\usrtqaon\\.nuget\\packages\\selenium.webdriver\\4.8.0\\selenium.webdriver.4.8.0.nupkg.sha512"
+    "C:\\Users\\diego\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
+    "C:\\Users\\diego\\.nuget\\packages\\selenium.support\\4.8.0\\selenium.support.4.8.0.nupkg.sha512",
+    "C:\\Users\\diego\\.nuget\\packages\\selenium.webdriver\\4.8.0\\selenium.webdriver.4.8.0.nupkg.sha512"
   ],
   "logs": []
 }

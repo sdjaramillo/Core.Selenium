@@ -28,388 +28,464 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this._tab = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this._grdScript = new System.Windows.Forms.DataGridView();
-            this.clmOrden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmCommand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.clmEjecutarFinal = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.clmComentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._menuGridScript = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.eliminarFilaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.agregarFilaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this._grdSuites = new System.Windows.Forms.DataGridView();
-            this.clmKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this._grdDatosExternos = new System.Windows.Forms.DataGridView();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this._txtJson = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.clmIterar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.clmEjecutarFin = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.clmInicio = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.clmScriptValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmScriptTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmScriptCommand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmScriptId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this._txtNombrePrueba = new System.Windows.Forms.TextBox();
-            this.btnEmpezar = new System.Windows.Forms.Button();
-            this._tab.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._grdScript)).BeginInit();
-            this._menuGridScript.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._grdSuites)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._grdDatosExternos)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            _tab = new TabControl();
+            tabPage1 = new TabPage();
+            _grdScript = new DataGridView();
+            clmOrden = new DataGridViewTextBoxColumn();
+            clmCommand = new DataGridViewTextBoxColumn();
+            clmTarget = new DataGridViewTextBoxColumn();
+            clmValor = new DataGridViewTextBoxColumn();
+            dataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
+            clmEjecutarFinal = new DataGridViewCheckBoxColumn();
+            dataGridViewCheckBoxColumn2 = new DataGridViewCheckBoxColumn();
+            clmComentario = new DataGridViewTextBoxColumn();
+            clmId = new DataGridViewTextBoxColumn();
+            _menuGridScript = new ContextMenuStrip(components);
+            eliminarFilaToolStripMenuItem = new ToolStripMenuItem();
+            agregarFilaToolStripMenuItem = new ToolStripMenuItem();
+            tabPage2 = new TabPage();
+            groupBox2 = new GroupBox();
+            _grdSuites = new DataGridView();
+            clmKey = new DataGridViewTextBoxColumn();
+            clmValue = new DataGridViewTextBoxColumn();
+            groupBox1 = new GroupBox();
+            button2 = new Button();
+            _grdDatosExternos = new DataGridView();
+            tabPage3 = new TabPage();
+            _txtJson = new RichTextBox();
+            clmIterar = new DataGridViewCheckBoxColumn();
+            clmEjecutarFin = new DataGridViewCheckBoxColumn();
+            clmInicio = new DataGridViewCheckBoxColumn();
+            clmScriptValor = new DataGridViewTextBoxColumn();
+            clmScriptTarget = new DataGridViewTextBoxColumn();
+            clmScriptCommand = new DataGridViewTextBoxColumn();
+            clmScriptId = new DataGridViewTextBoxColumn();
+            treeView1 = new TreeView();
+            _mnuTree = new ContextMenuStrip(components);
+            actualizarToolStripMenuItem = new ToolStripMenuItem();
+            statusStrip1 = new StatusStrip();
+            toolStripDropDownButton2 = new ToolStripDropDownButton();
+            generarScriptToolStripMenuItem = new ToolStripMenuItem();
+            guardarToolStripMenuItem = new ToolStripMenuItem();
+            toolStripDropDownButton1 = new ToolStripDropDownButton();
+            chromeToolStripMenuItem = new ToolStripMenuItem();
+            edgeToolStripMenuItem = new ToolStripMenuItem();
+            _txtUrl = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            _txtNombreTest = new TextBox();
+            _tab.SuspendLayout();
+            tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)_grdScript).BeginInit();
+            _menuGridScript.SuspendLayout();
+            tabPage2.SuspendLayout();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)_grdSuites).BeginInit();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)_grdDatosExternos).BeginInit();
+            tabPage3.SuspendLayout();
+            _mnuTree.SuspendLayout();
+            statusStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // _tab
             // 
-            this._tab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._tab.Controls.Add(this.tabPage1);
-            this._tab.Controls.Add(this.tabPage2);
-            this._tab.Controls.Add(this.tabPage3);
-            this._tab.Location = new System.Drawing.Point(12, 44);
-            this._tab.Name = "_tab";
-            this._tab.SelectedIndex = 0;
-            this._tab.Size = new System.Drawing.Size(1043, 546);
-            this._tab.TabIndex = 0;
+            _tab.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            _tab.Controls.Add(tabPage1);
+            _tab.Controls.Add(tabPage2);
+            _tab.Controls.Add(tabPage3);
+            _tab.Location = new Point(280, 58);
+            _tab.Name = "_tab";
+            _tab.SelectedIndex = 0;
+            _tab.Size = new Size(758, 652);
+            _tab.TabIndex = 0;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this._grdScript);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1035, 518);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Script";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Controls.Add(_grdScript);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(750, 624);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Script";
+            tabPage1.UseVisualStyleBackColor = true;
             // 
             // _grdScript
             // 
-            this._grdScript.AllowUserToAddRows = false;
-            this._grdScript.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._grdScript.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmOrden,
-            this.clmCommand,
-            this.clmTarget,
-            this.clmValor,
-            this.dataGridViewCheckBoxColumn1,
-            this.clmEjecutarFinal,
-            this.dataGridViewCheckBoxColumn2,
-            this.clmComentario,
-            this.clmId});
-            this._grdScript.ContextMenuStrip = this._menuGridScript;
-            this._grdScript.Location = new System.Drawing.Point(3, 3);
-            this._grdScript.Name = "_grdScript";
-            this._grdScript.RowTemplate.Height = 25;
-            this._grdScript.Size = new System.Drawing.Size(1029, 509);
-            this._grdScript.TabIndex = 0;
+            _grdScript.AllowUserToAddRows = false;
+            _grdScript.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            _grdScript.Columns.AddRange(new DataGridViewColumn[] { clmOrden, clmCommand, clmTarget, clmValor, dataGridViewCheckBoxColumn1, clmEjecutarFinal, dataGridViewCheckBoxColumn2, clmComentario, clmId });
+            _grdScript.ContextMenuStrip = _menuGridScript;
+            _grdScript.Dock = DockStyle.Fill;
+            _grdScript.Location = new Point(3, 3);
+            _grdScript.Name = "_grdScript";
+            _grdScript.RowTemplate.Height = 25;
+            _grdScript.Size = new Size(744, 618);
+            _grdScript.TabIndex = 0;
             // 
             // clmOrden
             // 
-            this.clmOrden.DataPropertyName = "Orden";
-            this.clmOrden.HeaderText = "Orden";
-            this.clmOrden.Name = "clmOrden";
+            clmOrden.DataPropertyName = "Orden";
+            clmOrden.HeaderText = "Orden";
+            clmOrden.Name = "clmOrden";
             // 
             // clmCommand
             // 
-            this.clmCommand.DataPropertyName = "command";
-            this.clmCommand.HeaderText = "Comando";
-            this.clmCommand.Name = "clmCommand";
+            clmCommand.DataPropertyName = "command";
+            clmCommand.HeaderText = "Comando";
+            clmCommand.Name = "clmCommand";
             // 
             // clmTarget
             // 
-            this.clmTarget.DataPropertyName = "target";
-            this.clmTarget.HeaderText = "Target";
-            this.clmTarget.Name = "clmTarget";
+            clmTarget.DataPropertyName = "target";
+            clmTarget.HeaderText = "Target";
+            clmTarget.Name = "clmTarget";
             // 
             // clmValor
             // 
-            this.clmValor.DataPropertyName = "value";
-            this.clmValor.HeaderText = "Valor";
-            this.clmValor.Name = "clmValor";
+            clmValor.DataPropertyName = "value";
+            clmValor.HeaderText = "Valor";
+            clmValor.Name = "clmValor";
             // 
             // dataGridViewCheckBoxColumn1
             // 
-            this.dataGridViewCheckBoxColumn1.DataPropertyName = "InicioSesion";
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Ejecutar Inicio";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            dataGridViewCheckBoxColumn1.DataPropertyName = "InicioSesion";
+            dataGridViewCheckBoxColumn1.HeaderText = "Ejecutar Inicio";
+            dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            dataGridViewCheckBoxColumn1.Resizable = DataGridViewTriState.True;
+            dataGridViewCheckBoxColumn1.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // clmEjecutarFinal
             // 
-            this.clmEjecutarFinal.DataPropertyName = "FinSesion";
-            this.clmEjecutarFinal.HeaderText = "Ejecutar Final";
-            this.clmEjecutarFinal.Name = "clmEjecutarFinal";
+            clmEjecutarFinal.DataPropertyName = "FinSesion";
+            clmEjecutarFinal.HeaderText = "Ejecutar Final";
+            clmEjecutarFinal.Name = "clmEjecutarFinal";
             // 
             // dataGridViewCheckBoxColumn2
             // 
-            this.dataGridViewCheckBoxColumn2.DataPropertyName = "Iterar";
-            this.dataGridViewCheckBoxColumn2.HeaderText = "Iterar";
-            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+            dataGridViewCheckBoxColumn2.DataPropertyName = "Iterar";
+            dataGridViewCheckBoxColumn2.HeaderText = "Iterar";
+            dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
             // 
             // clmComentario
             // 
-            this.clmComentario.DataPropertyName = "comment";
-            this.clmComentario.HeaderText = "Comentario";
-            this.clmComentario.Name = "clmComentario";
+            clmComentario.DataPropertyName = "comment";
+            clmComentario.HeaderText = "Comentario";
+            clmComentario.Name = "clmComentario";
             // 
             // clmId
             // 
-            this.clmId.DataPropertyName = "id";
-            this.clmId.HeaderText = "Id";
-            this.clmId.Name = "clmId";
+            clmId.DataPropertyName = "id";
+            clmId.HeaderText = "Id";
+            clmId.Name = "clmId";
             // 
             // _menuGridScript
             // 
-            this._menuGridScript.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.eliminarFilaToolStripMenuItem,
-            this.agregarFilaToolStripMenuItem});
-            this._menuGridScript.Name = "_menuGridScript";
-            this._menuGridScript.Size = new System.Drawing.Size(139, 48);
+            _menuGridScript.Items.AddRange(new ToolStripItem[] { eliminarFilaToolStripMenuItem, agregarFilaToolStripMenuItem });
+            _menuGridScript.Name = "_menuGridScript";
+            _menuGridScript.Size = new Size(139, 48);
             // 
             // eliminarFilaToolStripMenuItem
             // 
-            this.eliminarFilaToolStripMenuItem.Name = "eliminarFilaToolStripMenuItem";
-            this.eliminarFilaToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.eliminarFilaToolStripMenuItem.Text = "Eliminar Fila";
-            this.eliminarFilaToolStripMenuItem.Click += new System.EventHandler(this.eliminarFilaToolStripMenuItem_Click);
+            eliminarFilaToolStripMenuItem.Name = "eliminarFilaToolStripMenuItem";
+            eliminarFilaToolStripMenuItem.Size = new Size(138, 22);
+            eliminarFilaToolStripMenuItem.Text = "Eliminar Fila";
+            eliminarFilaToolStripMenuItem.Click += eliminarFilaToolStripMenuItem_Click;
             // 
             // agregarFilaToolStripMenuItem
             // 
-            this.agregarFilaToolStripMenuItem.Name = "agregarFilaToolStripMenuItem";
-            this.agregarFilaToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.agregarFilaToolStripMenuItem.Text = "Agregar Fila";
-            this.agregarFilaToolStripMenuItem.Click += new System.EventHandler(this.agregarFilaToolStripMenuItem_Click);
+            agregarFilaToolStripMenuItem.Name = "agregarFilaToolStripMenuItem";
+            agregarFilaToolStripMenuItem.Size = new Size(138, 22);
+            agregarFilaToolStripMenuItem.Text = "Agregar Fila";
+            agregarFilaToolStripMenuItem.Click += agregarFilaToolStripMenuItem_Click;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1035, 518);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Datos Externos";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            tabPage2.Controls.Add(groupBox2);
+            tabPage2.Controls.Add(groupBox1);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(750, 624);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Datos Externos";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this._grdSuites);
-            this.groupBox2.Location = new System.Drawing.Point(6, 270);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1023, 167);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Variables Inicio/fin";
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(_grdSuites);
+            groupBox2.Location = new Point(6, 270);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(738, 243);
+            groupBox2.TabIndex = 2;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Variables Globales";
             // 
             // _grdSuites
             // 
-            this._grdSuites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._grdSuites.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmKey,
-            this.clmValue});
-            this._grdSuites.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._grdSuites.Location = new System.Drawing.Point(3, 19);
-            this._grdSuites.Name = "_grdSuites";
-            this._grdSuites.RowTemplate.Height = 25;
-            this._grdSuites.Size = new System.Drawing.Size(1017, 145);
-            this._grdSuites.TabIndex = 0;
+            _grdSuites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            _grdSuites.Columns.AddRange(new DataGridViewColumn[] { clmKey, clmValue });
+            _grdSuites.Dock = DockStyle.Fill;
+            _grdSuites.Location = new Point(3, 19);
+            _grdSuites.Name = "_grdSuites";
+            _grdSuites.RowTemplate.Height = 25;
+            _grdSuites.Size = new Size(732, 221);
+            _grdSuites.TabIndex = 0;
             // 
             // clmKey
             // 
-            this.clmKey.HeaderText = "Nombre";
-            this.clmKey.Name = "clmKey";
-            this.clmKey.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            clmKey.HeaderText = "Nombre";
+            clmKey.Name = "clmKey";
+            clmKey.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // clmValue
             // 
-            this.clmValue.HeaderText = "Valor";
-            this.clmValue.Name = "clmValue";
-            this.clmValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            clmValue.HeaderText = "Valor";
+            clmValue.Name = "clmValue";
+            clmValue.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this._grdDatosExternos);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1023, 261);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datos Externos";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(button2);
+            groupBox1.Controls.Add(_grdDatosExternos);
+            groupBox1.Location = new Point(6, 6);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(735, 261);
+            groupBox1.TabIndex = 1;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Variables";
             // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(942, 232);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Cargar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button2.Location = new Point(654, 215);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 1;
+            button2.Text = "Cargar";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // _grdDatosExternos
             // 
-            this._grdDatosExternos.AllowUserToAddRows = false;
-            this._grdDatosExternos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._grdDatosExternos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._grdDatosExternos.Location = new System.Drawing.Point(3, 19);
-            this._grdDatosExternos.Name = "_grdDatosExternos";
-            this._grdDatosExternos.RowTemplate.Height = 25;
-            this._grdDatosExternos.Size = new System.Drawing.Size(1017, 239);
-            this._grdDatosExternos.TabIndex = 0;
+            _grdDatosExternos.AllowUserToAddRows = false;
+            _grdDatosExternos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            _grdDatosExternos.Dock = DockStyle.Fill;
+            _grdDatosExternos.Location = new Point(3, 19);
+            _grdDatosExternos.Name = "_grdDatosExternos";
+            _grdDatosExternos.RowTemplate.Height = 25;
+            _grdDatosExternos.Size = new Size(729, 239);
+            _grdDatosExternos.TabIndex = 0;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this._txtJson);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1035, 518);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Petición";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            tabPage3.Controls.Add(_txtJson);
+            tabPage3.Location = new Point(4, 24);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(750, 624);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Petición";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
             // _txtJson
             // 
-            this._txtJson.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._txtJson.Location = new System.Drawing.Point(3, 3);
-            this._txtJson.Name = "_txtJson";
-            this._txtJson.Size = new System.Drawing.Size(1029, 512);
-            this._txtJson.TabIndex = 1;
-            this._txtJson.Text = "";
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(572, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Cargar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            _txtJson.Dock = DockStyle.Fill;
+            _txtJson.Location = new Point(3, 3);
+            _txtJson.Name = "_txtJson";
+            _txtJson.Size = new Size(744, 618);
+            _txtJson.TabIndex = 1;
+            _txtJson.Text = "";
             // 
             // clmIterar
             // 
-            this.clmIterar.HeaderText = "Iterar";
-            this.clmIterar.Name = "clmIterar";
+            clmIterar.HeaderText = "Iterar";
+            clmIterar.Name = "clmIterar";
             // 
             // clmEjecutarFin
             // 
-            this.clmEjecutarFin.HeaderText = "Ejecutar Fin";
-            this.clmEjecutarFin.Name = "clmEjecutarFin";
+            clmEjecutarFin.HeaderText = "Ejecutar Fin";
+            clmEjecutarFin.Name = "clmEjecutarFin";
             // 
             // clmInicio
             // 
-            this.clmInicio.HeaderText = "Ejecutar Inicio";
-            this.clmInicio.Name = "clmInicio";
+            clmInicio.HeaderText = "Ejecutar Inicio";
+            clmInicio.Name = "clmInicio";
             // 
             // clmScriptValor
             // 
-            this.clmScriptValor.DataPropertyName = "value";
-            this.clmScriptValor.HeaderText = "Valor";
-            this.clmScriptValor.Name = "clmScriptValor";
+            clmScriptValor.DataPropertyName = "value";
+            clmScriptValor.HeaderText = "Valor";
+            clmScriptValor.Name = "clmScriptValor";
             // 
             // clmScriptTarget
             // 
-            this.clmScriptTarget.DataPropertyName = "target";
-            this.clmScriptTarget.HeaderText = "Target";
-            this.clmScriptTarget.Name = "clmScriptTarget";
+            clmScriptTarget.DataPropertyName = "target";
+            clmScriptTarget.HeaderText = "Target";
+            clmScriptTarget.Name = "clmScriptTarget";
             // 
             // clmScriptCommand
             // 
-            this.clmScriptCommand.DataPropertyName = "command";
-            this.clmScriptCommand.HeaderText = "Comando";
-            this.clmScriptCommand.Name = "clmScriptCommand";
+            clmScriptCommand.DataPropertyName = "command";
+            clmScriptCommand.HeaderText = "Comando";
+            clmScriptCommand.Name = "clmScriptCommand";
             // 
             // clmScriptId
             // 
-            this.clmScriptId.DataPropertyName = "id";
-            this.clmScriptId.HeaderText = "Id";
-            this.clmScriptId.Name = "clmScriptId";
+            clmScriptId.DataPropertyName = "id";
+            clmScriptId.HeaderText = "Id";
+            clmScriptId.Name = "clmScriptId";
+            // 
+            // treeView1
+            // 
+            treeView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            treeView1.ContextMenuStrip = _mnuTree;
+            treeView1.Location = new Point(12, 58);
+            treeView1.Name = "treeView1";
+            treeView1.Size = new Size(262, 652);
+            treeView1.TabIndex = 4;
+            treeView1.AfterSelect += treeView1_AfterSelect;
+            // 
+            // _mnuTree
+            // 
+            _mnuTree.Items.AddRange(new ToolStripItem[] { actualizarToolStripMenuItem });
+            _mnuTree.Name = "_mnuTree";
+            _mnuTree.Size = new Size(127, 26);
+            // 
+            // actualizarToolStripMenuItem
+            // 
+            actualizarToolStripMenuItem.Name = "actualizarToolStripMenuItem";
+            actualizarToolStripMenuItem.Size = new Size(126, 22);
+            actualizarToolStripMenuItem.Text = "Actualizar";
+            actualizarToolStripMenuItem.Click += actualizarToolStripMenuItem_Click;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Dock = DockStyle.Top;
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton2, toolStripDropDownButton1 });
+            statusStrip1.Location = new Point(0, 0);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(1050, 22);
+            statusStrip1.TabIndex = 5;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripDropDownButton2
+            // 
+            toolStripDropDownButton2.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripDropDownButton2.DropDownItems.AddRange(new ToolStripItem[] { generarScriptToolStripMenuItem, guardarToolStripMenuItem });
+            toolStripDropDownButton2.Image = Properties.Resources.guardar;
+            toolStripDropDownButton2.ImageTransparentColor = Color.Magenta;
+            toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            toolStripDropDownButton2.Size = new Size(61, 20);
+            toolStripDropDownButton2.Text = "Archivo";
+            // 
+            // generarScriptToolStripMenuItem
+            // 
+            generarScriptToolStripMenuItem.Name = "generarScriptToolStripMenuItem";
+            generarScriptToolStripMenuItem.Size = new Size(148, 22);
+            generarScriptToolStripMenuItem.Text = "Generar Script";
+            generarScriptToolStripMenuItem.Click += generarScriptToolStripMenuItem_Click;
+            // 
+            // guardarToolStripMenuItem
+            // 
+            guardarToolStripMenuItem.Image = Properties.Resources.guardar;
+            guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
+            guardarToolStripMenuItem.Size = new Size(148, 22);
+            guardarToolStripMenuItem.Text = "Guardar";
+            guardarToolStripMenuItem.Click += guardarToolStripMenuItem_Click;
+            // 
+            // toolStripDropDownButton1
+            // 
+            toolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripDropDownButton1.DropDownItems.AddRange(new ToolStripItem[] { chromeToolStripMenuItem, edgeToolStripMenuItem });
+            toolStripDropDownButton1.Image = Properties.Resources.edge;
+            toolStripDropDownButton1.ImageTransparentColor = Color.Magenta;
+            toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            toolStripDropDownButton1.Size = new Size(62, 20);
+            toolStripDropDownButton1.Text = "Ejecutar";
+            // 
+            // chromeToolStripMenuItem
+            // 
+            chromeToolStripMenuItem.Image = Properties.Resources.chrome;
+            chromeToolStripMenuItem.Name = "chromeToolStripMenuItem";
+            chromeToolStripMenuItem.Size = new Size(117, 22);
+            chromeToolStripMenuItem.Text = "Chrome";
+            chromeToolStripMenuItem.Click += chromeToolStripMenuItem_Click;
+            // 
+            // edgeToolStripMenuItem
+            // 
+            edgeToolStripMenuItem.Image = Properties.Resources.edge;
+            edgeToolStripMenuItem.Name = "edgeToolStripMenuItem";
+            edgeToolStripMenuItem.Size = new Size(117, 22);
+            edgeToolStripMenuItem.Text = "Edge";
+            edgeToolStripMenuItem.Click += edgeToolStripMenuItem_Click;
+            // 
+            // _txtUrl
+            // 
+            _txtUrl.Location = new Point(619, 6);
+            _txtUrl.Name = "_txtUrl";
+            _txtUrl.Size = new Size(412, 23);
+            _txtUrl.TabIndex = 6;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Nombre Prueba:";
+            label1.AutoSize = true;
+            label1.Location = new Point(580, 10);
+            label1.Name = "label1";
+            label1.Size = new Size(31, 15);
+            label1.TabIndex = 7;
+            label1.Text = "URL:";
             // 
-            // _txtNombrePrueba
+            // label2
             // 
-            this._txtNombrePrueba.Location = new System.Drawing.Point(112, 6);
-            this._txtNombrePrueba.Name = "_txtNombrePrueba";
-            this._txtNombrePrueba.Size = new System.Drawing.Size(454, 23);
-            this._txtNombrePrueba.TabIndex = 2;
-            this._txtNombrePrueba.Click += new System.EventHandler(this._txtNombrePrueba_Click);
+            label2.AutoSize = true;
+            label2.Location = new Point(559, 43);
+            label2.Name = "label2";
+            label2.Size = new Size(54, 15);
+            label2.TabIndex = 9;
+            label2.Text = "Nombre:";
             // 
-            // btnEmpezar
+            // _txtNombreTest
             // 
-            this.btnEmpezar.Location = new System.Drawing.Point(973, 5);
-            this.btnEmpezar.Name = "btnEmpezar";
-            this.btnEmpezar.Size = new System.Drawing.Size(75, 23);
-            this.btnEmpezar.TabIndex = 3;
-            this.btnEmpezar.Text = "▶️";
-            this.btnEmpezar.UseVisualStyleBackColor = true;
-            this.btnEmpezar.Click += new System.EventHandler(this.btnEmpezar_Click);
+            _txtNombreTest.Location = new Point(619, 35);
+            _txtNombreTest.Name = "_txtNombreTest";
+            _txtNombreTest.Size = new Size(412, 23);
+            _txtNombreTest.TabIndex = 8;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 602);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnEmpezar);
-            this.Controls.Add(this._txtNombrePrueba);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this._tab);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this._tab.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this._grdScript)).EndInit();
-            this._menuGridScript.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this._grdSuites)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this._grdDatosExternos)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1050, 722);
+            Controls.Add(label2);
+            Controls.Add(_txtNombreTest);
+            Controls.Add(label1);
+            Controls.Add(_txtUrl);
+            Controls.Add(statusStrip1);
+            Controls.Add(treeView1);
+            Controls.Add(_tab);
+            Name = "Form1";
+            Text = "Form1";
+            Load += Form1_Load;
+            _tab.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)_grdScript).EndInit();
+            _menuGridScript.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)_grdSuites).EndInit();
+            groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)_grdDatosExternos).EndInit();
+            tabPage3.ResumeLayout(false);
+            _mnuTree.ResumeLayout(false);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -421,7 +497,6 @@
         private GroupBox groupBox2;
         private DataGridView _grdSuites;
         private TabPage tabPage1;
-        private Button button1;
         private DataGridView _grdScript;
         private DataGridViewCheckBoxColumn clmIterar;
         private DataGridViewCheckBoxColumn clmEjecutarFin;
@@ -430,8 +505,6 @@
         private DataGridViewTextBoxColumn clmScriptTarget;
         private DataGridViewTextBoxColumn clmScriptCommand;
         private DataGridViewTextBoxColumn clmScriptId;
-        private Label label1;
-        private TextBox _txtNombrePrueba;
         private Button btnEmpezar;
         private DataGridViewTextBoxColumn clmOrden;
         private DataGridViewTextBoxColumn clmCommand;
@@ -451,5 +524,19 @@
         private ContextMenuStrip _menuGridScript;
         private ToolStripMenuItem eliminarFilaToolStripMenuItem;
         private ToolStripMenuItem agregarFilaToolStripMenuItem;
+        private TreeView treeView1;
+        private ContextMenuStrip _mnuTree;
+        private ToolStripMenuItem actualizarToolStripMenuItem;
+        private StatusStrip statusStrip1;
+        private ToolStripDropDownButton toolStripDropDownButton2;
+        private ToolStripMenuItem guardarToolStripMenuItem;
+        private ToolStripDropDownButton toolStripDropDownButton1;
+        private ToolStripMenuItem chromeToolStripMenuItem;
+        private ToolStripMenuItem edgeToolStripMenuItem;
+        private ToolStripMenuItem generarScriptToolStripMenuItem;
+        private TextBox _txtUrl;
+        private Label label1;
+        private Label label2;
+        private TextBox _txtNombreTest;
     }
 }

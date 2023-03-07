@@ -7,14 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BeneficiarioBase\**" />
     <Compile Remove="RecuperarUsuario\**" />
     <Compile Remove="TEST\**" />
+    <Compile Remove="TransferenciaBase\**" />
+    <Content Remove="BeneficiarioBase\**" />
     <Content Remove="RecuperarUsuario\**" />
     <Content Remove="TEST\**" />
+    <Content Remove="TransferenciaBase\**" />
+    <EmbeddedResource Remove="BeneficiarioBase\**" />
     <EmbeddedResource Remove="RecuperarUsuario\**" />
     <EmbeddedResource Remove="TEST\**" />
+    <EmbeddedResource Remove="TransferenciaBase\**" />
+    <None Remove="BeneficiarioBase\**" />
     <None Remove="RecuperarUsuario\**" />
     <None Remove="TEST\**" />
+    <None Remove="TransferenciaBase\**" />
   </ItemGroup>
 
   <ItemGroup>

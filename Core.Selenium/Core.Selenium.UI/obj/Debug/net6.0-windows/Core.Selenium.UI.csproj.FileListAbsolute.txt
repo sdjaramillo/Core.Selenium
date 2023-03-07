@@ -214,3 +214,4 @@ C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.UI\obj\Debug\net6.0-windows\ref
 C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.UI\obj\Debug\net6.0-windows\Core.Selenium.UI.pdb
 C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.UI\obj\Debug\net6.0-windows\Core.Selenium.UI.genruntimeconfig.cache
 C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.UI\obj\Debug\net6.0-windows\ref\Core.Selenium.UI.dll
+C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.UI\obj\Debug\net6.0-windows\Core.Selenium.UI.Properties.Resources.resources

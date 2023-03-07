@@ -1,6 +1,7 @@
 using Core.Selenium.Logic;
 using Core.Selenium.Model;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OfficeOpenXml;
 using System.Security.Policy;
 
@@ -8,26 +9,41 @@ namespace Core.Selenium.UI
 {
     public partial class Form1 : Form
     {
+        private string URL
+        {
+            get
+            {
+                return _txtUrl.Text;
+            }
+        }
+        public string NombreTest
+        {
+            get {
+                return _txtNombreTest.Text;
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Evento carga inicial
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_Load(object sender, EventArgs e)
         {
-            var fd = new OpenFileDialog();
-            fd.Filter = "|*.side";
-            if (fd.ShowDialog() == DialogResult.OK)
-            {
-                using (StreamReader sr = new StreamReader(fd.FileName))
-                {
-                    var json = sr.ReadToEnd();
-                    SeleniumScript myDeserializedClass = JsonConvert.DeserializeObject<SeleniumScript>(json);
-                    _grdScript.DataSource = myDeserializedClass.tests[0].commands;
-                }
-            }
+            ObtenerArbolScripts();
         }
 
+        /// <summary>
+        /// Metodo para cargar información de un archivo excel en un grid
+        /// </summary>
+        /// <param name="fname"></param>
+        /// <param name="grid"></param>
+        /// <param name="hasheader"></param>
         private void LeerExcel(string fname, DataGridView grid, bool hasheader = false)
         {
             try
@@ -73,22 +89,136 @@ namespace Core.Selenium.UI
             }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        /// <summary>
+        /// Metodo recursivo para leer scripts/carpetas de un directorio
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="nodo"></param>
+        public void LoadTreeView(string path, TreeNode nodo)
         {
+            var archivosNodo = Directory.GetFiles(path);
+            var carpetas = Directory.GetDirectories(path);
+
+            foreach (var arc in archivosNodo)
+            {
+                nodo.Nodes.Add(arc);
+            }
+
+            foreach (var carp in carpetas)
+            {
+                var nodoHijo = nodo.Nodes.Add(carp);
+                LoadTreeView(carp, nodoHijo);
+            }
 
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var fd = new OpenFileDialog();
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                LeerExcel(fd.FileName, _grdDatosExternos);
+            }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void eliminarFilaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var fila = _grdScript.SelectedRows;
 
+            foreach (DataGridViewRow f in fila)
+            {
+                _grdScript.Rows.Remove(f);
+            }
         }
 
-        private void btnEmpezar_Click(object sender, EventArgs e)
+        private void agregarFilaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _grdScript.Rows.Add();
+        }
+
+        private void actualizarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ObtenerArbolScripts();
+        }
+
+        public void ObtenerArbolScripts()
+        {
+            if (Directory.Exists("Scripts"))
+            {
+                var nodoRoot = new TreeNode("Scripts");
+                LoadTreeView("Scripts", nodoRoot);
+                treeView1.Nodes.Clear();
+                treeView1.Nodes.Add(nodoRoot);
+            }
+            else
+            {
+                Directory.CreateDirectory("Scripts");
+            }
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node != null && e.Node.Nodes.Count == 0)
+            {
+                try
+                {
+                    using (var sr = new StreamReader(e.Node.Text))
+                    {
+                        var scriptText = sr.ReadToEnd();
+                        _txtJson.Text = scriptText;
+
+                        ScriptBase script = JsonConvert.DeserializeObject<ScriptBase>(_txtJson.Text);
+                        CargarScriptData(script);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        private ScriptBase _scriptBase { get; set; }
+        private void CargarScriptData(ScriptBase scriptBase)
+        {
+            _scriptBase = scriptBase;
+            _grdScript.DataSource = _scriptBase.Comandos;
+            _txtNombreTest.Text = _scriptBase.ScriptData.DataTest[0].NombrePrueba;
+            _txtUrl.Text = _scriptBase.ScriptData.Url;
+            CargarDatosPrueba(_scriptBase.ScriptData.DataTest[0].TestsVars);
+            _grdSuites.Rows.Clear();
+            _scriptBase.ScriptData.DataTest[0].SuiteVars.ToList().ForEach(x =>
+            {
+                _grdSuites.Rows.Add(x.Key, x.Value);
+            });
+        }
+
+        private void CargarDatosPrueba(List<Dictionary<string, string>> diccionario)
+        {
+            var columnas = (from cols in diccionario
+                            from col in cols
+                            select col.Key).Distinct().ToList();
+            _grdDatosExternos.Columns.Clear();
+            columnas.ForEach(f => { _grdDatosExternos.Columns.Add(f, f); });
+
+
+            foreach (var row in diccionario)
+            {
+                var datosfila = row;
+                var indexAddRow = _grdDatosExternos.Rows.Add();
+
+                foreach (DataGridViewColumn col in _grdDatosExternos.Columns)
+                {
+                    if (datosfila.ContainsKey(col.Name))
+                    {
+                        _grdDatosExternos.Rows[indexAddRow].Cells[col.Index].Value = $"{datosfila[col.Name]}";
+                    }
+                }
+            }
+        }
+
+        private void GenerarScript(string driver = "chrome")
         {
             var commands = (List<Comando>)_grdScript.DataSource;
             commands.ForEach(cmd =>
@@ -129,15 +259,15 @@ namespace Core.Selenium.UI
 
             var script = new ScriptBase
             {
-                Nombre = _txtNombrePrueba.Text,
+                Nombre = NombreTest,
                 Comandos = (List<Comando>)_grdScript.DataSource,
                 ScriptData = new ParametroScript
                 {
-                    Url = "https://bgrdigital-test.bgr.com.ec/Cuenta/Login",
-                    Driver = "chrome",
+                    Url = URL,
+                    Driver = driver,
                     DataTest = new DataTest[] {
                                                 new DataTest{
-                                                NombrePrueba = _txtNombrePrueba.Text,
+                                                NombrePrueba = NombreTest,
                                                 SuiteVars= variablesInicio,
                                                 TestsVars= VariablesPruebas
                  }
@@ -147,41 +277,47 @@ namespace Core.Selenium.UI
 
 
             var json = JsonConvert.SerializeObject(script);
-            _txtJson.Text = json;            
+            JToken parsedJson = JToken.Parse(json);
+            json = parsedJson.ToString(Formatting.Indented);
+            _txtJson.Text = json;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Acciones menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void chromeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var fd = new OpenFileDialog();
-            if (fd.ShowDialog() == DialogResult.OK)
+            GenerarScript();
+            EjecutarScript(_txtJson.Text);
+        }
+
+        public void EjecutarScript(string jsonScript)
+        {
+
+            ScriptBase script = JsonConvert.DeserializeObject<ScriptBase>(_txtJson.Text);
+            LogicTemplate.EjecutarScript(script);
+        }
+
+        private void edgeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GenerarScript("edge");
+            EjecutarScript(_txtJson.Text);
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var sw = new StreamWriter(treeView1.SelectedNode.Text))
             {
-                LeerExcel(fd.FileName, _grdDatosExternos);
+                sw.Write(_txtJson.Text);
             }
         }
 
-        private void _txtNombrePrueba_Click(object sender, EventArgs e)
+        private void generarScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var fd = new FolderBrowserDialog();
-
-            if (fd.ShowDialog() == DialogResult.OK)
-            {
-                _txtNombrePrueba.Text = $@"{fd.SelectedPath}\";
-            }
+            GenerarScript();
         }
-
-        private void eliminarFilaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var fila = _grdScript.SelectedRows;
-
-            foreach (DataGridViewRow f in fila)
-            {
-                _grdScript.Rows.Remove(f);
-            }
-        }
-
-        private void agregarFilaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _grdScript.Rows.Add();
-        }
+        //FIN MENUS
     }
 }
