@@ -98,7 +98,7 @@
             _tab.Location = new Point(280, 58);
             _tab.Name = "_tab";
             _tab.SelectedIndex = 0;
-            _tab.Size = new Size(758, 652);
+            _tab.Size = new Size(860, 652);
             _tab.TabIndex = 0;
             // 
             // tabPage1
@@ -107,7 +107,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(750, 624);
+            tabPage1.Size = new Size(852, 624);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Script";
             tabPage1.UseVisualStyleBackColor = true;
@@ -122,7 +122,7 @@
             _grdScript.Location = new Point(3, 3);
             _grdScript.Name = "_grdScript";
             _grdScript.RowTemplate.Height = 25;
-            _grdScript.Size = new Size(744, 618);
+            _grdScript.Size = new Size(846, 618);
             _grdScript.TabIndex = 0;
             // 
             // clmOrden
@@ -369,7 +369,7 @@
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton2, toolStripDropDownButton1 });
             statusStrip1.Location = new Point(0, 0);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1050, 22);
+            statusStrip1.Size = new Size(1152, 22);
             statusStrip1.TabIndex = 5;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -426,7 +426,7 @@
             // 
             // _txtUrl
             // 
-            _txtUrl.Location = new Point(619, 6);
+            _txtUrl.Location = new Point(721, 6);
             _txtUrl.Name = "_txtUrl";
             _txtUrl.Size = new Size(412, 23);
             _txtUrl.TabIndex = 6;
@@ -434,7 +434,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(580, 10);
+            label1.Location = new Point(682, 10);
             label1.Name = "label1";
             label1.Size = new Size(31, 15);
             label1.TabIndex = 7;
@@ -443,7 +443,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(559, 43);
+            label2.Location = new Point(661, 43);
             label2.Name = "label2";
             label2.Size = new Size(54, 15);
             label2.TabIndex = 9;
@@ -451,7 +451,7 @@
             // 
             // _txtNombreTest
             // 
-            _txtNombreTest.Location = new Point(619, 35);
+            _txtNombreTest.Location = new Point(721, 35);
             _txtNombreTest.Name = "_txtNombreTest";
             _txtNombreTest.Size = new Size(412, 23);
             _txtNombreTest.TabIndex = 8;
@@ -460,7 +460,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1050, 722);
+            ClientSize = new Size(1152, 722);
             Controls.Add(label2);
             Controls.Add(_txtNombreTest);
             Controls.Add(label1);

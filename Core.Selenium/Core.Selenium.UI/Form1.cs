@@ -18,7 +18,8 @@ namespace Core.Selenium.UI
         }
         public string NombreTest
         {
-            get {
+            get
+            {
                 return _txtNombreTest.Text;
             }
         }
