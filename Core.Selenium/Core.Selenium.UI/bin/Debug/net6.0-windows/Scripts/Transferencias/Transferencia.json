@@ -1,0 +1,306 @@
+{
+  "Nombre": "TransferenciaBase",
+  "Comandos": [
+    {
+      "Id": "LOGIN",
+      "Orden": 0,
+      "Command": "open",
+      "Comment": "Página login",
+      "Target": "https://bgrdigital-test.bgr.com.ec",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": true,
+      "FinSesion": false,
+      "Iterar": false,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "LOGIN",
+      "Orden": 1,
+      "Command": "type",
+      "Comment": "Ingresar usuario",
+      "Target": "id=NombreUsuario",
+      "Value": "{usuario}",
+      "Tipo": "comando",
+      "InicioSesion": true,
+      "FinSesion": false,
+      "Iterar": false,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "LOGIN",
+      "Orden": 2,
+      "Command": "type",
+      "Comment": "Ingresar Contraseña",
+      "Target": "id=Clave",
+      "Value": "{clave}",
+      "Tipo": "comando",
+      "InicioSesion": true,
+      "FinSesion": false,
+      "Iterar": false,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "LOGIN",
+      "Orden": 3,
+      "Command": "click",
+      "Comment": "Boton Ingresar a Banca Digital",
+      "Target": "id=IdBotonIngresarBanca",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": true,
+      "FinSesion": false,
+      "Iterar": false,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "TRANSFERENCAS",
+      "Orden": 4,
+      "Command": "click",
+      "Comment": "opción Transferencias",
+      "Target": "id=Transferencias",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "TRANSFERENCIAS",
+      "Orden": 5,
+      "Command": "textispresent",
+      "Comment": "Verificar si existe mensaje de saludo",
+      "Target": "¡Hola",
+      "Value": "",
+      "Tipo": "condicion",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "NUEVA-TRANSFERENCIA",
+      "Orden": 6,
+      "Command": "click",
+      "Comment": "Boton nueva trasferencia",
+      "Target": "xpath=//button[normalize-space()='Nueva Transferencia']",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "NUEVA-TRANSFERENCIA",
+      "Orden": 7,
+      "Command": "wait",
+      "Comment": "Espera",
+      "Target": "2",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "BENEFICIARIO",
+      "Orden": 8,
+      "Command": "js",
+      "Comment": "Buscar cuenta benefciario en grid",
+      "Target": "var paginas = document.getElementById('tblBeneficiario_paginate').getElementsByClassName('page-link');for (let pag of paginas) {pag.click();let encontrado = false;var tabla = document.getElementById('tblBeneficiario');var filas = tabla.getElementsByTagName('tbody')[0].getElementsByTagName('tr');for (let f of filas) {var celdas = f.getElementsByTagName('td');var celdaCuenta = celdas[3].innerText;if (celdaCuenta.includes('{numeroCuenta}')) {console.log(celdas[0].childNodes[1].click());encontrado = true;break;}}if (encontrado) {break;}document.getElementById('tblBeneficiario_next').click();}",
+      "Value": "",
+      "Tipo": "script",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "BENEFICIARIO",
+      "Orden": 9,
+      "Command": "click",
+      "Comment": "Boton continuar",
+      "Target": "id=btnBeneficiario",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "MONTO-CONCEPTO",
+      "Orden": 10,
+      "Command": "type",
+      "Comment": "Campo monto",
+      "Target": "id=ValorTransaccion",
+      "Value": "{monto}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "MONTO-CONCEPTO",
+      "Orden": 11,
+      "Command": "type",
+      "Comment": "Campo concepto",
+      "Target": "id=ConceptoTransferencia",
+      "Value": "{concepto}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "MONTO",
+      "Orden": 12,
+      "Command": "click",
+      "Comment": "Boton continuar",
+      "Target": "id=btnMonto",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "CUENTA-DEBITAR",
+      "Orden": 13,
+      "Command": "select",
+      "Comment": "Boton continuar",
+      "Target": "id=DatosOrigen_NumeroCuentaOrigen",
+      "Value": "label={cuentaOrigen}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "CUENTA-DEBITAR",
+      "Orden": 14,
+      "Command": "click",
+      "Comment": "Boton continuar cuenta debitar",
+      "Target": "id=btnCuenta",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "TRANSFERENCIA",
+      "Orden": 15,
+      "Command": "click",
+      "Comment": "Boton confirmar transferenca",
+      "Target": "xpath=//button[@type='submit' and normalize-space()='Continuar']",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "TRANSFERENCIAS",
+      "Orden": 16,
+      "Command": "textispresent",
+      "Comment": "Validar transferecia exitosa",
+      "Target": "¡Transferencia exitosa!",
+      "Value": "10",
+      "Tipo": "condicion",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [
+        {
+          "Id": "Condicion-Transferencia-Exitosa",
+          "Orden": 1,
+          "Command": "terminarsinerror",
+          "Comment": "Condición transferencia exitosa",
+          "Target": "Transferencia exitosa",
+          "Value": "",
+          "Tipo": "comando",
+          "InicioSesion": false,
+          "FinSesion": false,
+          "Iterar": true,
+          "ComandosVerdadero": [],
+          "ComandosFalso": []
+        }
+      ],
+      "ComandosFalso": [
+        {
+          "Id": "Condicion-Transferencia-Exitosa",
+          "Orden": 1,
+          "Command": "terminarconerror",
+          "Comment": "Condición transferencia exitosa",
+          "Target": "Transferencia fallida",
+          "Value": "",
+          "Tipo": "comando",
+          "InicioSesion": false,
+          "FinSesion": false,
+          "Iterar": true,
+          "ComandosVerdadero": [],
+          "ComandosFalso": []
+        }
+      ]
+    }
+  ],
+  "ScriptData": {
+    "url": "",
+    "driver": "chrome",
+    "dataTest": [
+      {
+        "nombrePrueba": "TransferenciaBase",
+        "suiteVars": {
+          "usuario": "ajaramillo1",
+          "clave": "admin"
+        },
+        "testsVars": [
+          {
+            "numeroCuenta": "0100",
+            "monto": "16.15",
+            "concepto": "transferencia SPI",
+            "cuentaOrigen": "1900"
+          },
+          {
+            "numeroCuenta": "3870",
+            "monto": "5.13",
+            "concepto": "transferencia interbancaria",
+            "cuentaOrigen": "1900"
+          },
+          {
+            "numeroCuenta": "5602",
+            "monto": "12.34",
+            "concepto": "transferencia Interna",
+            "cuentaOrigen": "0100"
+          }
+        ]
+      }
+    ]
+  }
+}

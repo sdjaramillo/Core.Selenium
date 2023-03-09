@@ -1,0 +1,160 @@
+{
+    "nombre": "TransferenciaBase",
+    "comandos": [        
+        {
+            "id": "LOGIN",
+            "orden": 0,
+            "command": "open",
+            "comment": "Página login",
+            "target": "https://bgrdigital-test.bgr.com.ec",
+            "value": "",
+            "tipo": "comando",
+            "iterar": false,
+            "inicioSesion": true
+        },
+        {
+            "id": "LOGIN",
+            "orden": 2,
+            "command": "type",
+            "comment": "Ingresar usuario",
+            "target": "id=NombreUsuario",
+            "value": "{usuario}",
+            "tipo": "comando",
+            "iterar": false,
+            "inicioSesion": true
+        },
+        {
+            "id": "LOGIN",
+            "orden": 3,
+            "command": "type",
+            "comment": "Ingresar Contraseña",
+            "target": "id=Clave",
+            "value": "{clave}",
+            "tipo": "comando",
+            "iterar": false,
+            "inicioSesion": true
+        },
+        {
+            "id": "LOGIN",
+            "orden": 4,
+            "command": "click",
+            "comment": "Boton Ingresar a Banca Digital",
+            "target": "id=IdBotonIngresarBanca",
+            "tipo": "comando",
+            "value": "",
+            "iterar": false,
+            "inicioSesion": true
+        },
+        {
+            "id": "TRANSFERENCAS",
+            "orden": 1,
+            "command": "click",
+            "comment": "opción Transferencias",
+            "target": "id=Transferencias",
+            "value": "",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "VALIDACIONES",
+            "orden": 2,
+            "command": "textispresent",
+            "comment": "Validar que este presente la opción 'Administrar mis contactos'",
+            "target": "",
+            "value": "2",
+            "tipo": "condicion",
+            "iterar": true,
+            "comandosFalso": [
+                {
+                    "id": "condicion",
+                    "orden": 0,
+                    "command": "terminarconerror",
+                    "comment": "Texto no presente, terminar con error",
+                    "target": "Texto no presente, terminar con error",
+                    "value": "",
+                    "tipo": "comando",
+                    "iterar": true
+                }
+            ]
+        },
+        {
+            "id": "Validacion",
+            "orden": 3,
+            "command": "exist",
+            "comment": "Validar si esta presente el boton 'Nueva Transferencia'",
+            "target": "xpath=//button[normalize-space()='Nueva Transferencia']",
+            "value": "",
+            "tipo": "condicion",
+            "iterar": true,
+            "comandosFalso": [
+                {
+                    "id": "condicion",
+                    "orden": 0,
+                    "command": "terminarconerror",
+                    "comment": "Boton no presente, terminar con error",
+                    "target": "Boton no presente, terminar con error",
+                    "value": "",
+                    "tipo": "comando",
+                    "iterar": true
+                }
+            ]
+        },
+        {
+           "id": "Informacion Tabla Transferencia" ,
+           "orden":4,
+           "command": "informaciontabla",
+           "comment": "Información Tabla",
+           "target": "id=tblMovimientos",
+           "value": "tablaUltimasTransferencias",
+           "tipo": "comando",
+           "iterar":true
+        },
+        {
+            "id": "Validar numero de filas",
+            "orden": 5,
+            "command": "table",
+            "comment": "Validar si tiene 10 registros",
+            "target": "tablaUltimasTransferencias",
+            "value": "rowCount,=,10",
+            "tipo": "condicion",
+            "iterar":true
+        },
+        {
+            "id": "Validar columnas",
+            "orden": 6,
+            "command": "table",
+            "comment": "Validar si tiene columnas",
+            "target": "tablaUltimasTransferencias",
+            "value": "containcolumns,Fecha,Concepto,Monto,Saldo restante,Acciones",
+            "tipo": "condicion",
+            "iterar":true
+        }
+    ],
+    "scriptData": {
+        "url": "",
+        "driver": "chrome",
+        "dataTest": [
+            {
+                "nombrePrueba": "BeneficiarioBase",
+                "suiteVars": {
+                    "usuario": "ajaramillo1",
+                    "clave": "admin"
+                },
+                "testsVars": [
+                    {
+                        "numeroCuenta": "046000155602",
+                        "monto": "16.15",
+                        "concepto": "transferencia SPI",
+                        "cuentaOrigen": "9304"
+                    },
+                    {
+                        "numeroCuenta": "0010543870",
+                        "monto": "5.13",
+                        "concepto": "transferencia interbancaria",
+                        "cuentaOrigen": "9304"
+                    }
+                ]
+            }
+        ]
+    }
+}

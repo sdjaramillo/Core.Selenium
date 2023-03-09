@@ -1,0 +1,234 @@
+{
+    "nombre": "TransferenciaBase",
+    "comandos": [
+        {
+            "id": "LOGIN",
+            "orden": 0,
+            "command": "open",
+            "comment": "Página login",
+            "target": "https://bgrdigital-test.bgr.com.ec",
+            "value": "",
+            "tipo": "comando",
+            "iterar": false,
+            "inicioSesion": true
+        },
+        {
+            "id": "LOGIN",
+            "orden": 2,
+            "command": "type",
+            "comment": "Ingresar usuario",
+            "target": "id=NombreUsuario",
+            "value": "{usuario}",
+            "tipo": "comando",
+            "iterar": false,
+            "inicioSesion": true
+        },
+        {
+            "id": "LOGIN",
+            "orden": 3,
+            "command": "type",
+            "comment": "Ingresar Contraseña",
+            "target": "id=Clave",
+            "value": "{clave}",
+            "tipo": "comando",
+            "iterar": false,
+            "inicioSesion": true
+        },
+        {
+            "id": "LOGIN",
+            "orden": 4,
+            "command": "click",
+            "comment": "Boton Ingresar a Banca Digital",
+            "target": "id=IdBotonIngresarBanca",
+            "tipo": "comando",
+            "value": "",
+            "iterar": false,
+            "inicioSesion": true
+        },
+        {
+            "id": "TRANSFERENCAS",
+            "orden": 1,
+            "command": "click",
+            "comment": "opción Transferencias",
+            "target": "id=Transferencias",
+            "value": "",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "ADMINISTRAR CONTACTOS",
+            "orden": 2,
+            "command": "click",
+            "comment": "Seleccionar administrar contactos",
+            "target": "link=Administrar mis contactos",
+            "value": "",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "NUEVO BENEFICIARIO",
+            "orden": 3,
+            "command": "click",
+            "comment": "Nuevo Beneficiario",
+            "target": "link=Nuevo Beneficiario",
+            "value": "",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "BENEFICIARIO BGR",
+            "orden": 4,
+            "command": "click",
+            "comment": "Cliente BGR",
+            "target": "id=flexRadioDefault1",
+            "value": "",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "BENEFICIARIO BGR",
+            "orden": 5,
+            "command": "type",
+            "comment": "Cliente BGR",
+            "target": "id=numeroCuenta",
+            "value": "{cuentaBeneficiario}",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "BENEFICIARIO BGR",
+            "orden": 6,
+            "command": "click",
+            "comment": "Cliente BGR",
+            "target": "xpath=//button[normalize-space()='Verificar']",
+            "value": "",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "BENEFICIARIO BGR",
+            "orden": 7,
+            "command": "type",
+            "comment": "Alias beneficiario",
+            "target": "id=txtAlias",
+            "value": "{alias}",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "BENEFICIARIO BGR",
+            "orden": 8,
+            "command": "click",
+            "comment": "Continuar",
+            "target": "id=continuarValidacion",
+            "value": "",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "BENEFICIARIO BGR",
+            "orden": 9,
+            "command": "click",
+            "comment": "Continuar",
+            "target": "id=btnSeguir",
+            "value": "",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "PIN",
+            "orden": 10,
+            "command": "type",
+            "comment": "Continuar",
+            "target": "id=Pin1",
+            "value": "{pin1}",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "PIN",
+            "orden": 11,
+            "command": "type",
+            "comment": "Continuar",
+            "target": "id=Pin2",
+            "value": "{pin2}",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "PIN",
+            "orden": 12,
+            "command": "type",
+            "comment": "Continuar",
+            "target": "id=Pin3",
+            "value": "{pin3}",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "PIN",
+            "orden": 13,
+            "command": "type",
+            "comment": "Continuar",
+            "target": "id=Pin4",
+            "value": "{pin4}",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "PIN",
+            "orden": 14,
+            "command": "type",
+            "comment": "Continuar",
+            "target": "id=Pin5",
+            "value": "{pin5}",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "PIN",
+            "orden": 15,
+            "command": "type",
+            "comment": "Continuar",
+            "target": "id=Pin6",
+            "value": "{pin6}",
+            "tipo": "comando",
+            "iterar": true
+        },
+        {
+            "id": "VALIDAR PIN",
+            "orden": 16,
+            "command": "click",
+            "comment": "Continuar",
+            "target": "id=btnContinuar",
+            "value": "",
+            "tipo": "comando",
+            "iterar": true
+        }
+    ],
+    "scriptData": {
+        "url": "",
+        "driver": "chrome",
+        "dataTest": [
+            {
+                "nombrePrueba": "Beneficiario2",
+                "suiteVars": {
+                    "usuario": "ajaramillo1",
+                    "clave": "admin"
+                },
+                "testsVars": [
+                    {
+                        "cuentaBeneficiario": "8598424100",
+                        "alias": "propiaCA",
+                        "pin1":"1",
+                        "pin2":"2",
+                        "pin3":"3",
+                        "pin4":"4",
+                        "pin5":"5",
+                        "pin6":"6"
+                    }
+                ]
+            }
+        ]
+    }
+}
