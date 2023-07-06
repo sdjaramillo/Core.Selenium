@@ -22,3 +22,15 @@ C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Se
 C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\refint\Core.Selenium.Report.dll
 C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.pdb
 C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\ref\Core.Selenium.Report.dll
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\bin\Debug\net6.0\Core.Selenium.Report.deps.json
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\bin\Debug\net6.0\Core.Selenium.Report.dll
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\bin\Debug\net6.0\Core.Selenium.Report.pdb
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.csproj.AssemblyReference.cache
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.GeneratedMSBuildEditorConfig.editorconfig
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.AssemblyInfoInputs.cache
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.AssemblyInfo.cs
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.csproj.CoreCompileInputs.cache
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.dll
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\refint\Core.Selenium.Report.dll
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\Core.Selenium.Report.pdb
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Report\obj\Debug\net6.0\ref\Core.Selenium.Report.dll

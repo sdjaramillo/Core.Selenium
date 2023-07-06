@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YBdM6Pr8A2Z7yzJozy9R6Rpo+9nF/aFZvAoktqKgWJcnMAKxmRIVtR8PAB9ifi7Z2GMukom0Cii1ex7MMr5qAw==",
+  "dgSpecHash": "XuEno+W+KPkGAI7fLyFZm9iMziLk/06ORAqS7/6M8SzT1OZvd7NV1+XkJfGfnwIxKl9F4GSGLpxLja16StWVMA==",
   "success": true,
-  "projectFilePath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
+  "projectFilePath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diego\\.nuget\\packages\\dnsclient\\1.2.0\\dnsclient.1.2.0.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\dotnetseleniumextras.waithelpers\\3.11.0\\dotnetseleniumextras.waithelpers.3.11.0.nupkg.sha512",

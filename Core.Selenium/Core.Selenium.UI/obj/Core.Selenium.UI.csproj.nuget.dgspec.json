@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj": {}
+    "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj": {
+    "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
+        "projectUniqueName": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
         "projectName": "Core.Selenium.Helpers",
-        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
+        "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj",
         "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\obj\\",
+        "outputPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
-                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
+              "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
+                "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
               }
             }
           }
@@ -77,21 +82,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj": {
+    "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
+        "projectUniqueName": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
         "projectName": "Core.Selenium.Logic",
-        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
+        "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj",
         "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\obj\\",
+        "outputPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -99,20 +108,21 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj": {
-                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj"
+              "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj": {
+                "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Helpers\\Core.Selenium.Helpers.csproj"
               },
-              "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
-                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
+              "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
+                "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
               },
-              "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj": {
-                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj"
+              "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj": {
+                "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj"
               }
             }
           }
@@ -152,21 +162,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
+    "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
+        "projectUniqueName": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
         "projectName": "Core.Selenium.Model",
-        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
+        "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj",
         "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\obj\\",
+        "outputPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -174,6 +188,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -221,21 +236,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj": {
+    "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
+        "projectUniqueName": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
         "projectName": "Core.Selenium.Report",
-        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
+        "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\Core.Selenium.Report.csproj",
         "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\obj\\",
+        "outputPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Report\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -243,6 +262,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -282,21 +302,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj": {
+    "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj",
+        "projectUniqueName": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj",
         "projectName": "Core.Selenium.UI",
-        "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj",
+        "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\Core.Selenium.UI.csproj",
         "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\obj\\",
+        "outputPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.UI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -304,17 +328,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj": {
-                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj"
+              "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj": {
+                "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Logic\\Core.Selenium.Logic.csproj"
               },
-              "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
-                "projectPath": "C:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
+              "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj": {
+                "projectPath": "E:\\Dev\\Core.Selenium\\Core.Selenium\\Core.Selenium.Model\\Core.Selenium.Model.csproj"
               }
             }
           }
@@ -353,7 +378,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

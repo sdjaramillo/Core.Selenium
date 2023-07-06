@@ -19,7 +19,7 @@ namespace Core.Selenium.Logic
         {
             IWebDriver driver;
             LogicBase logica = null;
-
+            
             foreach (var data in script.ScriptData.DataTest)
             {
                 try
@@ -33,7 +33,10 @@ namespace Core.Selenium.Logic
                     var comandos = listaComandos.Where(w => w.InicioSesion).OrderBy(ord => ord.Orden).ToList();
                     InyectarVariables(comandos, data.SuiteVars);
 
-                    if (comandos.Count > 0) logica.EjecutarComandos(comandos, testName: data.NombrePrueba);
+                    if (comandos.Count > 0)
+                    {                        
+                        logica.EjecutarComandos(comandos, testName: data.NombrePrueba);                                             
+                    }
 
                     foreach (var test in data.TestsVars)
                     {
@@ -62,7 +65,6 @@ namespace Core.Selenium.Logic
                     Console.WriteLine(exPrueba.Message);
                 }
             }
-
             logica?.GuardarReporte();
         }
 

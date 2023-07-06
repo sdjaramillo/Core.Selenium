@@ -37,6 +37,11 @@ namespace Core.Selenium.Logic
         private Dictionary<string, TablaBase> Tablas { get; set; } = new Dictionary<string, TablaBase>();
 
         /// <summary>
+        /// Variable para escribir en el log del test
+        /// </summary>
+        private ExtentTest _test;
+
+        /// <summary>
         /// Constructor que recibe instancia de driver
         /// </summary>
         /// <param name="driver"></param>
@@ -60,11 +65,12 @@ namespace Core.Selenium.Logic
         public void EjecutarComandos(List<Comando> comandosEjecutar, ExtentTest test = null, bool screenIteration = true, string? testName = null)
         {
             test = (test == null) ? _reporte.CrearTest($"{testName ?? "test"}") : test.CreateNode(testName ?? "test", "Detalle:");
-
+            _test = test;
+            var tiempoInicioPrueba = DateTime.Now;            
             foreach (var cmd in comandosEjecutar)
             {
                 try
-                {
+                {                    
                     cmd.Target = cmd.Target.Inject(dictionary: variablesEjecucion);
                     cmd.Value = cmd.Value.Inject(dictionary: variablesEjecucion);
                     if (cmd.Tipo == null || cmd?.Tipo?.ToLower() == TipoComando.Comando.ToLower())
@@ -82,7 +88,7 @@ namespace Core.Selenium.Logic
 
                     if (screenIteration)
                         test.Pass($"{cmd?.Orden}. {cmd?.Comment} > {cmd?.Tipo} > {cmd?.Command} : {cmd?.Target}", _driver.TomarScreen());
-
+                    
                 }
                 catch (EjecucionTerminadaException ex)
                 {
@@ -106,9 +112,10 @@ namespace Core.Selenium.Logic
                 {
                     test.Fail($"Error al ejecutar comando: {cmd.Orden}: {cmd.Command} {cmd.Target} - {ex.Message}", _driver.TomarScreen());
                     throw new Exception($"Error al ejecutar comando: {cmd.Orden}: {cmd.Command}");
-                }
+                }                                
             }
-
+            var tiempoFinPrueba = DateTime.Now;            
+            test.Info($"Tiempo Prueba:{(tiempoFinPrueba - tiempoInicioPrueba).TotalSeconds}");
             AgregarVariablesEjecucion(test, variablesEjecucion);
         }
 
@@ -490,14 +497,10 @@ namespace Core.Selenium.Logic
                         tabla.Filas.Add(rows);
                     }
 
-                    if (Tablas.ContainsKey(comando.Value))
-                    {
-                        Tablas[comando.Value] = tabla;
-                    }
-                    else
-                    {
-                        Tablas.Add(comando.Value, tabla);
-                    }
+                    if (Tablas.ContainsKey(comando.Value))                    
+                        Tablas[comando.Value] = tabla;                    
+                    else                    
+                        Tablas.Add(comando.Value, tabla);                    
 
                     break;
 
@@ -537,6 +540,11 @@ namespace Core.Selenium.Logic
         public void LimpiarVaraiblesEjecucion()
         {
             this.variablesEjecucion = new Dictionary<string, string>();
+        }
+
+        public void EscribirLog(Status status, string mensaje)
+        {
+            _test.Log(status, mensaje);
         }
     }
 }

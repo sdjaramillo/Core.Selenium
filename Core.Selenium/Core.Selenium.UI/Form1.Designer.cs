@@ -208,7 +208,7 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(750, 624);
+            tabPage2.Size = new Size(852, 624);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Datos Externos";
             tabPage2.UseVisualStyleBackColor = true;
@@ -287,7 +287,7 @@
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(750, 624);
+            tabPage3.Size = new Size(852, 624);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Petición";
             tabPage3.UseVisualStyleBackColor = true;
@@ -297,7 +297,7 @@
             _txtJson.Dock = DockStyle.Fill;
             _txtJson.Location = new Point(3, 3);
             _txtJson.Name = "_txtJson";
-            _txtJson.Size = new Size(744, 618);
+            _txtJson.Size = new Size(846, 618);
             _txtJson.TabIndex = 1;
             _txtJson.Text = "";
             // 
@@ -382,11 +382,12 @@
             toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             toolStripDropDownButton2.Size = new Size(61, 20);
             toolStripDropDownButton2.Text = "Archivo";
+            toolStripDropDownButton2.Click += toolStripDropDownButton2_Click;
             // 
             // generarScriptToolStripMenuItem
             // 
             generarScriptToolStripMenuItem.Name = "generarScriptToolStripMenuItem";
-            generarScriptToolStripMenuItem.Size = new Size(148, 22);
+            generarScriptToolStripMenuItem.Size = new Size(180, 22);
             generarScriptToolStripMenuItem.Text = "Generar Script";
             generarScriptToolStripMenuItem.Click += generarScriptToolStripMenuItem_Click;
             // 
@@ -394,7 +395,7 @@
             // 
             guardarToolStripMenuItem.Image = Properties.Resources.guardar;
             guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            guardarToolStripMenuItem.Size = new Size(148, 22);
+            guardarToolStripMenuItem.Size = new Size(180, 22);
             guardarToolStripMenuItem.Text = "Guardar";
             guardarToolStripMenuItem.Click += guardarToolStripMenuItem_Click;
             // 

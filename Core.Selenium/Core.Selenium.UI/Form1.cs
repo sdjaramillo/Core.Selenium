@@ -319,6 +319,11 @@ namespace Core.Selenium.UI
         {
             GenerarScript();
         }
+
+        private void toolStripDropDownButton2_Click(object sender, EventArgs e)
+        {
+
+        }
         //FIN MENUS
     }
 }
