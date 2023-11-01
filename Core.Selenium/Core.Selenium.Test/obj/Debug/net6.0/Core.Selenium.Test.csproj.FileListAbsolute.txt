@@ -200,3 +200,11 @@ C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\refint\Co
 C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\Core.Selenium.Test.pdb
 C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\Core.Selenium.Test.genruntimeconfig.cache
 C:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\ref\Core.Selenium.Test.dll
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\Core.Selenium.Test.csproj.AssemblyReference.cache
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\Core.Selenium.Test.GeneratedMSBuildEditorConfig.editorconfig
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\Core.Selenium.Test.AssemblyInfoInputs.cache
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\Core.Selenium.Test.AssemblyInfo.cs
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\Core.Selenium.Test.csproj.CoreCompileInputs.cache
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\Core.Selenium.Test.dll
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\refint\Core.Selenium.Test.dll
+E:\Dev\Core.Selenium\Core.Selenium\Core.Selenium.Test\obj\Debug\net6.0\Core.Selenium.Test.pdb

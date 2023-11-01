@@ -24,7 +24,7 @@ namespace Core.Selenium.Report
         /// <param name="pathGuardado"></param>
         public SeleniumReport(string pathGuardado)
         {
-            PathGuardado = !string.IsNullOrEmpty(pathGuardado) ? $@"{pathGuardado}\" : PathGuardado;
+            PathGuardado = !string.IsNullOrEmpty(pathGuardado) ? $@"Results\{pathGuardado}\" : PathGuardado;
             HtmlReporte = new ExtentHtmlReporter(PathGuardado);
             Reporte = new ExtentReports();
             Reporte.AttachReporter(HtmlReporte);

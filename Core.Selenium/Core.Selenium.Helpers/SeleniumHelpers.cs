@@ -1,9 +1,11 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Chromium;
 using OpenQA.Selenium.Edge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,15 +13,19 @@ namespace Core.Selenium.Helpers
 {
     public static class SeleniumHelpers
     {
-        public static IWebDriver GetDriverInstance(string driver, string ruta = "Drivers")
-        {            
+        public static IWebDriver GetDriverInstance(string driver, string[] parametros, string ruta = "Drivers")
+        {
             switch (driver.ToLower())
             {
                 case "chrome":
-                    return new ChromeDriver(ruta);
+                    var chromeOptions = new ChromeOptions();
+                    chromeOptions.AddArguments(parametros);
+                    return new ChromeDriver(ruta, chromeOptions);
 
                 case "edge":
-                    return new EdgeDriver(ruta);
+                    var edgeOptions = new EdgeOptions();
+                    edgeOptions.AddArguments(parametros);
+                    return new EdgeDriver(ruta, edgeOptions);
             }
             return new ChromeDriver("Drivers");
         }
@@ -47,6 +53,9 @@ namespace Core.Selenium.Helpers
 
                 case "link":
 
+                    return By.LinkText(valor);
+
+                case "linktext":                    
                     return By.PartialLinkText(valor);
             }
 

@@ -440,7 +440,7 @@
   ],
   "ScriptData": {
     "url": "",
-    "driver": "chrome",
+    "driver": "edge",
     "dataTest": [
       {
         "nombrePrueba": "TransferenciaBase",

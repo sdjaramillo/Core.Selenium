@@ -37,6 +37,7 @@ namespace Core.Selenium.Model
         public const string Select = "select";
         public const string Open = "open";
         public const string CheckAlert = "checkalert";
+        public const string CheckAlertList = "checkalertlist";
         public const string Screen = "screen";
         public const string GetText = "gettext";
         public const string GetValue = "getvalue";
@@ -52,6 +53,9 @@ namespace Core.Selenium.Model
         public const string FindClick = "findclick";
         public const string Maximizar = "Maximizar";
         public const string InformacionTabla = "informaciontabla";
+        public const string SelectFrame = "selectframe";
+        public const string FindTextClick = "findtextclick";
+
     }
 
     public static class Condiciones

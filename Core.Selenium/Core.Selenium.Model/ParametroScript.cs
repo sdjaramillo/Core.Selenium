@@ -17,6 +17,9 @@ namespace Core.Selenium.Model
 
         [JsonProperty("dataTest")]
         public DataTest[] DataTest { get; set; }
+
+        [JsonProperty("parametrosDriver")]
+        public string[] ParametrosDriver { get; set; }
     }
 
     public partial class DataTest

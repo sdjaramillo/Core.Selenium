@@ -1,4 +1,5 @@
 ﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Model;
 using Core.Selenium.Helpers;
 using Core.Selenium.Model;
 using Core.Selenium.Model.Exepciones;
@@ -62,33 +63,16 @@ namespace Core.Selenium.Logic
         /// <param name="testName"></param>
         /// <exception cref="CondicionException"></exception>
         /// <exception cref="Exception"></exception>
-        public void EjecutarComandos(List<Comando> comandosEjecutar, ExtentTest test = null, bool screenIteration = true, string? testName = null)
+        public void EjecutarComandos(List<Comando> comandosEjecutar, ExtentTest test = null, bool screenIteration = true, string? testName = null, bool ignorarAlertas = true)
         {
             test = (test == null) ? _reporte.CrearTest($"{testName ?? "test"}") : test.CreateNode(testName ?? "test", "Detalle:");
             _test = test;
-            var tiempoInicioPrueba = DateTime.Now;            
+            var tiempoInicioPrueba = DateTime.Now;
             foreach (var cmd in comandosEjecutar)
             {
                 try
-                {                    
-                    cmd.Target = cmd.Target.Inject(dictionary: variablesEjecucion);
-                    cmd.Value = cmd.Value.Inject(dictionary: variablesEjecucion);
-                    if (cmd.Tipo == null || cmd?.Tipo?.ToLower() == TipoComando.Comando.ToLower())
-                    {
-                        var splitTarget = SplitTarget.GetSplitTarget(cmd.Target);
-                        By by = SeleniumHelpers.ObtenerIdentificador(splitTarget.Identificador, splitTarget.Valor);
-                        PerformAction(cmd, by, test);
-                    }
-
-                    if (cmd?.Tipo?.ToLower() == TipoComando.Script.ToLower())
-                        EvaluarScript(cmd);
-
-                    if (cmd?.Tipo?.ToLower() == TipoComando.Condicion.ToLower())
-                        EvaluarCondicion(cmd, test);
-
-                    if (screenIteration)
-                        test.Pass($"{cmd?.Orden}. {cmd?.Comment} > {cmd?.Tipo} > {cmd?.Command} : {cmd?.Target}", _driver.TomarScreen());
-                    
+                {
+                    EvaluarComando(cmd, test, screenIteration);
                 }
                 catch (EjecucionTerminadaException ex)
                 {
@@ -108,15 +92,41 @@ namespace Core.Selenium.Logic
                     test.Fail(ex.Message, _driver.TomarScreen());
                     throw new CondicionException(ex.Message);
                 }
+                //catch (UnhandledAlertException ex)
+                //{
+                //    _driver.checkAlert();
+                //    EvaluarComando(cmd, test, screenIteration);
+                //}
                 catch (Exception ex)
                 {
                     test.Fail($"Error al ejecutar comando: {cmd.Orden}: {cmd.Command} {cmd.Target} - {ex.Message}", _driver.TomarScreen());
                     throw new Exception($"Error al ejecutar comando: {cmd.Orden}: {cmd.Command}");
-                }                                
+                }
             }
-            var tiempoFinPrueba = DateTime.Now;            
+            var tiempoFinPrueba = DateTime.Now;
             test.Info($"Tiempo Prueba:{(tiempoFinPrueba - tiempoInicioPrueba).TotalSeconds}");
             AgregarVariablesEjecucion(test, variablesEjecucion);
+        }
+
+        private void EvaluarComando(Comando cmd, ExtentTest test, bool screenIteration)
+        {
+            cmd.Target = cmd.Target.Inject(dictionary: variablesEjecucion);
+            cmd.Value = cmd.Value.Inject(dictionary: variablesEjecucion);
+            if (cmd.Tipo == null || cmd?.Tipo?.ToLower() == TipoComando.Comando.ToLower())
+            {
+                var splitTarget = SplitTarget.GetSplitTarget(cmd.Target);
+                By by = SeleniumHelpers.ObtenerIdentificador(splitTarget.Identificador, splitTarget.Valor);
+                PerformAction(cmd, by, test);
+            }
+
+            if (cmd?.Tipo?.ToLower() == TipoComando.Script.ToLower())
+                EvaluarScript(cmd);
+
+            if (cmd?.Tipo?.ToLower() == TipoComando.Condicion.ToLower())
+                EvaluarCondicion(cmd, test);
+
+            if (screenIteration)
+                test.Pass($"{cmd?.Orden}. {cmd?.Comment} > {cmd?.Tipo} > {cmd?.Command} : {cmd?.Target}", _driver.TomarScreen());
         }
 
         /// <summary>
@@ -126,7 +136,7 @@ namespace Core.Selenium.Logic
         /// <param name="variablesEjecucion"></param>
         private void AgregarVariablesEjecucion(ExtentTest test, Dictionary<string, string> variablesEjecucion)
         {
-            if (!test.Model.IsChild && variablesEjecucion.Count>0)
+            if (!test.Model.IsChild && variablesEjecucion.Count > 0)
             {
                 test.AgregarDatosEjecucion(variablesEjecucion, "Variables Recuperadas");
             }
@@ -344,6 +354,22 @@ namespace Core.Selenium.Logic
             IWebElement element;
             switch (comando.Command.ToLower())
             {
+                case Acciones.SelectFrame:
+
+                    int indexFrame = 0;
+                    if (int.TryParse(comando.Target, out indexFrame))
+                        _driver.WaitFindFrame(indexFrame);
+                    else
+                        _driver.WaitFindFrame(comando.Target);
+
+                    break;
+
+                case Acciones.FindTextClick:
+
+                    _driver.WaitFindElement(by);
+
+                    break;
+
                 case Acciones.Maximizar:
                     _driver.Manage().Window.Maximize();
                     break;
@@ -381,7 +407,6 @@ namespace Core.Selenium.Logic
                     if (tag == "label")
                         comboCuentaOrigen.SelectByText(valor, true);
                     if (tag == "value")
-
                         comboCuentaOrigen.SelectByValue(valor);
                     if (tag == "index")
                         comboCuentaOrigen.SelectByIndex(Convert.ToInt32(valor));
@@ -396,7 +421,7 @@ namespace Core.Selenium.Logic
                     break;
 
                 case Acciones.AssertAlert:
-                    
+
                     var textoAlerta = _driver.AssertAlert();
                     if (!textoAlerta.Contains(comando.Target))
                     {
@@ -407,6 +432,16 @@ namespace Core.Selenium.Logic
                 case Acciones.CheckAlert:
 
                     _driver.checkAlert(3);
+
+                    break;
+
+                case Acciones.CheckAlertList:
+
+                    int timeoutAlerts;
+                    if (int.TryParse(comando.Value, out timeoutAlerts))
+                        _driver.checkAlertList(comando.Target, timeoutAlerts);
+                    else
+                        _driver.checkAlertList(comando.Target);
 
                     break;
 
@@ -497,10 +532,10 @@ namespace Core.Selenium.Logic
                         tabla.Filas.Add(rows);
                     }
 
-                    if (Tablas.ContainsKey(comando.Value))                    
-                        Tablas[comando.Value] = tabla;                    
-                    else                    
-                        Tablas.Add(comando.Value, tabla);                    
+                    if (Tablas.ContainsKey(comando.Value))
+                        Tablas[comando.Value] = tabla;
+                    else
+                        Tablas.Add(comando.Value, tabla);
 
                     break;
 

@@ -1,5 +1,5 @@
 {
-  "Nombre": "TransferenciaBase",
+  "Nombre": "TransferenciaValidacionFormulario",
   "Comandos": [
     {
       "Id": "LOGIN",
@@ -61,8 +61,8 @@
       "Id": "TRANSFERENCAS",
       "Orden": 4,
       "Command": "click",
-      "Comment": "opción Transferencias",
-      "Target": "id=Transferencias",
+      "Comment": "Click opción menu transferencias",
+      "Target": "id=menu-transferencias",
       "Value": "",
       "Tipo": "comando",
       "InicioSesion": false,
@@ -116,11 +116,25 @@
     {
       "Id": "BENEFICIARIO",
       "Orden": 8,
-      "Command": "js",
-      "Comment": "Buscar cuenta benefciario en grid",
-      "Target": "var paginas = document.getElementById('tblBeneficiario_paginate').getElementsByClassName('page-link');for (let pag of paginas) {pag.click();let encontrado = false;var tabla = document.getElementById('tblBeneficiario');var filas = tabla.getElementsByTagName('tbody')[0].getElementsByTagName('tr');for (let f of filas) {var celdas = f.getElementsByTagName('td');var celdaCuenta = celdas[3].innerText;if (celdaCuenta.includes('{numeroCuenta}')) {console.log(celdas[0].childNodes[1].click());encontrado = true;break;}}if (encontrado) {break;}document.getElementById('tblBeneficiario_next').click();}",
+      "Command": "type",
+      "Comment": "Buscar cuenta o beneficiario",
+      "Target": "id=txtBuscarBeneficiario",
+      "Value": "{numeroCuenta}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "TRANSFERENCIA",
+      "Orden": 9,
+      "Command": "click",
+      "Comment": "Selecciona cuenta encontrada",
+      "Target": "name=numCuentaBeneficiario",
       "Value": "",
-      "Tipo": "script",
+      "Tipo": "comando",
       "InicioSesion": false,
       "FinSesion": false,
       "Iterar": true,
@@ -129,7 +143,7 @@
     },
     {
       "Id": "BENEFICIARIO",
-      "Orden": 9,
+      "Orden": 10,
       "Command": "click",
       "Comment": "Boton continuar",
       "Target": "id=btnBeneficiario",
@@ -143,7 +157,7 @@
     },
     {
       "Id": "MONTO-CONCEPTO",
-      "Orden": 10,
+      "Orden": 11,
       "Command": "type",
       "Comment": "Campo monto",
       "Target": "id=ValorTransaccion",
@@ -156,8 +170,109 @@
       "ComandosFalso": []
     },
     {
+      "Id": "Validar si existe mensaje de monto",
+      "Orden": 12,
+      "Command": "isvisible",
+      "Comment": "Validar si mensaje de error se visualiza",
+      "Target": "id=error-t-monto",
+      "Value": "2",
+      "Tipo": "condicion",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [
+        {
+          "Id": "Obtener mensaje de error cuenta",
+          "Orden": 1,
+          "Command": "gettext",
+          "Comment": "Obtener error mensaje monto",
+          "Target": "id=error-t-monto",
+          "Value": "errorMonto",
+          "Tipo": "comando",
+          "InicioSesion": false,
+          "FinSesion": false,
+          "Iterar": true,
+          "ComandosVerdadero": [],
+          "ComandosFalso": []
+        },
+        {
+          "Id": "ERROR1",
+          "Orden": 1,
+          "Command": "js",
+          "Comment": "Validar si mensaje mensaje de error corresponde a limite de transferencia 5000",
+          "Target": "return '{errorMonto}'=='{errorMontoDefault}' && ({monto}>{montoMaximoDefault})",
+          "Value": "errorCuentaOrigen",
+          "Tipo": "condicion",
+          "InicioSesion": false,
+          "FinSesion": false,
+          "Iterar": true,
+          "ComandosVerdadero": [
+            {
+              "Id": "Validación de fondos insuficientes",
+              "Orden": 1,
+              "Command": "terminarsinerror",
+              "Comment": "Validación correcta",
+              "Target": "Terminar sin error validación correcta",
+              "Value": "Terminar sin error validación correcta",
+              "Tipo": "comando",
+              "InicioSesion": false,
+              "FinSesion": false,
+              "Iterar": true,
+              "ComandosVerdadero": [],
+              "ComandosFalso": []
+            }
+          ],
+          "ComandosFalso": []
+        },
+        {
+          "Id": "ERROR2",
+          "Orden": 2,
+          "Command": "js",
+          "Comment": "Validar si mensaje es de monto menor a 0 y monto es <=0",
+          "Target": "return '{errorMonto}'=='{errorMontoMenorDefault}' && ({monto}<=0)",
+          "Value": "errorCuentaOrigen",
+          "Tipo": "condicion",
+          "InicioSesion": false,
+          "FinSesion": false,
+          "Iterar": true,
+          "ComandosVerdadero": [
+            {
+              "Id": "Validación de fondos insuficientes",
+              "Orden": 1,
+              "Command": "terminarsinerror",
+              "Comment": "Validación correcta",
+              "Target": "Terminar sin error validación correcta",
+              "Value": "Terminar sin error validación correcta",
+              "Tipo": "comando",
+              "InicioSesion": false,
+              "FinSesion": false,
+              "Iterar": true,
+              "ComandosVerdadero": [],
+              "ComandosFalso": []
+            }
+          ],
+          "ComandosFalso": []
+        },
+        {
+          "Id": "ERROR3",
+          "Orden": 3,
+          "Command": "terminarconerror",
+          "Comment": "Error desconocido",
+          "Target": "Terminar con error, error desconocido",
+          "Value": "Error desconocido",
+          "Tipo": "comando",
+          "InicioSesion": false,
+          "FinSesion": false,
+          "Iterar": true,
+          "ComandosVerdadero": [],
+          "ComandosFalso": []
+        }
+      ],
+      "ComandosFalso": []
+    },
+    {
       "Id": "MONTO-CONCEPTO",
-      "Orden": 11,
+      "Orden": 13,
       "Command": "type",
       "Comment": "Campo concepto",
       "Target": "id=ConceptoTransferencia",
@@ -171,7 +286,7 @@
     },
     {
       "Id": "MONTO",
-      "Orden": 12,
+      "Orden": 14,
       "Command": "click",
       "Comment": "Boton continuar",
       "Target": "id=btnMonto",
@@ -185,11 +300,11 @@
     },
     {
       "Id": "CUENTA-DEBITAR",
-      "Orden": 13,
-      "Command": "select",
-      "Comment": "Boton continuar",
-      "Target": "id=DatosOrigen_NumeroCuentaOrigen",
-      "Value": "label={cuentaOrigen}",
+      "Orden": 15,
+      "Command": "click",
+      "Comment": "Boton expandir cuentas",
+      "Target": "xpath=//button[contains(.,'Selecciona una de tus cuentas')]",
+      "Value": "",
       "Tipo": "comando",
       "InicioSesion": false,
       "FinSesion": false,
@@ -199,9 +314,51 @@
     },
     {
       "Id": "CUENTA-DEBITAR",
-      "Orden": 14,
-      "Command": "click",
+      "Orden": 16,
+      "Command": "select",
+      "Comment": "Boton continuar",
+      "Target": "xpath=//*[@id=\"cabeceraSeleccionarCuenta\"]/button/",
+      "Value": "label={cuentaOrigen}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": false,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "NUEVA-TRANSFERENCIA",
+      "Orden": 17,
+      "Command": "wait",
+      "Comment": "Espera",
+      "Target": "1",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "BUSCAR-CUENTA-DEBITAR",
+      "Orden": 18,
+      "Command": "js",
       "Comment": "Boton continuar cuenta debitar",
+      "Target": "var filaListaCuentas = document.getElementsByClassName('row mt-3 rowCuentas align-items-center');var cantidadListaCuentas = filaListaCuentas.length;for (let item of filaListaCuentas) {var input = item.getElementsByTagName('input')[0];var innerTextSplit = item.innerText.split('\\n');var numParametros = innerTextSplit.length;var tipoCuenta = innerTextSplit[0];var numeroCuenta = innerTextSplit[1];var fondoInsuficiente = (numParametros.length==4)?innerTextSplit[2]:'';var valorCuenta = (numParametros.length==4)?innerTextSplit[4]:innerTextSplit[3];        if(numeroCuenta.includes(1900)){input.click();  break;}    }",
+      "Value": "",
+      "Tipo": "script",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "BOTON-CONTINUAR-CUENTA",
+      "Orden": 19,
+      "Command": "click",
+      "Comment": "Boton confirmar cuenta origuen",
       "Target": "id=btnCuenta",
       "Value": "",
       "Tipo": "comando",
@@ -212,11 +369,109 @@
       "ComandosFalso": []
     },
     {
-      "Id": "TRANSFERENCIA",
-      "Orden": 15,
+      "Id": "BOTON-CONTINUAR-CUENTA",
+      "Orden": 20,
       "Command": "click",
-      "Comment": "Boton confirmar transferenca",
-      "Target": "xpath=//button[@type='submit' and normalize-space()='Continuar']",
+      "Comment": "Boton Continuar",
+      "Target": "xpath=//*[@id=\"ContinuarTransferencia\"]/div[2]/button",
+      "Value": "",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "INGRESO-OTP",
+      "Orden": 21,
+      "Command": "type",
+      "Comment": "Boton Continuar",
+      "Target": "id=Pin1",
+      "Value": "{pin1}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "INGRESO-OTP-2",
+      "Orden": 22,
+      "Command": "type",
+      "Comment": "Boton Continuar",
+      "Target": "id=Pin2",
+      "Value": "{pin2}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "INGRESO-OTP-3",
+      "Orden": 23,
+      "Command": "type",
+      "Comment": "Pin 3",
+      "Target": "id=Pin3",
+      "Value": "{pin3}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "INGRESO-OTP-4",
+      "Orden": 24,
+      "Command": "type",
+      "Comment": "Pin 4",
+      "Target": "id=Pin4",
+      "Value": "{pin4}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "INGRESO-OTP-5",
+      "Orden": 25,
+      "Command": "type",
+      "Comment": "Pin 5",
+      "Target": "id=Pin5",
+      "Value": "{pin5}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "INGRESO-OTP-6",
+      "Orden": 26,
+      "Command": "type",
+      "Comment": "Boton Continuar",
+      "Target": "id=Pin6",
+      "Value": "{pin6}",
+      "Tipo": "comando",
+      "InicioSesion": false,
+      "FinSesion": false,
+      "Iterar": true,
+      "ComandosVerdadero": [],
+      "ComandosFalso": []
+    },
+    {
+      "Id": "VALIDAR-OTP",
+      "Orden": 27,
+      "Command": "click",
+      "Comment": "Boton Continuar",
+      "Target": "id=btnContinuar",
       "Value": "",
       "Tipo": "comando",
       "InicioSesion": false,
@@ -227,7 +482,7 @@
     },
     {
       "Id": "TRANSFERENCIAS",
-      "Orden": 16,
+      "Orden": 28,
       "Command": "textispresent",
       "Comment": "Validar transferecia exitosa",
       "Target": "¡Transferencia exitosa!",
@@ -272,35 +527,51 @@
   ],
   "ScriptData": {
     "url": "",
-    "driver": "edge",
+    "driver": "chrome",
     "dataTest": [
       {
-        "nombrePrueba": "TransferenciaBase",
+        "nombrePrueba": "TransferenciaValidacionFormulario",
         "suiteVars": {
           "usuario": "ajaramillo1",
-          "clave": "admin"
+          "clave": "Administrador27.",
+          "errorMontoDefault": "El monto no puede ser mayor al configurado como límite de transferencia que es: $5,000.00",
+          "errorMontoMenorDefault": "Monto a transferir debe ser mayor a $0.00",
+          "montoMaximoDefault": "5000"
         },
         "testsVars": [
           {
-            "numeroCuenta": "0100",
-            "monto": "16.15",
-            "concepto": "transferencia SPI",
-            "cuentaOrigen": "1900"
+            "cuentaBeneficiario": "8598424100",
+            "alias": "propiaCA",
+            "pin1": "1",
+            "pin2": "2",
+            "pin3": "3",
+            "pin4": "4",
+            "pin5": "5",
+            "pin6": "6"
           },
           {
-            "numeroCuenta": "3870",
-            "monto": "5.13",
-            "concepto": "transferencia interbancaria",
-            "cuentaOrigen": "1900"
+            "cuentaBeneficiario": "8055063600",
+            "alias": "walmedia",
+            "pin1": "1",
+            "pin2": "2",
+            "pin3": "3",
+            "pin4": "4",
+            "pin5": "5",
+            "pin6": "6"
           },
           {
-            "numeroCuenta": "5602",
-            "monto": "12.34",
-            "concepto": "transferencia Interna",
-            "cuentaOrigen": "0100"
+            "cuentaBeneficiario": "8088818800",
+            "alias": "lestupinan",
+            "pin1": "1",
+            "pin2": "2",
+            "pin3": "3",
+            "pin4": "4",
+            "pin5": "5",
+            "pin6": "6"
           }
         ]
       }
-    ]
+    ],
+    "parametrosDriver": null
   }
 }

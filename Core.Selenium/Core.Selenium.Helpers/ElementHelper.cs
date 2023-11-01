@@ -71,6 +71,32 @@ namespace Core.Selenium.Helpers
             var elements = w.Until(ExpectedConditions.ElementExists(by));
             return driver.FindElements(by).ToList();
         }
+
+        public static void WaitFindFrame(this IWebDriver driver, string target, int timeout = 10)
+        {
+            if (string.IsNullOrEmpty(target))
+            {
+                WaitParentFrame(driver);
+            }
+            else
+            {
+                WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+                w.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(target));
+            }
+        }
+
+        public static void WaitFindFrame(this IWebDriver driver, int index, int timeout = 10)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(driver => driver.SwitchTo().Frame(index));
+        }
+
+        public static void WaitParentFrame(this IWebDriver driver, int timeout = 10)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(driver => driver.SwitchTo().ParentFrame());
+        }
+
         public static bool ElementIsVisible(this IWebDriver driver, By by, int timeout = 10)
         {
             try
@@ -193,6 +219,27 @@ namespace Core.Selenium.Helpers
             catch (Exception e)
             {
                 //exception handling
+            }
+        }
+
+        public static void checkAlertList(this IWebDriver driver, string targetArgument, int timeout = 1)
+        {
+            if (int.TryParse(targetArgument, out int numeroAlertas))
+            {
+                for (int i = 0; i < numeroAlertas; i++)
+                {
+                    try
+                    {
+                        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+                        wait.Until(ExpectedConditions.AlertIsPresent());
+                        var alert = driver.SwitchTo().Alert();
+                        alert.Accept();
+                    }
+                    catch (Exception)
+                    {
+                        //ignore
+                    }
+                }
             }
         }
 

@@ -24,7 +24,7 @@ namespace Core.Selenium.Logic
             {
                 try
                 {
-                    driver = SeleniumHelpers.GetDriverInstance(script.ScriptData.Driver);
+                    driver = SeleniumHelpers.GetDriverInstance(script.ScriptData.Driver, script.ScriptData.ParametrosDriver);
                     driver.Url = string.IsNullOrEmpty(script.ScriptData.Url) ? driver.Url : script.ScriptData.Url;
                     string jsonCommands = Newtonsoft.Json.JsonConvert.SerializeObject(script.Comandos);
                     logica = new LogicBase(driver, data.NombrePrueba);
@@ -58,7 +58,7 @@ namespace Core.Selenium.Logic
                     }
                     var comandosFin = script.Comandos.Where(w => w.FinSesion).OrderBy(ord => ord.Orden).ToList();
                     if (comandosFin.Count > 0) logica.EjecutarComandos(comandosFin);
-
+                                        
                 }
                 catch (Exception exPrueba)
                 {
